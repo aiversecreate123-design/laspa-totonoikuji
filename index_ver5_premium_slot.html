@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>LASPA 夏のととのいくじ Ver5</title>
+<style>
+:root{
+  --bg:#05070d;
+  --panel:#111827;
+  --gold:#f7d774;
+  --gold2:#b8872d;
+  --cyan:#6fe7ff;
+  --red:#ff4d6d;
+  --purple:#b56cff;
+  --text:#fff7dd;
+  --muted:#b9a77b;
+  --green:#60ffa8;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 50% -5%, rgba(111,231,255,.22), transparent 38%),
+    radial-gradient(circle at 15% 25%, rgba(181,108,255,.18), transparent 28%),
+    radial-gradient(circle at 85% 70%, rgba(247,215,116,.13), transparent 30%),
+    linear-gradient(180deg,#07111c 0%,#03050a 58%,#000 100%);
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(circle at center, black, transparent 78%);
+}
+.steam{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:1}
+.steam i{position:absolute;bottom:-120px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.07);filter:blur(18px);animation:steamUp linear infinite}
+.steam i:nth-child(1){left:4%;animation-duration:11s;animation-delay:0s}.steam i:nth-child(2){left:25%;animation-duration:14s;animation-delay:2s}.steam i:nth-child(3){left:58%;animation-duration:10s;animation-delay:1s}.steam i:nth-child(4){left:82%;animation-duration:16s;animation-delay:4s}
+@keyframes steamUp{0%{transform:translateY(0) scale(.5);opacity:0}18%{opacity:.7}100%{transform:translateY(-110vh) scale(1.8);opacity:0}}
+.app{position:relative;z-index:2;width:min(430px,100%);margin:0 auto;padding:18px 14px 32px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.machine{
+  position:relative;
+  border:2px solid rgba(247,215,116,.75);
+  border-radius:30px;
+  padding:16px 14px 18px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,0) 25%),
+    linear-gradient(180deg,#172033 0%,#090d16 40%,#05060b 100%);
+  box-shadow:0 0 0 5px rgba(184,135,45,.13),0 0 45px rgba(247,215,116,.18),inset 0 0 35px rgba(0,0,0,.6);
+  overflow:hidden;
+}
+.machine::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 0deg,transparent,rgba(111,231,255,.14),transparent,rgba(247,215,116,.16),transparent);animation:spinGlow 8s linear infinite;opacity:.85}.machine>*{position:relative;z-index:1}@keyframes spinGlow{to{transform:rotate(360deg)}}
+.top-badge{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.12em;color:#ffe9a1;text-transform:uppercase;margin-bottom:8px}.pill{border:1px solid rgba(247,215,116,.55);border-radius:999px;padding:5px 9px;background:rgba(0,0,0,.35);box-shadow:0 0 14px rgba(247,215,116,.15)}
+.logo{text-align:center;margin-top:2px}.logo .brand{font-size:38px;font-weight:900;letter-spacing:.12em;line-height:1;text-shadow:0 0 16px rgba(247,215,116,.55),0 3px 0 rgba(0,0,0,.5)}.logo .sub{font-size:11px;letter-spacing:.34em;color:#91f0ff;margin-top:7px}.limited{display:inline-block;margin:13px auto 8px;padding:6px 13px;border-radius:999px;background:linear-gradient(90deg,rgba(255,77,109,.25),rgba(247,215,116,.22));border:1px solid rgba(255,255,255,.18);font-size:12px;color:#fff}
+h1{margin:3px 0 8px;text-align:center;font-size:29px;line-height:1.18;letter-spacing:.03em;background:linear-gradient(180deg,#fff,#ffe599 55%,#f3b23c);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 12px rgba(247,215,116,.25))}.lead{text-align:center;margin:0 0 14px;color:#e5d6ad;font-size:13px;line-height:1.7}
+.marquee{border:1px solid rgba(111,231,255,.28);border-radius:14px;background:rgba(3,10,18,.72);padding:8px 10px;overflow:hidden;margin-bottom:13px;box-shadow:inset 0 0 18px rgba(111,231,255,.08)}.marquee span{display:block;white-space:nowrap;color:#98f1ff;font-weight:700;font-size:12px;animation:marq 12s linear infinite}@keyframes marq{from{transform:translateX(105%)}to{transform:translateX(-145%)}}
+.slot-frame{position:relative;border-radius:24px;padding:14px;background:linear-gradient(180deg,#ecd581,#7b4c13 12%,#251404 48%,#d7a545 100%);box-shadow:inset 0 2px 8px rgba(255,255,255,.35),0 12px 30px rgba(0,0,0,.55);margin:9px 0 16px}.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;background:#05070a;border-radius:18px;padding:10px;border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 0 26px rgba(0,0,0,.9)}.reel{height:112px;border-radius:15px;background:linear-gradient(180deg,#fff6d4,#ffe49d 48%,#fff7d8);overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative;border:2px solid rgba(255,255,255,.65);box-shadow:inset 0 9px 18px rgba(255,255,255,.55),inset 0 -12px 18px rgba(184,135,45,.35)}.reel::before,.reel::after{content:"";position:absolute;left:0;right:0;height:28%;z-index:2;pointer-events:none}.reel::before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent)}.reel::after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.24),transparent)}.symbol{font-size:43px;line-height:1;filter:drop-shadow(0 3px 0 rgba(0,0,0,.18));transition:.18s}.spinning .symbol{animation:blurSpin .12s linear infinite}@keyframes blurSpin{0%{transform:translateY(-16px) scale(1.05);filter:blur(1.5px)}100%{transform:translateY(16px) scale(.96);filter:blur(2.5px)}}
+.status{text-align:center;min-height:25px;font-weight:900;letter-spacing:.08em;color:#ffe9a1;text-shadow:0 0 12px rgba(247,215,116,.35);font-size:13px}.btn{width:100%;border:0;border-radius:18px;padding:17px 12px;font-size:18px;font-weight:900;letter-spacing:.08em;color:#2b1600;background:linear-gradient(180deg,#fff6b8,#f7d774 45%,#c88924);box-shadow:0 8px 0 #6a3e0c,0 0 25px rgba(247,215,116,.34);cursor:pointer;transition:.1s}.btn:active{transform:translateY(5px);box-shadow:0 3px 0 #6a3e0c,0 0 20px rgba(247,215,116,.25)}.btn:disabled{opacity:.55;filter:grayscale(.45);cursor:not-allowed}.subbtn{margin-top:10px;background:rgba(255,255,255,.08);color:#ffe9a1;border:1px solid rgba(247,215,116,.35);box-shadow:none;font-size:13px;padding:12px;border-radius:14px}
+.ticket{display:none;margin-top:15px;border-radius:22px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(247,215,116,.5);box-shadow:0 0 30px rgba(247,215,116,.13),inset 0 0 28px rgba(0,0,0,.28)}.ticket.show{display:block;animation:pop .48s cubic-bezier(.2,1.3,.4,1)}@keyframes pop{from{transform:scale(.86);opacity:0}to{transform:scale(1);opacity:1}}.ticket-type{display:inline-block;font-size:11px;letter-spacing:.12em;border-radius:999px;padding:5px 9px;margin-bottom:8px;border:1px solid rgba(255,255,255,.24);color:#bff7ff}.prize{font-size:24px;font-weight:900;line-height:1.28;margin-bottom:8px}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:20px;letter-spacing:.08em;background:#05070a;border:1px dashed rgba(247,215,116,.6);padding:10px;border-radius:13px;text-align:center;color:#fff3ad;margin:10px 0}.meta{font-size:12px;color:#dccb9b;line-height:1.75}.notice{margin-top:13px;font-size:11px;line-height:1.7;color:#b9aa86}.flash{position:fixed;inset:0;background:white;opacity:0;pointer-events:none;z-index:5}.flash.on{animation:flash .7s ease}@keyframes flash{0%{opacity:0}20%{opacity:.9}100%{opacity:0}}.jackpot{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:6;pointer-events:none}.jackpot.on{display:flex;animation:fadeOut 2.2s ease forwards}.jackpot div{text-align:center;font-size:34px;font-weight:1000;letter-spacing:.05em;color:#fff;text-shadow:0 0 10px #fff,0 0 22px var(--gold),0 0 40px var(--red);animation:boom .55s ease infinite alternate}.jackpot small{display:block;font-size:15px;color:#98f1ff;margin-top:7px}@keyframes boom{from{transform:scale(1) rotate(-1deg)}to{transform:scale(1.06) rotate(1deg)}}@keyframes fadeOut{0%,72%{opacity:1}100%{opacity:0}}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:7;overflow:hidden}.confetti i{position:absolute;top:-20px;width:9px;height:14px;background:var(--gold);animation:fall linear forwards}.confetti i:nth-child(3n){background:#6fe7ff}.confetti i:nth-child(4n){background:#ff4d6d}.confetti i:nth-child(5n){background:#b56cff}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:.2}}
+.rules{margin-top:12px;padding:11px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);font-size:11px;color:#cbbf9b;line-height:1.75}.footer{text-align:center;margin-top:12px;color:#786d55;font-size:10px}.used-stamp{display:none;position:absolute;right:20px;bottom:26px;transform:rotate(-12deg);border:4px solid rgba(255,77,109,.85);color:#ff6d86;font-size:28px;font-weight:1000;padding:8px 15px;border-radius:12px;z-index:4;background:rgba(0,0,0,.35)}.used .used-stamp{display:block}.shake{animation:shake .45s ease}@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@media(max-width:370px){.reel{height:100px}.symbol{font-size:38px}.logo .brand{font-size:33px}h1{font-size:25px}.prize{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="steam"><i></i><i></i><i></i><i></i></div><div class="flash" id="flash"></div><div class="jackpot" id="jackpot"><div id="jackpotText">激ととのい！<small>LASPA PREMIUM BONUS</small></div></div><div class="confetti" id="confetti"></div>
+<main class="app">
+  <section class="machine" id="machine">
+    <div class="used-stamp">使用済</div>
+    <div class="top-badge"><span class="pill">PREMIUM SLOT</span><span class="pill">SUMMER 2026</span></div>
+    <div class="logo"><div class="brand">LASPA</div><div class="sub">PRIVATE SAUNA</div><div class="limited">7月限定キャンペーン</div></div>
+    <h1>夏の<br>ととのいくじ</h1>
+    <p class="lead">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
+    <div class="marquee"><span>超ととのい賞 1%　｜　激ととのい賞 2%　｜　ハズレなしの夏限定スロット</span></div>
+    <div class="slot-frame"><div class="reels">
+      <div class="reel" id="r0"><div class="symbol">♨️</div></div>
+      <div class="reel" id="r1"><div class="symbol">🧖‍♀️</div></div>
+      <div class="reel" id="r2"><div class="symbol">🌿</div></div>
+    </div></div>
+    <div class="status" id="status">READY</div>
+    <button class="btn" id="startBtn">スロットを回す</button>
+    <button class="subbtn" id="useBtn" style="display:none">スタッフ確認：景品交換済みにする</button>
+    <div class="ticket" id="ticket">
+      <div class="ticket-type" id="ticketType">当日交換景品</div>
+      <div class="prize" id="prizeName"></div>
+      <div class="code" id="code"></div>
+      <div class="meta" id="meta"></div>
+      <div class="notice" id="notice"></div>
+    </div>
+    <div class="rules">
+      ※同じスマホでは1日1回まで参加できます。<br>
+      ※当日交換景品は当日中にスタッフへ画面をご提示ください。<br>
+      ※無料券系はスクリーンショット保存後、スタッフが控えを記録します。<br>
+      ※景品内容は在庫状況により変更になる場合があります。
+    </div>
+    <div class="footer">LASPA TOTONOI SLOT Ver5</div>
+  </section>
+</main>
+<script>
+const prizes=[
+ {name:'超ととのい賞：サウナ70分無料券',rate:1,type:'次回特典',days:14,icons:['💎','♨️','💎'],level:'super'},
+ {name:'激ととのい賞：よもぎ蒸し無料券',rate:2,type:'次回特典',days:14,icons:['🌿','🔥','🌿'],level:'mega'},
+ {name:'ぽかぽか賞：無料延長30分',rate:7,type:'当日交換景品',days:0,icons:['⏰','♨️','⏰'],level:'hot'},
+ {name:'爆睡ととのい賞：めぐりズム',rate:15,type:'当日交換景品',days:0,icons:['🌙','💤','🌙'],level:'normal'},
+ {name:'美肌ととのい賞：フェイスパック',rate:25,type:'当日交換景品',days:0,icons:['✨','🧴','✨'],level:'normal'},
+ {name:'さっぱり賞：汗拭きシート',rate:25,type:'当日交換景品',days:0,icons:['💧','🧊','💧'],level:'normal'},
+ {name:'ほっこり賞：入浴剤',rate:25,type:'当日交換景品',days:0,icons:['🛁','♨️','🛁'],level:'normal'}
+];
+const spinSymbols=['♨️','🌿','💧','🔥','✨','🧖‍♀️','🌙','💎','🛁','⏰','🧊'];
+const todayKey=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const ymd=(d)=>d.getFullYear()+'/'+String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0');
+const hm=(d)=>String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+const key='laspa_slot_'+todayKey();
+const btn=document.getElementById('startBtn'), status=document.getElementById('status'), ticket=document.getElementById('ticket'), useBtn=document.getElementById('useBtn');
+const reels=[0,1,2].map(i=>document.querySelector('#r'+i+' .symbol'));
+let intervals=[];
+function pickPrize(){let n=Math.random()*100, acc=0;for(const p of prizes){acc+=p.rate;if(n<acc)return p}return prizes[prizes.length-1]}
+function codeGen(){const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='LASPA-';for(let i=0;i<6;i++)s+=chars[Math.floor(Math.random()*chars.length)];return s}
+function saveResult(data){localStorage.setItem(key,JSON.stringify(data));localStorage.setItem('laspa_last_ticket',JSON.stringify(data))}
+function getResult(){try{return JSON.parse(localStorage.getItem(key)||'null')}catch(e){return null}}
+function renderTicket(data){ticket.classList.add('show');document.getElementById('ticketType').textContent=data.type;document.getElementById('prizeName').textContent=data.name;document.getElementById('code').textContent=data.code;document.getElementById('meta').innerHTML='抽選日時：'+data.drawDate+' '+data.drawTime+'<br>有効期限：'+data.expire+'<br>交換状態：'+(data.used?'使用済み':'未使用');document.getElementById('notice').innerHTML=data.type==='次回特典'?'無料券系はスクショ保存後、スタッフがコード・日時・景品名を控えてください。次回来店時はこの画面またはスクショをご提示ください。':'当日交換景品です。本日中にスタッフへこの画面をご提示ください。';useBtn.style.display='block';btn.disabled=true;btn.textContent='本日は抽選済み';if(data.used){document.getElementById('machine').classList.add('used')}}
+function confetti(){const box=document.getElementById('confetti');box.innerHTML='';for(let i=0;i<90;i++){const el=document.createElement('i');el.style.left=Math.random()*100+'%';el.style.animationDuration=(1.8+Math.random()*2.2)+'s';el.style.animationDelay=(Math.random()*.8)+'s';box.appendChild(el)}setTimeout(()=>box.innerHTML='',4300)}
+function flash(){const f=document.getElementById('flash');f.classList.add('on');setTimeout(()=>f.classList.remove('on'),800)}
+function jackpot(text){const j=document.getElementById('jackpot'), t=document.getElementById('jackpotText');t.innerHTML=text+'<small>LASPA PREMIUM BONUS</small>';j.classList.add('on');setTimeout(()=>j.classList.remove('on'),2300)}
+function startSpin(){if(getResult())return;btn.disabled=true;ticket.classList.remove('show');status.textContent='SPINNING...';document.getElementById('machine').classList.remove('used');reels.forEach((s,i)=>{s.parentElement.classList.add('spinning');intervals[i]=setInterval(()=>{s.textContent=spinSymbols[Math.floor(Math.random()*spinSymbols.length)]},70+i*18)});const prize=pickPrize();[0,1,2].forEach((_,i)=>{setTimeout(()=>{clearInterval(intervals[i]);reels[i].parentElement.classList.remove('spinning');reels[i].textContent=prize.icons[i];reels[i].parentElement.classList.add('shake');setTimeout(()=>reels[i].parentElement.classList.remove('shake'),480);if(i===2)finish(prize)},1050+i*700)})}
+function finish(prize){const now=new Date();const exp=new Date(now);if(prize.days>0){exp.setDate(exp.getDate()+prize.days)}const data={name:prize.name,type:prize.type,code:codeGen(),drawDate:ymd(now),drawTime:hm(now),expire:prize.days>0?ymd(exp):ymd(now)+' 当日限り',used:false,level:prize.level};saveResult(data);status.textContent='WIN!';if(prize.level==='super'){flash();confetti();jackpot('超ととのい賞！')}else if(prize.level==='mega'){flash();confetti();jackpot('激ととのい賞！')}else if(prize.level==='hot'){flash();confetti()}else{confetti()}renderTicket(data)}
+btn.addEventListener('click',startSpin);
+useBtn.addEventListener('click',()=>{const pin=prompt('スタッフ確認PINを入力してください');if(pin!=='0716'){alert('PINが違います');return}const data=getResult();if(!data)return;data.used=true;saveResult(data);renderTicket(data);alert('使用済みにしました')});
+const existing=getResult();if(existing){status.textContent='本日は抽選済み';renderTicket(existing)}
+</script>
+</body>
+</html>
