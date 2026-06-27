@@ -1,272 +1,419 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LASPA 夏のととのいくじ</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>LASPA 夏のととのいくじ PREMIUM SLOT</title>
 <style>
 :root{
-  --bg:#0b0503;
-  --brown:#211109;
-  --wood:#6f4324;
-  --gold:#f7d58b;
-  --gold2:#b98230;
-  --cream:#fff3dc;
-  --ink:#1b0d07;
-  --red:#c53225;
+  --gold:#ffd36a;
+  --gold2:#ffb300;
+  --deep:#070812;
+  --navy:#0b1028;
+  --cyan:#72f7ff;
+  --red:#ff3b5c;
+  --green:#54ffb0;
+  --white:#fff8df;
 }
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--cream);background:#0b0503}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:#050611;color:white;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
 body{
   background:
-    radial-gradient(circle at 50% 5%,rgba(255,210,130,.28),transparent 28%),
-    radial-gradient(circle at 20% 85%,rgba(255,112,45,.12),transparent 33%),
-    linear-gradient(160deg,#080302,#241107 58%,#050201);
-  overflow-x:hidden;
+    radial-gradient(circle at 50% 8%, rgba(255,210,94,.22), transparent 30%),
+    radial-gradient(circle at 18% 35%, rgba(114,247,255,.15), transparent 28%),
+    radial-gradient(circle at 80% 45%, rgba(255,59,92,.12), transparent 28%),
+    linear-gradient(180deg,#070812 0%,#050611 55%,#01020a 100%);
 }
-body:before{
-  content:"";
-  position:fixed;inset:0;pointer-events:none;opacity:.18;
-  background:
-    repeating-linear-gradient(90deg,rgba(255,230,180,.08) 0 1px,transparent 1px 64px),
-    repeating-linear-gradient(0deg,rgba(255,230,180,.035) 0 1px,transparent 1px 30px);
+.bg-stars,.steam,.confetti{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-stars:before,.bg-stars:after{
+  content:"";position:absolute;inset:-20%;background-image:
+  radial-gradient(circle,rgba(255,255,255,.8) 1px, transparent 1.5px);
+  background-size:42px 42px;opacity:.18;animation:stars 18s linear infinite;
 }
-.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px 14px}
-.app{
-  width:min(440px,100%);
-  border-radius:30px;
-  border:1px solid rgba(247,213,139,.55);
-  background:linear-gradient(180deg,rgba(43,24,13,.94),rgba(11,5,3,.97));
-  box-shadow:0 30px 90px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.08);
-  overflow:hidden;
-  position:relative;
+.bg-stars:after{background-size:67px 67px;opacity:.11;animation-duration:29s}
+@keyframes stars{to{transform:translateY(120px)}}
+.steam span{
+  position:absolute;bottom:-160px;width:90px;height:220px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.16),rgba(255,255,255,0) 70%);
+  filter:blur(10px);animation:steamUp 6s linear infinite;opacity:0;
 }
-.top{
-  text-align:center;
-  padding:23px 18px 12px;
-  position:relative;
+@keyframes steamUp{
+  0%{transform:translateY(0) scale(.8);opacity:0}
+  20%{opacity:.45}
+  100%{transform:translateY(-110vh) scale(1.7);opacity:0}
 }
-.mark{font-size:25px;color:var(--gold);filter:drop-shadow(0 0 12px rgba(247,213,139,.45))}
-.logo{
-  margin:0;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:43px;
-  letter-spacing:.18em;
-  text-shadow:0 4px 22px rgba(0,0,0,.68);
-}
-.sublogo{font-size:12px;letter-spacing:.32em;color:#f4d9a3;margin-top:3px}
-.badge{
-  display:inline-block;margin:16px 0 8px;padding:7px 15px;border-radius:999px;
-  border:1px solid rgba(247,213,139,.46);background:rgba(255,255,255,.06);
-  font-size:13px;font-weight:900;color:#ffe9ba;letter-spacing:.06em;
-}
-h1{margin:0 0 7px;font-size:31px;line-height:1.12;text-shadow:0 0 22px rgba(247,213,139,.18)}
-.lead{margin:0;color:#f8ddb2;font-size:14px;line-height:1.7}
+.app{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px 12px 28px}
 .machine{
-  margin:12px 16px 10px;
-  padding:18px 14px 16px;
-  border-radius:28px;
-  border:1px solid rgba(247,213,139,.48);
-  background:
-    radial-gradient(circle at 50% 0%,rgba(247,213,139,.20),transparent 42%),
-    linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.25));
-  box-shadow:inset 0 0 30px rgba(0,0,0,.38),0 16px 42px rgba(0,0,0,.25);
+  width:min(430px,100%);position:relative;border-radius:34px;padding:14px;
+  background:linear-gradient(145deg,#2a1b06,#b07212 18%,#fff0a6 33%,#6b4107 52%,#120b08 80%);
+  box-shadow:0 0 30px rgba(255,195,78,.35),0 22px 70px rgba(0,0,0,.72),inset 0 0 18px rgba(255,255,255,.25);
 }
-.panelTitle{
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  color:#ffe8b5;font-weight:1000;font-size:15px;letter-spacing:.08em;margin-bottom:13px;
+.machine:before{
+  content:"";position:absolute;inset:5px;border-radius:30px;border:1px solid rgba(255,255,255,.24);pointer-events:none;
 }
-.reels{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:9px;
-  padding:10px;
-  border-radius:22px;
-  background:linear-gradient(180deg,#241209,#080302);
-  border:1px solid rgba(247,213,139,.4);
-  box-shadow:inset 0 8px 20px rgba(0,0,0,.55);
-  position:relative;
+.machine-inner{
+  border-radius:26px;padding:18px 14px 16px;
+  background:linear-gradient(180deg,#111735 0%,#070814 52%,#130a13 100%);
+  box-shadow:inset 0 0 35px rgba(0,0,0,.85);
+  position:relative;overflow:hidden;
 }
-.reels:before{
-  content:"";
-  position:absolute;left:10px;right:10px;top:50%;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(247,213,139,.7),transparent);
-  box-shadow:0 0 14px rgba(247,213,139,.5);
+.machine-inner:before{
+  content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-130%);animation:shine 5s ease-in-out infinite;
 }
+@keyframes shine{50%,100%{transform:translateX(130%)}}
+.top-lamps{display:flex;justify-content:space-between;margin:0 8px 8px}
+.lamp{width:16px;height:16px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--gold),0 0 30px var(--gold2);animation:blink 1.1s infinite alternate}
+.lamp:nth-child(2n){animation-delay:.25s;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.lamp:nth-child(3n){animation-delay:.5s;background:var(--red);box-shadow:0 0 16px var(--red)}
+@keyframes blink{from{opacity:.35;transform:scale(.86)}to{opacity:1;transform:scale(1.18)}}
+.logo{text-align:center;margin-top:4px}
+.logo .sub{font-size:12px;letter-spacing:.25em;color:#d8faff;text-shadow:0 0 8px rgba(114,247,255,.8)}
+.logo h1{margin:4px 0 0;font-size:31px;line-height:1;font-weight:900;letter-spacing:.06em;
+  background:linear-gradient(180deg,#fff8ce,#ffd36a 45%,#ff9f1a 70%,#fff1a2);
+  -webkit-background-clip:text;color:transparent;
+  text-shadow:0 0 22px rgba(255,180,40,.3);
+}
+.logo .campaign{display:inline-block;margin-top:8px;padding:5px 13px;border-radius:999px;font-size:13px;font-weight:800;color:#07121c;background:linear-gradient(90deg,#78f7ff,#fff3ac,#ffb84a);box-shadow:0 0 18px rgba(114,247,255,.28)}
+.screen{
+  margin:16px 0 12px;border-radius:22px;padding:12px;
+  background:linear-gradient(180deg,#050714,#121c3e);
+  border:2px solid rgba(255,211,106,.72);
+  box-shadow:inset 0 0 28px rgba(0,0,0,.9),0 0 24px rgba(255,211,106,.22);
+  position:relative;overflow:hidden;
+}
+.status{
+  text-align:center;min-height:34px;font-weight:900;font-size:17px;letter-spacing:.04em;color:#fff2b0;text-shadow:0 0 12px rgba(255,211,106,.65);
+}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:8px 0 4px;perspective:600px}
 .reel{
-  height:122px;
-  border-radius:18px;
-  background:linear-gradient(180deg,#fff8df,#e4b45b 55%,#9b641f);
-  color:#1a0b05;
-  display:flex;align-items:center;justify-content:center;
-  font-size:52px;
-  font-weight:1000;
-  box-shadow:inset 0 4px 0 rgba(255,255,255,.55),inset 0 -8px 16px rgba(55,23,0,.20),0 8px 20px rgba(0,0,0,.42);
-  overflow:hidden;
-  position:relative;
+  height:136px;border-radius:18px;overflow:hidden;position:relative;
+  background:linear-gradient(180deg,#fff7d9,#fff,#d9f6ff);
+  border:2px solid #ffdf83;
+  box-shadow:inset 0 12px 24px rgba(255,255,255,.75),inset 0 -18px 20px rgba(0,0,0,.18),0 0 18px rgba(255,211,106,.25);
 }
-.reel:after{
-  content:"";
-  position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,.48),transparent 24%,transparent 70%,rgba(0,0,0,.15));
+.reel:before,.reel:after{content:"";position:absolute;left:0;right:0;height:38px;z-index:3;pointer-events:none}
+.reel:before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.28),transparent)}
+.reel:after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.28),transparent)}
+.strip{position:absolute;left:0;right:0;top:0;will-change:transform}
+.symbol{
+  height:136px;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  color:#111;font-weight:900;font-size:41px;text-align:center;
+}
+.symbol small{font-size:11px;margin-top:5px;color:#313131;line-height:1.15}
+.payline{position:absolute;left:8px;right:8px;top:50%;height:2px;z-index:5;background:linear-gradient(90deg,transparent,#ff2d55,#fff,#ff2d55,transparent);box-shadow:0 0 16px #ff2d55}
+.panel{
+  margin-top:12px;border-radius:18px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.12)
+}
+.push{
+  width:100%;height:72px;border:0;border-radius:22px;cursor:pointer;
+  background:radial-gradient(circle at 50% 25%,#fff6bd,#ffd36a 38%,#ff8b00 70%,#702400);
+  color:#2a0900;font-size:24px;font-weight:1000;letter-spacing:.08em;
+  box-shadow:0 9px 0 #5b1d00,0 0 24px rgba(255,179,0,.65),inset 0 4px 10px rgba(255,255,255,.8);
+  animation:pulse 1.4s infinite;position:relative;
+}
+.push:active{transform:translateY(7px);box-shadow:0 2px 0 #5b1d00,0 0 20px rgba(255,179,0,.65)}
+.push:disabled{filter:grayscale(.8);opacity:.65;animation:none}
+@keyframes pulse{50%{transform:scale(1.018);filter:brightness(1.13)}}
+.note{font-size:12px;color:#bcd6e6;text-align:center;margin:10px 4px 0;line-height:1.6}
+.ticket{
+  display:none;margin-top:12px;border-radius:20px;padding:14px;background:
+  linear-gradient(135deg,rgba(255,211,106,.18),rgba(114,247,255,.10)),
+  rgba(255,255,255,.06);
+  border:1px solid rgba(255,211,106,.55);box-shadow:0 0 25px rgba(255,211,106,.16)
+}
+.ticket.show{display:block;animation:pop .45s cubic-bezier(.2,1.4,.2,1)}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.9)}to{opacity:1;transform:none}}
+.ticket .rank{font-size:13px;color:#86fbff;font-weight:900;letter-spacing:.12em}
+.ticket .prize{font-size:23px;font-weight:1000;color:#fff6bb;margin:5px 0;text-shadow:0 0 14px rgba(255,211,106,.58)}
+.ticket .meta{font-size:12px;line-height:1.6;color:#e8f6ff}
+.code{margin-top:10px;padding:10px;border-radius:12px;background:#050611;border:1px dashed rgba(255,211,106,.75);font-size:19px;font-weight:1000;letter-spacing:.13em;text-align:center;color:#fff}
+.badge{display:inline-block;margin-top:9px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;background:rgba(84,255,176,.14);color:#8affc7;border:1px solid rgba(84,255,176,.5)}
+.badge.next{background:rgba(255,211,106,.14);color:#ffe596;border-color:rgba(255,211,106,.55)}
+.admin-link{margin-top:10px;text-align:center;font-size:12px;color:#71859b;text-decoration:underline;cursor:pointer}
+.admin{display:none;margin-top:12px;padding:12px;border-radius:16px;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12)}
+.admin input{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:#070812;color:white;font-size:16px;margin:6px 0}
+.admin button{width:100%;padding:12px;border:0;border-radius:12px;background:#dcb056;color:#130a00;font-weight:900;margin-top:6px}
+.admin-result{font-size:13px;line-height:1.6;color:#e8f6ff;margin-top:8px}
+.flash{animation:flash .55s ease-in-out 2}
+@keyframes flash{50%{filter:brightness(2.8) saturate(1.8)}}
+.shake{animation:shake .45s}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-7px)}40%,60%{transform:translateX(7px)}}
+.jackpot{
+  position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(circle,rgba(255,224,119,.3),rgba(255,59,92,.17),rgba(0,0,0,.82));
   pointer-events:none;
 }
-.reel.spin{animation:spinReel .08s linear infinite}
-.reel.stop{animation:stopPop .22s ease-out}
-@keyframes spinReel{0%{transform:translateY(-2px);filter:blur(.4px)}50%{transform:translateY(2px);filter:blur(1px)}100%{transform:translateY(-2px);filter:blur(.4px)}}
-@keyframes stopPop{0%{transform:scale(1.08)}70%{transform:scale(.96)}100%{transform:scale(1)}}
-.lamps{
-  display:flex;justify-content:center;gap:7px;margin-top:14px;
-}
-.lamp{
-  width:11px;height:11px;border-radius:50%;background:#6b3f22;box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
-}
-.lamps.on .lamp{animation:lamp .35s infinite alternate}
-.lamps.on .lamp:nth-child(2){animation-delay:.08s}.lamps.on .lamp:nth-child(3){animation-delay:.16s}.lamps.on .lamp:nth-child(4){animation-delay:.24s}.lamps.on .lamp:nth-child(5){animation-delay:.32s}
-@keyframes lamp{to{background:#ffe16b;box-shadow:0 0 14px #ffe16b}}
-.action{text-align:center;padding:4px 18px 20px}
-.btn{
-  border:0;border-radius:999px;padding:18px 22px;width:100%;max-width:330px;
-  background:linear-gradient(180deg,#fff0b8,#d49a38 58%,#844712);
-  color:#241006;font-weight:1000;font-size:18px;letter-spacing:.08em;
-  box-shadow:0 13px 30px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.58);
-}
-.btn:active{transform:translateY(2px)}.btn:disabled{opacity:.65}
-.result{
-  display:none;margin-top:16px;padding:14px;border-radius:24px;
-  background:linear-gradient(180deg,rgba(255,246,222,.12),rgba(0,0,0,.18));
-  border:1px solid rgba(247,213,139,.45);
-  animation:pop .35s ease-out;
-}
-.result.show{display:block}
-@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-.ticket{
-  border:1px dashed rgba(247,213,139,.9);
-  border-radius:18px;
-  padding:15px 12px;
-  background:rgba(255,244,221,.08);
-}
-.rank{font-size:26px;font-weight:1000;color:var(--gold);text-shadow:0 0 18px rgba(247,213,139,.38);margin-bottom:8px}
-.rank.rainbow{
-  background:linear-gradient(90deg,#ffeb3b,#ff5252,#ff4fd8,#4fc3f7,#66ff66,#ffeb3b);
-  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rainbow 1s linear infinite;
-}
-@keyframes rainbow{to{background-position:220% center}}
-.prize{font-size:22px;font-weight:900;margin-bottom:8px}
-.code{font-size:12px;color:#ffe5b4;line-height:1.55}
-.staff{margin-top:10px;padding:10px;border-radius:14px;background:rgba(0,0,0,.25);color:#f9dfaa;font-size:13px;line-height:1.55}
-.used{display:none;margin-top:11px;padding:13px 8px;border:2px solid rgba(255,80,80,.78);border-radius:15px;color:#ffb2a8;font-size:23px;font-weight:1000;letter-spacing:.12em;transform:rotate(-3deg)}
-.used.show{display:block}
-.miniBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
-.mini{border:1px solid rgba(247,213,139,.35);background:rgba(255,255,255,.06);color:#f5dcaa;border-radius:999px;padding:10px 12px;font-size:13px}
-.rules{color:#d9bd85;font-size:12px;line-height:1.65;margin:13px 8px 0}
-.overlay{
-  position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:20;
-  background:rgba(0,0,0,.88);
-}
-.overlay.show{display:flex;animation:fade 1.1s ease both}
-@keyframes fade{0%,100%{opacity:0}14%,84%{opacity:1}}
-.hotText{
-  text-align:center;font-size:38px;line-height:1.28;font-weight:1000;color:#fff;
-  text-shadow:0 0 18px #fff,0 0 36px var(--gold),0 0 60px #ff7b2e;
-  animation:pulse .4s infinite alternate;
-}
-@keyframes pulse{to{transform:scale(1.08)}}
-.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
-.piece{position:absolute;top:-20px;width:9px;height:14px;animation:fall 1.8s linear forwards}
-@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
-.shake{animation:shake .48s linear}
-@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.jackpot.show{display:flex;animation:fadeOut 2.5s forwards}
+.jackpot h2{font-size:46px;margin:0;font-weight:1000;line-height:1.05;color:#fff2a8;text-shadow:0 0 18px #ffb300,0 0 35px #ff2d55}
+.jackpot p{font-size:17px;font-weight:900;color:#fff}
+@keyframes fadeOut{0%,78%{opacity:1}100%{opacity:0;display:none}}
+.confetti i{position:absolute;width:8px;height:14px;background:#ffd36a;top:-20px;animation:fall 2.8s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(780deg);opacity:.2}}
+.footer{font-size:10px;color:#6f8194;text-align:center;margin-top:10px}
 </style>
 </head>
 <body>
-<div class="overlay" id="overlay"><div class="hotText" id="hotText">🔥 激ととのい<br>チャンス 🔥</div></div>
+<div class="bg-stars"></div>
+<div class="steam" id="steam"></div>
 <div class="confetti" id="confetti"></div>
-<main class="wrap">
-  <section class="app">
-    <header class="top">
-      <div class="mark">♨</div>
-      <h2 class="logo">LASPA</h2>
-      <div class="sublogo">PRIVATE SAUNA</div>
-      <div class="badge">7月限定キャンペーン</div>
-      <h1>🌿 夏のととのいくじ 🌿</h1>
-      <p class="lead">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
-    </header>
+<div class="jackpot" id="jackpot"><div><h2 id="jackpotText">超ととのい</h2><p>PREMIUM BONUS</p></div></div>
 
-    <section class="machine">
-      <div class="panelTitle">🎰 LASPA LUCKY SLOT 🎰</div>
-      <div class="reels">
-        <div class="reel" id="r1">🧖</div>
-        <div class="reel" id="r2">🌿</div>
-        <div class="reel" id="r3">🧴</div>
+<main class="app">
+  <section class="machine" id="machine">
+    <div class="machine-inner">
+      <div class="top-lamps">
+        <div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div>
       </div>
-      <div class="lamps" id="lamps"><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span></div>
-    </section>
+      <div class="logo">
+        <div class="sub">LASPA PREMIUM SLOT</div>
+        <h1>夏の<br>ととのいくじ</h1>
+        <div class="campaign">7月限定キャンペーン</div>
+      </div>
 
-    <section class="action">
-      <button class="btn" id="drawBtn">スロットを回す</button>
-      <div class="result" id="result">
-        <div class="ticket">
+      <div class="screen">
+        <div class="status" id="status">本日1回限定。PUSHで抽選開始。</div>
+        <div class="reels">
+          <div class="reel"><div class="strip" id="strip0"></div></div>
+          <div class="reel"><div class="strip" id="strip1"></div></div>
+          <div class="reel"><div class="strip" id="strip2"></div></div>
+        </div>
+        <div class="payline"></div>
+      </div>
+
+      <div class="panel">
+        <button class="push" id="spinBtn">PUSH</button>
+        <div class="note">
+          同じスマホでは1日1回まで。<br>
+          当選画面をスタッフへご提示ください。
+        </div>
+
+        <div class="ticket" id="ticket">
           <div class="rank" id="rank"></div>
           <div class="prize" id="prize"></div>
+          <div class="meta" id="meta"></div>
           <div class="code" id="code"></div>
-          <div class="staff" id="staff"></div>
-          <div class="used" id="used">使用済</div>
+          <div class="badge" id="badge"></div>
         </div>
-        <div class="miniBtns">
-          <button class="mini" id="useBtn">スタッフ確認：使用済みにする</button>
-          <button class="mini" id="resetBtn">次のお客様へ</button>
+
+        <div class="admin-link" id="adminToggle">スタッフ確認モード</div>
+        <div class="admin" id="admin">
+          <input id="pin" placeholder="スタッフPIN" inputmode="numeric">
+          <input id="checkCode" placeholder="交換コードを入力">
+          <button id="useBtn">このコードを使用済みにする</button>
+          <div class="admin-result" id="adminResult"></div>
         </div>
       </div>
-      <p class="rules">※景品交換は当日限りです。<br>※スタッフにこの画面をお見せください。<br>※景品は変更になる場合があります。</p>
-    </section>
+      <div class="footer">© LASPA / Digital ticket prototype</div>
+    </div>
   </section>
 </main>
 
 <script>
-const symbols=["🧖","🌿","🧴","♨️","✨","🔥","🫧","🌙"];
-const prizes=[
- {rank:"🌈 超ととのい賞",prize:"サウナ70分無料券",weight:1,type:"rainbow",staff:"無料券をお渡しください。",reels:["🌈","🌈","🌈"]},
- {rank:"🔥 激ととのい賞",prize:"よもぎ蒸し無料券",weight:2,type:"gold",staff:"無料券をお渡しください。",reels:["🔥","🔥","🔥"]},
- {rank:"♨️ ぽかぽか賞",prize:"無料延長30分",weight:7,type:"gold",staff:"延長30分を付与してください。",reels:["♨️","♨️","♨️"]},
- {rank:"🌙 爆睡ととのい賞",prize:"めぐりズム 1枚",weight:15,type:"silver",staff:"めぐりズムを1点お渡しください。",reels:["🌙","🌙","🌙"]},
- {rank:"🧴 美肌ととのい賞",prize:"フェイスパック",weight:25,type:"silver",staff:"フェイスパックを1点お渡しください。",reels:["🧴","🧴","🧴"]},
- {rank:"🫧 さっぱり賞",prize:"汗拭きシート",weight:25,type:"bronze",staff:"汗拭きシートを1点お渡しください。",reels:["🫧","🫧","🫧"]},
- {rank:"🌿 ほっこり賞",prize:"入浴剤",weight:25,type:"bronze",staff:"入浴剤を1点お渡しください。",reels:["🌿","🌿","🌿"]}
+const ADMIN_PIN = "0716";
+const todayKey = () => new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+const nowText = () => new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
+const addDays = (n) => {
+  const d = new Date(); d.setDate(d.getDate()+n);
+  return d.toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+};
+
+const prizes = [
+  {rank:"超ととのい賞", name:"サウナ70分無料券", rate:1, type:"next", emoji:"👑", expire:30},
+  {rank:"激ととのい賞", name:"よもぎ蒸し無料券", rate:2, type:"next", emoji:"🔥", expire:30},
+  {rank:"ぽかぽか賞", name:"無料延長30分", rate:7, type:"today", emoji:"⏰", expire:0},
+  {rank:"爆睡ととのい賞", name:"めぐりズム", rate:15, type:"today", emoji:"😴", expire:0},
+  {rank:"美肌ととのい賞", name:"フェイスパック", rate:25, type:"today", emoji:"✨", expire:0},
+  {rank:"さっぱり賞", name:"汗拭きシート", rate:25, type:"today", emoji:"💧", expire:0},
+  {rank:"ほっこり賞", name:"入浴剤", rate:25, type:"today", emoji:"♨️", expire:0}
 ];
-const $=id=>document.getElementById(id);
-const reels=[$("r1"),$("r2"),$("r3")],btn=$("drawBtn"),lamps=$("lamps"),result=$("result"),rank=$("rank"),prize=$("prize"),code=$("code"),staff=$("staff"),used=$("used");
-function pickPrize(){let total=prizes.reduce((s,p)=>s+p.weight,0),r=Math.random()*total;for(const p of prizes){r-=p.weight;if(r<=0)return p}return prizes[prizes.length-1]}
-function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
-function sound(kind="normal"){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const master=ctx.createGain();master.gain.value=.18;master.connect(ctx.destination);function tone(f,s,d,type="sine"){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,ctx.currentTime+s);g.gain.setValueAtTime(.0001,ctx.currentTime+s);g.gain.exponentialRampToValueAtTime(.8,ctx.currentTime+s+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+s+d);o.connect(g);g.connect(master);o.start(ctx.currentTime+s);o.stop(ctx.currentTime+s+d+.02)}if(kind==="spin"){tone(220,0,.08,"square");tone(260,.1,.08,"square");tone(300,.2,.08,"square")}else if(kind==="hot"){tone(880,0,.16);tone(1320,.16,.16);tone(1760,.32,.24)}else{tone(523,0,.13);tone(659,.13,.13);tone(784,.26,.22)}}catch(e){}}
-function flash(text,rainbow=false){$("hotText").innerHTML=rainbow?'<span style="background:linear-gradient(90deg,#ff3,#f55,#f0f,#55f,#0ff,#5f5,#ff3);-webkit-background-clip:text;background-clip:text;color:transparent">🌈 超ととのい<br>降臨 🌈</span>':text;$("overlay").classList.add("show");setTimeout(()=>$("overlay").classList.remove("show"),1080)}
-function confetti(n=70){const box=$("confetti");box.innerHTML="";const colors=["#f6d28a","#fff4dd","#ff7043","#7bd66f","#54c7ff","#ff5cf0"];for(let i=0;i<n;i++){const el=document.createElement("div");el.className="piece";el.style.left=Math.random()*100+"vw";el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.animationDelay=Math.random()*0.55+"s";el.style.animationDuration=(1.25+Math.random()*1.35)+"s";box.appendChild(el)}setTimeout(()=>box.innerHTML="",3000)}
-function resetVisual(){result.classList.remove("show");rank.classList.remove("rainbow");used.classList.remove("show");reels.forEach((r,i)=>{r.classList.remove("spin","stop");r.textContent=["🧖","🌿","🧴"][i]});lamps.classList.remove("on")}
-async function draw(){
- btn.disabled=true;btn.textContent="抽選中...";resetVisual();const p=pickPrize();
- lamps.classList.add("on");reels.forEach(r=>r.classList.add("spin"));vibrate([50,40,50]);sound("spin");
- let timers=reels.map(r=>setInterval(()=>{r.textContent=symbols[Math.floor(Math.random()*symbols.length)]},70));
- await sleep(950);
- clearInterval(timers[0]);reels[0].classList.remove("spin");reels[0].classList.add("stop");reels[0].textContent=p.reels[0];sound("normal");vibrate(45);
- await sleep(520);
- clearInterval(timers[1]);reels[1].classList.remove("spin");reels[1].classList.add("stop");reels[1].textContent=p.reels[1];sound("normal");vibrate(45);
- await sleep(700);
- if(p.type==="rainbow"){document.body.classList.add("shake");flash("",true);sound("hot");vibrate([100,40,100,40,160]);await sleep(900);document.body.classList.remove("shake")}
- else if(p.type==="gold"){document.body.classList.add("shake");flash("🔥 激ととのい<br>チャンス 🔥");sound("hot");vibrate([80,50,100]);await sleep(760);document.body.classList.remove("shake")}
- clearInterval(timers[2]);reels[2].classList.remove("spin");reels[2].classList.add("stop");reels[2].textContent=p.reels[2];sound("normal");vibrate(80);
- await sleep(380);lamps.classList.remove("on");
- rank.textContent=p.rank;if(p.type==="rainbow")rank.classList.add("rainbow");
- prize.textContent="🎁 "+p.prize;const now=new Date();
- code.innerHTML="交換コード：<b>LASPA-"+now.toLocaleDateString("ja-JP").replaceAll("/","")+"-"+Math.floor(1000+Math.random()*9000)+"</b><br>表示時刻："+now.toLocaleString("ja-JP");
- staff.textContent="スタッフ確認："+p.staff;
- confetti(p.type==="rainbow"?140:p.type==="gold"?100:70);
- result.classList.add("show");btn.disabled=false;btn.textContent="もう一度スロットを回す";
+
+const symbols = [
+  ["👑","超ととのい"],["🔥","激ととのい"],["⏰","延長30分"],["😴","めぐりズム"],
+  ["✨","美肌"],["💧","さっぱり"],["♨️","ほっこり"],["🌿","よもぎ"],["🧖","サウナ"]
+];
+
+const strips = [...Array(3)].map((_,i)=>document.getElementById("strip"+i));
+const machine = document.getElementById("machine");
+const statusEl = document.getElementById("status");
+const spinBtn = document.getElementById("spinBtn");
+const ticket = document.getElementById("ticket");
+const rankEl = document.getElementById("rank");
+const prizeEl = document.getElementById("prize");
+const metaEl = document.getElementById("meta");
+const codeEl = document.getElementById("code");
+const badgeEl = document.getElementById("badge");
+const jackpot = document.getElementById("jackpot");
+const jackpotText = document.getElementById("jackpotText");
+
+function buildStrips(){
+  strips.forEach((strip,idx)=>{
+    strip.innerHTML="";
+    const loop = [];
+    for(let r=0;r<18;r++) loop.push(...symbols);
+    loop.forEach(s=>{
+      const div=document.createElement("div");
+      div.className="symbol";
+      div.innerHTML=`<div>${s[0]}</div><small>${s[1]}</small>`;
+      strip.appendChild(div);
+    });
+  });
 }
-btn.addEventListener("click",draw);
-$("useBtn").addEventListener("click",()=>{used.classList.add("show");vibrate(80)});
-$("resetBtn").addEventListener("click",()=>{resetVisual();btn.textContent="スロットを回す";window.scrollTo({top:0,behavior:"smooth"})});
+buildStrips();
+
+function pickPrize(){
+  const r = Math.random()*100;
+  let acc=0;
+  for(const p of prizes){acc+=p.rate;if(r<acc)return p}
+  return prizes[prizes.length-1];
+}
+function makeCode(){
+  const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let out="LASPA-";
+  for(let i=0;i<6;i++) out+=chars[Math.floor(Math.random()*chars.length)];
+  return out;
+}
+function saveRecord(p,code,drawnAt){
+  const record={prize:p.name,rank:p.rank,type:p.type,code,drawnAt,expire:p.type==="next"?addDays(p.expire):todayKey(),used:false};
+  localStorage.setItem("laspaLastTicket",JSON.stringify(record));
+  localStorage.setItem("laspaDrawDate",todayKey());
+  const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");
+  all[code]=record;
+  localStorage.setItem("laspaTickets",JSON.stringify(all));
+  return record;
+}
+function showTicket(record){
+  ticket.classList.add("show");
+  rankEl.textContent=record.rank;
+  prizeEl.textContent=record.prize;
+  codeEl.textContent=record.code;
+  const limit = record.type==="next" ? `次回来店時利用：有効期限 ${record.expire}まで` : `当日交換：本日中にスタッフへ提示`;
+  metaEl.innerHTML=`抽選日時：${record.drawnAt}<br>${limit}<br>※スクショ保存OK。交換時にこの画面をご提示ください。`;
+  badgeEl.className="badge "+(record.type==="next"?"next":"");
+  badgeEl.textContent=record.type==="next" ? "次回特典" : "当日交換景品";
+}
+function alreadyDrawn(){
+  return localStorage.getItem("laspaDrawDate")===todayKey();
+}
+function restore(){
+  const rec=localStorage.getItem("laspaLastTicket");
+  if(alreadyDrawn() && rec){
+    spinBtn.disabled=true;
+    spinBtn.textContent="本日は抽選済み";
+    statusEl.textContent="本日の抽選結果";
+    showTicket(JSON.parse(rec));
+  }
+}
+restore();
+
+function confetti(){
+  const box=document.getElementById("confetti");
+  for(let i=0;i<90;i++){
+    const e=document.createElement("i");
+    e.style.left=Math.random()*100+"vw";
+    e.style.background=["#ffd36a","#72f7ff","#ff3b5c","#54ffb0","#fff"][Math.floor(Math.random()*5)];
+    e.style.animationDelay=Math.random()*0.8+"s";
+    e.style.transform=`rotate(${Math.random()*360}deg)`;
+    box.appendChild(e);
+    setTimeout(()=>e.remove(),4200);
+  }
+}
+function vibrate(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+function beep(freq=520,dur=.08,type="sine",gain=.04){
+  try{
+    const ctx=new (window.AudioContext||window.webkitAudioContext)();
+    const o=ctx.createOscillator(); const g=ctx.createGain();
+    o.type=type; o.frequency.value=freq; g.gain.value=gain;
+    o.connect(g); g.connect(ctx.destination); o.start();
+    setTimeout(()=>{o.stop();ctx.close()},dur*1000);
+  }catch(e){}
+}
+
+function finalIndexForPrize(p){
+  const idx=symbols.findIndex(s=>s[0]===p.emoji);
+  return idx < 0 ? 0 : idx;
+}
+function spinReel(strip, reelNo, finalIdx, duration){
+  return new Promise(resolve=>{
+    const cell=136;
+    const totalSymbols=symbols.length;
+    const loops=12 + reelNo*5;
+    const target=(loops*totalSymbols + finalIdx)*cell;
+    strip.style.transition="none";
+    strip.style.transform="translateY(0px)";
+    requestAnimationFrame(()=>{
+      strip.style.transition=`transform ${duration}ms cubic-bezier(.08,.72,.09,1)`;
+      strip.style.transform=`translateY(-${target}px)`;
+    });
+    setTimeout(()=>{
+      strip.style.transition="none";
+      strip.style.transform=`translateY(-${finalIdx*cell}px)`;
+      machine.classList.add("shake"); setTimeout(()=>machine.classList.remove("shake"),450);
+      vibrate(80); beep(220+reelNo*80,.07,"square",.035);
+      resolve();
+    },duration+80);
+  });
+}
+
+spinBtn.addEventListener("click", async()=>{
+  if(alreadyDrawn()) return;
+  spinBtn.disabled=true;
+  ticket.classList.remove("show");
+  statusEl.textContent="リール回転中…";
+  beep(440,.08,"sawtooth",.04);
+  const p=pickPrize();
+  const finalIdx=finalIndexForPrize(p);
+  await Promise.all([
+    spinReel(strips[0],0,finalIdx,1700),
+    spinReel(strips[1],1,finalIdx,2400),
+    spinReel(strips[2],2,finalIdx,3150)
+  ]);
+  const code=makeCode();
+  const drawnAt=nowText();
+  const record=saveRecord(p,code,drawnAt);
+  statusEl.textContent=p.rank+" 確定！";
+  showTicket(record);
+  confetti();
+  machine.classList.add("flash"); setTimeout(()=>machine.classList.remove("flash"),1200);
+  if(p.rank.includes("超") || p.rank.includes("激")){
+    jackpotText.textContent=p.rank;
+    jackpot.classList.add("show");
+    setTimeout(()=>jackpot.classList.remove("show"),2600);
+    vibrate([120,70,120,70,240]);
+    beep(880,.12,"square",.045); setTimeout(()=>beep(1320,.16,"square",.045),160);
+  }else{
+    vibrate(120); beep(740,.1,"triangle",.04);
+  }
+  spinBtn.textContent="本日は抽選済み";
+});
+
+document.getElementById("adminToggle").addEventListener("click",()=>{
+  const a=document.getElementById("admin");
+  a.style.display = a.style.display==="block" ? "none" : "block";
+});
+document.getElementById("useBtn").addEventListener("click",()=>{
+  const pin=document.getElementById("pin").value.trim();
+  const code=document.getElementById("checkCode").value.trim().toUpperCase();
+  const out=document.getElementById("adminResult");
+  if(pin!==ADMIN_PIN){out.textContent="PINが違います。";return;}
+  const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");
+  if(!all[code]){out.textContent="この端末には該当コードの記録がありません。スクショの抽選日時・景品名を確認してください。";return;}
+  if(all[code].used){out.innerHTML="使用済みです。<br>使用日時："+all[code].usedAt;return;}
+  all[code].used=true; all[code].usedAt=nowText();
+  localStorage.setItem("laspaTickets",JSON.stringify(all));
+  out.innerHTML=`使用済みにしました。<br>${all[code].rank} / ${all[code].prize}<br>抽選日時：${all[code].drawnAt}`;
+});
+
+const steamBox=document.getElementById("steam");
+for(let i=0;i<9;i++){
+  const s=document.createElement("span");
+  s.style.left=(Math.random()*95)+"vw";
+  s.style.animationDelay=(Math.random()*5)+"s";
+  s.style.animationDuration=(5+Math.random()*4)+"s";
+  steamBox.appendChild(s);
+}
 </script>
 </body>
 </html>
