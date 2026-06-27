@@ -3,105 +3,270 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LASPA 夏のととのいくじ Ver2</title>
+<title>LASPA 夏のととのいくじ</title>
 <style>
-:root{--gold:#f6d28a;--cream:#fff4dd;--dark:#100805}
+:root{
+  --bg:#0b0503;
+  --brown:#211109;
+  --wood:#6f4324;
+  --gold:#f7d58b;
+  --gold2:#b98230;
+  --cream:#fff3dc;
+  --ink:#1b0d07;
+  --red:#c53225;
+}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--cream);background:radial-gradient(circle at 50% 10%,rgba(255,210,135,.25),transparent 30%),linear-gradient(160deg,#0b0503,#2c170d 55%,#070302);overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background:repeating-linear-gradient(90deg,rgba(255,230,180,.08) 0 1px,transparent 1px 56px),repeating-linear-gradient(0deg,rgba(255,230,180,.04) 0 1px,transparent 1px 32px)}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--cream);background:#0b0503}
+body{
+  background:
+    radial-gradient(circle at 50% 5%,rgba(255,210,130,.28),transparent 28%),
+    radial-gradient(circle at 20% 85%,rgba(255,112,45,.12),transparent 33%),
+    linear-gradient(160deg,#080302,#241107 58%,#050201);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.18;
+  background:
+    repeating-linear-gradient(90deg,rgba(255,230,180,.08) 0 1px,transparent 1px 64px),
+    repeating-linear-gradient(0deg,rgba(255,230,180,.035) 0 1px,transparent 1px 30px);
+}
 .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px 14px}
-.app{width:min(440px,100%);border:1px solid rgba(246,210,138,.48);border-radius:30px;background:linear-gradient(180deg,rgba(42,24,14,.9),rgba(13,7,4,.95));box-shadow:0 28px 90px rgba(0,0,0,.55);overflow:hidden}
-.header{text-align:center;padding:22px 18px 8px}
-.brand{font-family:Georgia,serif;font-size:42px;letter-spacing:.18em;margin:0;text-shadow:0 4px 20px #000}
-.subbrand{letter-spacing:.28em;color:#f5dcaa;font-size:13px}
-.badge{display:inline-block;margin:15px 0 6px;padding:7px 15px;border:1px solid rgba(246,210,138,.45);border-radius:999px;color:#ffe9b3;background:rgba(255,255,255,.06);font-weight:800}
-h1{margin:4px 0 6px;font-size:31px;line-height:1.15}
-.lead{margin:0;color:#f7dfb8;font-size:14px;line-height:1.7}
-.stage{height:250px;margin:16px;border-radius:26px;border:1px solid rgba(246,210,138,.38);background:radial-gradient(circle at 50% 18%,rgba(246,210,138,.2),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.24));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.machine{position:absolute;top:22px;width:176px;height:176px;border-radius:34px;background:linear-gradient(145deg,#f6d28a,#c28d3a 58%,#7a4a1d);border:2px solid rgba(255,244,221,.55);box-shadow:0 18px 42px rgba(0,0,0,.45),inset 0 4px 0 rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
-.machine:after{content:"";position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);width:84px;height:44px;border-radius:12px 12px 4px 4px;background:linear-gradient(180deg,#aaa,#4b4b4b)}
-.logo{font-family:Georgia,serif;color:#2a170b;font-size:25px;letter-spacing:.12em;text-align:center}.logo span{display:block;font-size:8px;margin-top:5px}
-.handle{position:absolute;right:34px;bottom:42px;width:58px;height:58px;border-radius:50%;border:10px solid #555;background:#ddd;box-shadow:inset 0 3px 0 rgba(255,255,255,.75);z-index:2}
-.handle:after{content:"";position:absolute;right:-35px;top:16px;width:42px;height:13px;border-radius:999px;background:linear-gradient(180deg,#f2c47a,#8a5324)}
-.machine.turn{animation:machineTurn .9s ease-in-out}.machine.turn .handle{animation:handleTurn .55s ease-in-out 2}
-@keyframes machineTurn{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}55%{transform:rotate(5deg)}75%{transform:rotate(-3deg)}}@keyframes handleTurn{to{transform:rotate(360deg)}}
-.capsule{position:absolute;width:76px;height:76px;border-radius:50%;bottom:24px;left:50%;transform:translateX(-50%) scale(0);opacity:0;box-shadow:0 12px 24px rgba(0,0,0,.35),inset 0 4px 0 rgba(255,255,255,.45);z-index:4;overflow:hidden}
-.capsule:before{content:"";position:absolute;inset:0 0 50% 0;background:rgba(255,255,255,.33)}
-.bronze{background:linear-gradient(160deg,#f2b06b,#9b521f)}.silver{background:linear-gradient(160deg,#fff,#9ea7ad)}.gold{background:linear-gradient(160deg,#fff3a7,#d59622)}.rainbow{background:linear-gradient(135deg,#ff3,#ff5b5b,#c65bff,#4cc9ff,#5dff8d)}
-.capsule.roll{animation:capsuleRoll 1.15s cubic-bezier(.18,.84,.32,1) forwards}@keyframes capsuleRoll{0%{opacity:0;transform:translate(-50%,-120px) scale(.25) rotate(0)}20%{opacity:1}65%{transform:translate(-20%,12px) scale(1) rotate(520deg)}100%{opacity:1;transform:translate(-50%,0) scale(1.06) rotate(900deg)}}
-.capsule.open{animation:capsuleOpen .5s ease-out forwards}@keyframes capsuleOpen{60%{transform:translate(-50%,0) scale(1.28)}100%{transform:translate(-50%,0) scale(.01);opacity:0}}
-.icons{position:absolute;bottom:14px;display:flex;gap:10px;opacity:0;transform:translateY(16px)}.icons.show{animation:up .45s ease-out forwards}@keyframes up{to{opacity:1;transform:translateY(0)}}
-.ico{width:58px;height:58px;border-radius:16px;background:linear-gradient(180deg,#fff3cf,#d6a04a);display:flex;align-items:center;justify-content:center;font-size:31px;color:#2b1408;box-shadow:0 8px 20px rgba(0,0,0,.35)}
-.action{text-align:center;padding:0 18px 20px}.btn{border:0;border-radius:999px;width:100%;max-width:326px;padding:18px 22px;background:linear-gradient(180deg,#fff1b9,#d09a3f 58%,#8b4e18);color:#2b1408;font-size:18px;font-weight:1000;letter-spacing:.08em;box-shadow:0 13px 28px rgba(0,0,0,.42),inset 0 2px 0 rgba(255,255,255,.58)}.btn:active{transform:translateY(2px)}.btn:disabled{opacity:.62}
-.result{display:none;margin:15px 0 0;padding:16px 14px;border-radius:22px;background:linear-gradient(180deg,rgba(255,248,226,.12),rgba(0,0,0,.18));border:1px solid rgba(246,210,138,.45);animation:pop .36s ease-out}.result.show{display:block}@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
-.ticket{border:1px dashed rgba(246,210,138,.86);border-radius:18px;padding:14px 12px;background:rgba(255,244,221,.08)}
-.rank{font-size:25px;font-weight:1000;margin-bottom:7px;color:var(--gold);text-shadow:0 0 16px rgba(246,210,138,.35)}.rank.rainbowText{background:linear-gradient(90deg,#ff3,#ff6868,#d65cff,#4cc9ff,#5dff8d,#ff3);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rainbowMove 1.2s linear infinite}@keyframes rainbowMove{to{background-position:220% center}}
-.prize{font-size:22px;font-weight:900;margin:8px 0 6px}.code{font-size:12px;line-height:1.55;color:#ffe8b8;margin-top:8px}.staff{margin-top:10px;padding:10px;border-radius:14px;background:rgba(0,0,0,.25);color:#f9dfaa;font-size:13px;line-height:1.6}.used{display:none;margin-top:11px;padding:14px 10px;border:2px solid rgba(255,80,80,.75);border-radius:16px;color:#ffb2a8;font-weight:1000;transform:rotate(-3deg);font-size:23px;letter-spacing:.12em}.used.show{display:block}
-.miniBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}.mini{border:1px solid rgba(246,210,138,.34);background:rgba(255,255,255,.06);color:#f5dcaa;border-radius:999px;padding:10px 12px;font-size:13px}
+.app{
+  width:min(440px,100%);
+  border-radius:30px;
+  border:1px solid rgba(247,213,139,.55);
+  background:linear-gradient(180deg,rgba(43,24,13,.94),rgba(11,5,3,.97));
+  box-shadow:0 30px 90px rgba(0,0,0,.58),inset 0 1px 0 rgba(255,255,255,.08);
+  overflow:hidden;
+  position:relative;
+}
+.top{
+  text-align:center;
+  padding:23px 18px 12px;
+  position:relative;
+}
+.mark{font-size:25px;color:var(--gold);filter:drop-shadow(0 0 12px rgba(247,213,139,.45))}
+.logo{
+  margin:0;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:43px;
+  letter-spacing:.18em;
+  text-shadow:0 4px 22px rgba(0,0,0,.68);
+}
+.sublogo{font-size:12px;letter-spacing:.32em;color:#f4d9a3;margin-top:3px}
+.badge{
+  display:inline-block;margin:16px 0 8px;padding:7px 15px;border-radius:999px;
+  border:1px solid rgba(247,213,139,.46);background:rgba(255,255,255,.06);
+  font-size:13px;font-weight:900;color:#ffe9ba;letter-spacing:.06em;
+}
+h1{margin:0 0 7px;font-size:31px;line-height:1.12;text-shadow:0 0 22px rgba(247,213,139,.18)}
+.lead{margin:0;color:#f8ddb2;font-size:14px;line-height:1.7}
+.machine{
+  margin:12px 16px 10px;
+  padding:18px 14px 16px;
+  border-radius:28px;
+  border:1px solid rgba(247,213,139,.48);
+  background:
+    radial-gradient(circle at 50% 0%,rgba(247,213,139,.20),transparent 42%),
+    linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.25));
+  box-shadow:inset 0 0 30px rgba(0,0,0,.38),0 16px 42px rgba(0,0,0,.25);
+}
+.panelTitle{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  color:#ffe8b5;font-weight:1000;font-size:15px;letter-spacing:.08em;margin-bottom:13px;
+}
+.reels{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+  padding:10px;
+  border-radius:22px;
+  background:linear-gradient(180deg,#241209,#080302);
+  border:1px solid rgba(247,213,139,.4);
+  box-shadow:inset 0 8px 20px rgba(0,0,0,.55);
+  position:relative;
+}
+.reels:before{
+  content:"";
+  position:absolute;left:10px;right:10px;top:50%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(247,213,139,.7),transparent);
+  box-shadow:0 0 14px rgba(247,213,139,.5);
+}
+.reel{
+  height:122px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#fff8df,#e4b45b 55%,#9b641f);
+  color:#1a0b05;
+  display:flex;align-items:center;justify-content:center;
+  font-size:52px;
+  font-weight:1000;
+  box-shadow:inset 0 4px 0 rgba(255,255,255,.55),inset 0 -8px 16px rgba(55,23,0,.20),0 8px 20px rgba(0,0,0,.42);
+  overflow:hidden;
+  position:relative;
+}
+.reel:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(255,255,255,.48),transparent 24%,transparent 70%,rgba(0,0,0,.15));
+  pointer-events:none;
+}
+.reel.spin{animation:spinReel .08s linear infinite}
+.reel.stop{animation:stopPop .22s ease-out}
+@keyframes spinReel{0%{transform:translateY(-2px);filter:blur(.4px)}50%{transform:translateY(2px);filter:blur(1px)}100%{transform:translateY(-2px);filter:blur(.4px)}}
+@keyframes stopPop{0%{transform:scale(1.08)}70%{transform:scale(.96)}100%{transform:scale(1)}}
+.lamps{
+  display:flex;justify-content:center;gap:7px;margin-top:14px;
+}
+.lamp{
+  width:11px;height:11px;border-radius:50%;background:#6b3f22;box-shadow:inset 0 1px 2px rgba(0,0,0,.5);
+}
+.lamps.on .lamp{animation:lamp .35s infinite alternate}
+.lamps.on .lamp:nth-child(2){animation-delay:.08s}.lamps.on .lamp:nth-child(3){animation-delay:.16s}.lamps.on .lamp:nth-child(4){animation-delay:.24s}.lamps.on .lamp:nth-child(5){animation-delay:.32s}
+@keyframes lamp{to{background:#ffe16b;box-shadow:0 0 14px #ffe16b}}
+.action{text-align:center;padding:4px 18px 20px}
+.btn{
+  border:0;border-radius:999px;padding:18px 22px;width:100%;max-width:330px;
+  background:linear-gradient(180deg,#fff0b8,#d49a38 58%,#844712);
+  color:#241006;font-weight:1000;font-size:18px;letter-spacing:.08em;
+  box-shadow:0 13px 30px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.58);
+}
+.btn:active{transform:translateY(2px)}.btn:disabled{opacity:.65}
+.result{
+  display:none;margin-top:16px;padding:14px;border-radius:24px;
+  background:linear-gradient(180deg,rgba(255,246,222,.12),rgba(0,0,0,.18));
+  border:1px solid rgba(247,213,139,.45);
+  animation:pop .35s ease-out;
+}
+.result.show{display:block}
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.ticket{
+  border:1px dashed rgba(247,213,139,.9);
+  border-radius:18px;
+  padding:15px 12px;
+  background:rgba(255,244,221,.08);
+}
+.rank{font-size:26px;font-weight:1000;color:var(--gold);text-shadow:0 0 18px rgba(247,213,139,.38);margin-bottom:8px}
+.rank.rainbow{
+  background:linear-gradient(90deg,#ffeb3b,#ff5252,#ff4fd8,#4fc3f7,#66ff66,#ffeb3b);
+  background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rainbow 1s linear infinite;
+}
+@keyframes rainbow{to{background-position:220% center}}
+.prize{font-size:22px;font-weight:900;margin-bottom:8px}
+.code{font-size:12px;color:#ffe5b4;line-height:1.55}
+.staff{margin-top:10px;padding:10px;border-radius:14px;background:rgba(0,0,0,.25);color:#f9dfaa;font-size:13px;line-height:1.55}
+.used{display:none;margin-top:11px;padding:13px 8px;border:2px solid rgba(255,80,80,.78);border-radius:15px;color:#ffb2a8;font-size:23px;font-weight:1000;letter-spacing:.12em;transform:rotate(-3deg)}
+.used.show{display:block}
+.miniBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}
+.mini{border:1px solid rgba(247,213,139,.35);background:rgba(255,255,255,.06);color:#f5dcaa;border-radius:999px;padding:10px 12px;font-size:13px}
 .rules{color:#d9bd85;font-size:12px;line-height:1.65;margin:13px 8px 0}
-.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:20;background:rgba(0,0,0,.86)}.overlay.show{display:flex;animation:flashFade 1.2s ease both}@keyframes flashFade{0%,100%{opacity:0}14%,85%{opacity:1}}
-.hotText{text-align:center;font-size:36px;line-height:1.3;font-weight:1000;color:#fff;text-shadow:0 0 18px #fff,0 0 36px var(--gold),0 0 54px var(--orange);animation:pulse .45s ease-in-out infinite alternate}@keyframes pulse{to{transform:scale(1.08)}}
-.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}.piece{position:absolute;top:-18px;width:9px;height:14px;animation:fall 1.8s linear forwards}@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
-.screenShake{animation:shake .5s linear}@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.overlay{
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:20;
+  background:rgba(0,0,0,.88);
+}
+.overlay.show{display:flex;animation:fade 1.1s ease both}
+@keyframes fade{0%,100%{opacity:0}14%,84%{opacity:1}}
+.hotText{
+  text-align:center;font-size:38px;line-height:1.28;font-weight:1000;color:#fff;
+  text-shadow:0 0 18px #fff,0 0 36px var(--gold),0 0 60px #ff7b2e;
+  animation:pulse .4s infinite alternate;
+}
+@keyframes pulse{to{transform:scale(1.08)}}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
+.piece{position:absolute;top:-20px;width:9px;height:14px;animation:fall 1.8s linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
+.shake{animation:shake .48s linear}
+@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
 </style>
 </head>
 <body>
 <div class="overlay" id="overlay"><div class="hotText" id="hotText">🔥 激ととのい<br>チャンス 🔥</div></div>
 <div class="confetti" id="confetti"></div>
 <main class="wrap">
-<section class="app">
-<header class="header">
-<div style="font-size:26px;color:var(--gold)">♨</div>
-<h2 class="brand">LASPA</h2>
-<div class="subbrand">PRIVATE SAUNA</div>
-<div class="badge">7月限定キャンペーン</div>
-<h1>🌿 夏のととのいくじ 🌿</h1>
-<p class="lead">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
-</header>
-<section class="stage">
-<div class="machine" id="machine"><div class="logo">LASPA<span>LUCKY GACHA</span></div><div class="handle"></div></div>
-<div class="capsule bronze" id="capsule"></div>
-<div class="icons" id="icons"><div class="ico" id="i1">🧖</div><div class="ico" id="i2">🌿</div><div class="ico" id="i3">🧴</div></div>
-</section>
-<section class="action">
-<button class="btn" id="drawBtn">ガチャを回す</button>
-<div class="result" id="result">
-<div class="ticket">
-<div class="rank" id="rank"></div>
-<div class="prize" id="prize"></div>
-<div class="code" id="code"></div>
-<div class="staff" id="staff"></div>
-<div class="used" id="used">使用済</div>
-</div>
-<div class="miniBtns"><button class="mini" id="useBtn">スタッフ確認：使用済みにする</button><button class="mini" id="resetBtn">次のお客様へ</button></div>
-</div>
-<p class="rules">※景品交換は当日限りです。<br>※スタッフにこの画面をお見せください。<br>※景品は変更になる場合があります。</p>
-</section>
-</section>
+  <section class="app">
+    <header class="top">
+      <div class="mark">♨</div>
+      <h2 class="logo">LASPA</h2>
+      <div class="sublogo">PRIVATE SAUNA</div>
+      <div class="badge">7月限定キャンペーン</div>
+      <h1>🌿 夏のととのいくじ 🌿</h1>
+      <p class="lead">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
+    </header>
+
+    <section class="machine">
+      <div class="panelTitle">🎰 LASPA LUCKY SLOT 🎰</div>
+      <div class="reels">
+        <div class="reel" id="r1">🧖</div>
+        <div class="reel" id="r2">🌿</div>
+        <div class="reel" id="r3">🧴</div>
+      </div>
+      <div class="lamps" id="lamps"><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span><span class="lamp"></span></div>
+    </section>
+
+    <section class="action">
+      <button class="btn" id="drawBtn">スロットを回す</button>
+      <div class="result" id="result">
+        <div class="ticket">
+          <div class="rank" id="rank"></div>
+          <div class="prize" id="prize"></div>
+          <div class="code" id="code"></div>
+          <div class="staff" id="staff"></div>
+          <div class="used" id="used">使用済</div>
+        </div>
+        <div class="miniBtns">
+          <button class="mini" id="useBtn">スタッフ確認：使用済みにする</button>
+          <button class="mini" id="resetBtn">次のお客様へ</button>
+        </div>
+      </div>
+      <p class="rules">※景品交換は当日限りです。<br>※スタッフにこの画面をお見せください。<br>※景品は変更になる場合があります。</p>
+    </section>
+  </section>
 </main>
+
 <script>
+const symbols=["🧖","🌿","🧴","♨️","✨","🔥","🫧","🌙"];
 const prizes=[
-{rank:"🌈 超ととのい賞",prize:"サウナ70分無料券",weight:1,type:"rainbow",staff:"無料券をお渡しください。"},
-{rank:"🔥 激ととのい賞",prize:"よもぎ蒸し無料券",weight:2,type:"gold",staff:"無料券をお渡しください。"},
-{rank:"♨️ ぽかぽか賞",prize:"無料延長30分",weight:7,type:"gold",staff:"延長30分を付与してください。"},
-{rank:"🌙 爆睡ととのい賞",prize:"めぐりズム 1枚",weight:15,type:"silver",staff:"めぐりズムを1点お渡しください。"},
-{rank:"🧴 美肌ととのい賞",prize:"フェイスパック",weight:25,type:"silver",staff:"フェイスパックを1点お渡しください。"},
-{rank:"🫧 さっぱり賞",prize:"汗拭きシート",weight:25,type:"bronze",staff:"汗拭きシートを1点お渡しください。"},
-{rank:"🌿 ほっこり賞",prize:"入浴剤",weight:25,type:"bronze",staff:"入浴剤を1点お渡しください。"}
+ {rank:"🌈 超ととのい賞",prize:"サウナ70分無料券",weight:1,type:"rainbow",staff:"無料券をお渡しください。",reels:["🌈","🌈","🌈"]},
+ {rank:"🔥 激ととのい賞",prize:"よもぎ蒸し無料券",weight:2,type:"gold",staff:"無料券をお渡しください。",reels:["🔥","🔥","🔥"]},
+ {rank:"♨️ ぽかぽか賞",prize:"無料延長30分",weight:7,type:"gold",staff:"延長30分を付与してください。",reels:["♨️","♨️","♨️"]},
+ {rank:"🌙 爆睡ととのい賞",prize:"めぐりズム 1枚",weight:15,type:"silver",staff:"めぐりズムを1点お渡しください。",reels:["🌙","🌙","🌙"]},
+ {rank:"🧴 美肌ととのい賞",prize:"フェイスパック",weight:25,type:"silver",staff:"フェイスパックを1点お渡しください。",reels:["🧴","🧴","🧴"]},
+ {rank:"🫧 さっぱり賞",prize:"汗拭きシート",weight:25,type:"bronze",staff:"汗拭きシートを1点お渡しください。",reels:["🫧","🫧","🫧"]},
+ {rank:"🌿 ほっこり賞",prize:"入浴剤",weight:25,type:"bronze",staff:"入浴剤を1点お渡しください。",reels:["🌿","🌿","🌿"]}
 ];
 const $=id=>document.getElementById(id);
-const machine=$("machine"),capsule=$("capsule"),icons=$("icons"),drawBtn=$("drawBtn"),result=$("result"),rank=$("rank"),prize=$("prize"),code=$("code"),staff=$("staff"),used=$("used");
-function pickPrize(){const t=prizes.reduce((s,p)=>s+p.weight,0);let r=Math.random()*t;for(const p of prizes){r-=p.weight;if(r<=0)return p}return prizes[prizes.length-1]}
+const reels=[$("r1"),$("r2"),$("r3")],btn=$("drawBtn"),lamps=$("lamps"),result=$("result"),rank=$("rank"),prize=$("prize"),code=$("code"),staff=$("staff"),used=$("used");
+function pickPrize(){let total=prizes.reduce((s,p)=>s+p.weight,0),r=Math.random()*total;for(const p of prizes){r-=p.weight;if(r<=0)return p}return prizes[prizes.length-1]}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
-function sound(kind="normal"){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const m=ctx.createGain();m.connect(ctx.destination);m.gain.value=.18;function tone(f,s,d,type="sine"){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,ctx.currentTime+s);g.gain.setValueAtTime(.0001,ctx.currentTime+s);g.gain.exponentialRampToValueAtTime(.8,ctx.currentTime+s+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+s+d);o.connect(g);g.connect(m);o.start(ctx.currentTime+s);o.stop(ctx.currentTime+s+d+.02)}if(kind==="roll"){tone(180,0,.1,"square");tone(220,.12,.1,"square");tone(260,.24,.1,"square")}else if(kind==="hot"){tone(880,0,.18);tone(1320,.18,.18);tone(1760,.36,.26)}else{tone(523,0,.14);tone(659,.14,.14);tone(784,.28,.22)}}catch(e){}}
 function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
-function confetti(n=70){const box=$("confetti");box.innerHTML="";const colors=["#f6d28a","#fff4dd","#ff7043","#7bd66f","#54c7ff","#ff5cf0"];for(let i=0;i<n;i++){const p=document.createElement("div");p.className="piece";p.style.left=Math.random()*100+"vw";p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.animationDelay=Math.random()*0.55+"s";p.style.animationDuration=(1.25+Math.random()*1.35)+"s";box.appendChild(p)}setTimeout(()=>box.innerHTML="",3000)}
-function flash(text,rainbow=false){$("hotText").innerHTML=rainbow?'<span class="rank rainbowText">🌈 超ととのい<br>降臨 🌈</span>':text;$("overlay").classList.add("show");setTimeout(()=>$("overlay").classList.remove("show"),1180)}
-function resetVisual(){machine.classList.remove("turn");capsule.className="capsule bronze";icons.classList.remove("show");result.classList.remove("show");rank.classList.remove("rainbowText");used.classList.remove("show");$("i1").textContent="🧖";$("i2").textContent="🌿";$("i3").textContent="🧴"}
-async function draw(){drawBtn.disabled=true;drawBtn.textContent="抽選中...";resetVisual();const p=pickPrize();capsule.className="capsule "+p.type;machine.classList.add("turn");sound("roll");vibrate([60,40,60]);await sleep(900);capsule.classList.add("roll");await sleep(1150);if(p.type==="rainbow"){document.body.classList.add("screenShake");flash("",true);sound("hot");vibrate([100,40,100,40,160]);await sleep(1050);document.body.classList.remove("screenShake")}else if(p.type==="gold"){document.body.classList.add("screenShake");flash("🔥 激ととのい<br>チャンス 🔥");sound("hot");vibrate([80,50,100]);await sleep(950);document.body.classList.remove("screenShake")}else{sound("normal");vibrate(80)}capsule.classList.add("open");await sleep(460);if(p.type==="rainbow"){$("i1").textContent="🌈";$("i2").textContent="🌈";$("i3").textContent="🌈"}else if(p.type==="gold"){$("i1").textContent="🔥";$("i2").textContent="🔥";$("i3").textContent="🔥"}else if(p.type==="silver"){$("i1").textContent="🌙";$("i2").textContent="🧴";$("i3").textContent="✨"}else{$("i1").textContent="🧖";$("i2").textContent="🌿";$("i3").textContent="🫧"}icons.classList.add("show");rank.textContent=p.rank;if(p.type==="rainbow")rank.classList.add("rainbowText");prize.textContent="🎁 "+p.prize;const now=new Date();code.innerHTML="交換コード：<b>LASPA-"+now.toLocaleDateString("ja-JP").replaceAll("/","")+"-"+Math.floor(1000+Math.random()*9000)+"</b><br>表示時刻："+now.toLocaleString("ja-JP");staff.textContent="スタッフ確認："+p.staff;confetti(p.type==="rainbow"?140:p.type==="gold"?100:70);result.classList.add("show");drawBtn.disabled=false;drawBtn.textContent="もう一度ガチャを回す"}
-drawBtn.addEventListener("click",draw);
+function sound(kind="normal"){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const master=ctx.createGain();master.gain.value=.18;master.connect(ctx.destination);function tone(f,s,d,type="sine"){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,ctx.currentTime+s);g.gain.setValueAtTime(.0001,ctx.currentTime+s);g.gain.exponentialRampToValueAtTime(.8,ctx.currentTime+s+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+s+d);o.connect(g);g.connect(master);o.start(ctx.currentTime+s);o.stop(ctx.currentTime+s+d+.02)}if(kind==="spin"){tone(220,0,.08,"square");tone(260,.1,.08,"square");tone(300,.2,.08,"square")}else if(kind==="hot"){tone(880,0,.16);tone(1320,.16,.16);tone(1760,.32,.24)}else{tone(523,0,.13);tone(659,.13,.13);tone(784,.26,.22)}}catch(e){}}
+function flash(text,rainbow=false){$("hotText").innerHTML=rainbow?'<span style="background:linear-gradient(90deg,#ff3,#f55,#f0f,#55f,#0ff,#5f5,#ff3);-webkit-background-clip:text;background-clip:text;color:transparent">🌈 超ととのい<br>降臨 🌈</span>':text;$("overlay").classList.add("show");setTimeout(()=>$("overlay").classList.remove("show"),1080)}
+function confetti(n=70){const box=$("confetti");box.innerHTML="";const colors=["#f6d28a","#fff4dd","#ff7043","#7bd66f","#54c7ff","#ff5cf0"];for(let i=0;i<n;i++){const el=document.createElement("div");el.className="piece";el.style.left=Math.random()*100+"vw";el.style.background=colors[Math.floor(Math.random()*colors.length)];el.style.animationDelay=Math.random()*0.55+"s";el.style.animationDuration=(1.25+Math.random()*1.35)+"s";box.appendChild(el)}setTimeout(()=>box.innerHTML="",3000)}
+function resetVisual(){result.classList.remove("show");rank.classList.remove("rainbow");used.classList.remove("show");reels.forEach((r,i)=>{r.classList.remove("spin","stop");r.textContent=["🧖","🌿","🧴"][i]});lamps.classList.remove("on")}
+async function draw(){
+ btn.disabled=true;btn.textContent="抽選中...";resetVisual();const p=pickPrize();
+ lamps.classList.add("on");reels.forEach(r=>r.classList.add("spin"));vibrate([50,40,50]);sound("spin");
+ let timers=reels.map(r=>setInterval(()=>{r.textContent=symbols[Math.floor(Math.random()*symbols.length)]},70));
+ await sleep(950);
+ clearInterval(timers[0]);reels[0].classList.remove("spin");reels[0].classList.add("stop");reels[0].textContent=p.reels[0];sound("normal");vibrate(45);
+ await sleep(520);
+ clearInterval(timers[1]);reels[1].classList.remove("spin");reels[1].classList.add("stop");reels[1].textContent=p.reels[1];sound("normal");vibrate(45);
+ await sleep(700);
+ if(p.type==="rainbow"){document.body.classList.add("shake");flash("",true);sound("hot");vibrate([100,40,100,40,160]);await sleep(900);document.body.classList.remove("shake")}
+ else if(p.type==="gold"){document.body.classList.add("shake");flash("🔥 激ととのい<br>チャンス 🔥");sound("hot");vibrate([80,50,100]);await sleep(760);document.body.classList.remove("shake")}
+ clearInterval(timers[2]);reels[2].classList.remove("spin");reels[2].classList.add("stop");reels[2].textContent=p.reels[2];sound("normal");vibrate(80);
+ await sleep(380);lamps.classList.remove("on");
+ rank.textContent=p.rank;if(p.type==="rainbow")rank.classList.add("rainbow");
+ prize.textContent="🎁 "+p.prize;const now=new Date();
+ code.innerHTML="交換コード：<b>LASPA-"+now.toLocaleDateString("ja-JP").replaceAll("/","")+"-"+Math.floor(1000+Math.random()*9000)+"</b><br>表示時刻："+now.toLocaleString("ja-JP");
+ staff.textContent="スタッフ確認："+p.staff;
+ confetti(p.type==="rainbow"?140:p.type==="gold"?100:70);
+ result.classList.add("show");btn.disabled=false;btn.textContent="もう一度スロットを回す";
+}
+btn.addEventListener("click",draw);
 $("useBtn").addEventListener("click",()=>{used.classList.add("show");vibrate(80)});
-$("resetBtn").addEventListener("click",()=>{resetVisual();drawBtn.textContent="ガチャを回す";window.scrollTo({top:0,behavior:"smooth"})});
+$("resetBtn").addEventListener("click",()=>{resetVisual();btn.textContent="スロットを回す";window.scrollTo({top:0,behavior:"smooth"})});
 </script>
 </body>
 </html>
