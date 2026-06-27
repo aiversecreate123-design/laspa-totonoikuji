@@ -1,110 +1,107 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>LASPA 夏のととのいくじ</title>
-  <style>
-    :root{
-      --bg1:#170d08; --bg2:#3a2117; --gold:#f6d28a; --cream:#fff4dd;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;background:#170d08;color:var(--cream);}
-    body{
-      overflow-x:hidden;
-      background:
-        radial-gradient(circle at 50% 20%, rgba(255,198,107,.22), transparent 28%),
-        radial-gradient(circle at 20% 95%, rgba(255,115,53,.18), transparent 30%),
-        linear-gradient(160deg, var(--bg1), var(--bg2) 55%, #0b0705);
-    }
-    .grain{position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px);background-size:34px 34px;mix-blend-mode:overlay}
-    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:22px 16px 34px}
-    .card{width:min(430px,100%);border:1px solid rgba(246,210,138,.45);border-radius:28px;padding:24px 18px 22px;background:linear-gradient(180deg,rgba(35,21,13,.86),rgba(16,9,6,.92));box-shadow:0 26px 80px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.08);text-align:center;position:relative;overflow:hidden}
-    .brand{letter-spacing:.18em;font-size:15px;color:var(--gold);font-weight:800;margin-bottom:6px}
-    h1{font-size:31px;line-height:1.15;margin:0 0 6px;text-shadow:0 2px 16px rgba(246,210,138,.22)}
-    .sub{font-size:14px;line-height:1.8;color:#f8dfb2;margin:0 0 18px}
-    .slotbox{margin:16px auto 18px;padding:15px 12px;border-radius:22px;border:1px solid rgba(246,210,138,.5);background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.18));box-shadow:inset 0 0 24px rgba(0,0,0,.28)}
-    .slots{display:flex;gap:10px;justify-content:center}
-    .slot{width:86px;height:98px;border-radius:18px;background:linear-gradient(180deg,#fff2ce,#d9ad62);color:#2b1408;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:inset 0 3px 0 rgba(255,255,255,.45),0 8px 20px rgba(0,0,0,.32);overflow:hidden}
-    .slot.spin{animation:spinShake .12s linear infinite}
-    @keyframes spinShake{50%{transform:translateY(-2px) scale(1.02)}}
-    .btn{appearance:none;border:none;border-radius:999px;padding:17px 30px;background:linear-gradient(180deg,#ffe3a4,#c99038 60%,#8c531d);color:#291204;font-weight:900;font-size:18px;letter-spacing:.05em;box-shadow:0 10px 26px rgba(0,0,0,.38),inset 0 2px 0 rgba(255,255,255,.55);width:100%;max-width:310px}
-    .btn:active{transform:translateY(2px)} .btn:disabled{opacity:.65}
-    .note{font-size:12px;color:#d8bc87;margin-top:14px;line-height:1.65}
-    .result{display:none;margin-top:17px;padding:16px 14px;border-radius:20px;background:rgba(255,246,222,.08);border:1px solid rgba(246,210,138,.38)}
-    .result.show{display:block;animation:pop .38s ease-out}
-    @keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
-    .rank{font-size:25px;font-weight:900;color:var(--gold);margin-bottom:8px;text-shadow:0 0 18px rgba(246,210,138,.28)}
-    .prize{font-size:21px;font-weight:800;margin-bottom:10px}
-    .staff{display:none;font-size:14px;line-height:1.65;margin-top:10px;padding:10px;border-radius:14px;background:rgba(0,0,0,.23);color:#ffe8b8}
-    .staff.show{display:block}
-    .flash{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:20;background:rgba(0,0,0,.82);color:#fff}
-    .flash.show{display:flex;animation:fadeFlash 1.1s ease both}
-    .flashText{text-align:center;font-size:32px;font-weight:1000;line-height:1.35;text-shadow:0 0 18px #fff,0 0 38px var(--gold);animation:zoom .72s ease-out infinite alternate}
-    @keyframes zoom{to{transform:scale(1.08)}} @keyframes fadeFlash{0%,100%{opacity:0}15%,85%{opacity:1}}
-    .rainbow{background:linear-gradient(90deg,#ff3,#f55,#f0f,#55f,#0ff,#5f5,#ff3);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:220% auto;animation:rainbow 1s linear infinite}
-    @keyframes rainbow{to{background-position:220% center}}
-    .confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
-    .piece{position:absolute;top:-20px;width:9px;height:14px;background:var(--gold);animation:fall 1.8s linear forwards}
-    @keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
-    .footerBtns{display:flex;gap:8px;margin-top:12px;justify-content:center;flex-wrap:wrap}
-    .smallbtn{border:1px solid rgba(246,210,138,.35);background:rgba(255,255,255,.06);color:#f5dcaa;border-radius:999px;padding:10px 14px;font-size:13px}
-    .coupon{margin-top:12px;border:1px dashed rgba(246,210,138,.75);padding:10px;border-radius:14px;font-size:12px;color:#fce9bf}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LASPA 夏のととのいくじ Ver2</title>
+<style>
+:root{--gold:#f6d28a;--cream:#fff4dd;--dark:#100805}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--cream);background:radial-gradient(circle at 50% 10%,rgba(255,210,135,.25),transparent 30%),linear-gradient(160deg,#0b0503,#2c170d 55%,#070302);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;background:repeating-linear-gradient(90deg,rgba(255,230,180,.08) 0 1px,transparent 1px 56px),repeating-linear-gradient(0deg,rgba(255,230,180,.04) 0 1px,transparent 1px 32px)}
+.wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px 14px}
+.app{width:min(440px,100%);border:1px solid rgba(246,210,138,.48);border-radius:30px;background:linear-gradient(180deg,rgba(42,24,14,.9),rgba(13,7,4,.95));box-shadow:0 28px 90px rgba(0,0,0,.55);overflow:hidden}
+.header{text-align:center;padding:22px 18px 8px}
+.brand{font-family:Georgia,serif;font-size:42px;letter-spacing:.18em;margin:0;text-shadow:0 4px 20px #000}
+.subbrand{letter-spacing:.28em;color:#f5dcaa;font-size:13px}
+.badge{display:inline-block;margin:15px 0 6px;padding:7px 15px;border:1px solid rgba(246,210,138,.45);border-radius:999px;color:#ffe9b3;background:rgba(255,255,255,.06);font-weight:800}
+h1{margin:4px 0 6px;font-size:31px;line-height:1.15}
+.lead{margin:0;color:#f7dfb8;font-size:14px;line-height:1.7}
+.stage{height:250px;margin:16px;border-radius:26px;border:1px solid rgba(246,210,138,.38);background:radial-gradient(circle at 50% 18%,rgba(246,210,138,.2),transparent 38%),linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.24));position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.machine{position:absolute;top:22px;width:176px;height:176px;border-radius:34px;background:linear-gradient(145deg,#f6d28a,#c28d3a 58%,#7a4a1d);border:2px solid rgba(255,244,221,.55);box-shadow:0 18px 42px rgba(0,0,0,.45),inset 0 4px 0 rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center}
+.machine:after{content:"";position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);width:84px;height:44px;border-radius:12px 12px 4px 4px;background:linear-gradient(180deg,#aaa,#4b4b4b)}
+.logo{font-family:Georgia,serif;color:#2a170b;font-size:25px;letter-spacing:.12em;text-align:center}.logo span{display:block;font-size:8px;margin-top:5px}
+.handle{position:absolute;right:34px;bottom:42px;width:58px;height:58px;border-radius:50%;border:10px solid #555;background:#ddd;box-shadow:inset 0 3px 0 rgba(255,255,255,.75);z-index:2}
+.handle:after{content:"";position:absolute;right:-35px;top:16px;width:42px;height:13px;border-radius:999px;background:linear-gradient(180deg,#f2c47a,#8a5324)}
+.machine.turn{animation:machineTurn .9s ease-in-out}.machine.turn .handle{animation:handleTurn .55s ease-in-out 2}
+@keyframes machineTurn{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}55%{transform:rotate(5deg)}75%{transform:rotate(-3deg)}}@keyframes handleTurn{to{transform:rotate(360deg)}}
+.capsule{position:absolute;width:76px;height:76px;border-radius:50%;bottom:24px;left:50%;transform:translateX(-50%) scale(0);opacity:0;box-shadow:0 12px 24px rgba(0,0,0,.35),inset 0 4px 0 rgba(255,255,255,.45);z-index:4;overflow:hidden}
+.capsule:before{content:"";position:absolute;inset:0 0 50% 0;background:rgba(255,255,255,.33)}
+.bronze{background:linear-gradient(160deg,#f2b06b,#9b521f)}.silver{background:linear-gradient(160deg,#fff,#9ea7ad)}.gold{background:linear-gradient(160deg,#fff3a7,#d59622)}.rainbow{background:linear-gradient(135deg,#ff3,#ff5b5b,#c65bff,#4cc9ff,#5dff8d)}
+.capsule.roll{animation:capsuleRoll 1.15s cubic-bezier(.18,.84,.32,1) forwards}@keyframes capsuleRoll{0%{opacity:0;transform:translate(-50%,-120px) scale(.25) rotate(0)}20%{opacity:1}65%{transform:translate(-20%,12px) scale(1) rotate(520deg)}100%{opacity:1;transform:translate(-50%,0) scale(1.06) rotate(900deg)}}
+.capsule.open{animation:capsuleOpen .5s ease-out forwards}@keyframes capsuleOpen{60%{transform:translate(-50%,0) scale(1.28)}100%{transform:translate(-50%,0) scale(.01);opacity:0}}
+.icons{position:absolute;bottom:14px;display:flex;gap:10px;opacity:0;transform:translateY(16px)}.icons.show{animation:up .45s ease-out forwards}@keyframes up{to{opacity:1;transform:translateY(0)}}
+.ico{width:58px;height:58px;border-radius:16px;background:linear-gradient(180deg,#fff3cf,#d6a04a);display:flex;align-items:center;justify-content:center;font-size:31px;color:#2b1408;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.action{text-align:center;padding:0 18px 20px}.btn{border:0;border-radius:999px;width:100%;max-width:326px;padding:18px 22px;background:linear-gradient(180deg,#fff1b9,#d09a3f 58%,#8b4e18);color:#2b1408;font-size:18px;font-weight:1000;letter-spacing:.08em;box-shadow:0 13px 28px rgba(0,0,0,.42),inset 0 2px 0 rgba(255,255,255,.58)}.btn:active{transform:translateY(2px)}.btn:disabled{opacity:.62}
+.result{display:none;margin:15px 0 0;padding:16px 14px;border-radius:22px;background:linear-gradient(180deg,rgba(255,248,226,.12),rgba(0,0,0,.18));border:1px solid rgba(246,210,138,.45);animation:pop .36s ease-out}.result.show{display:block}@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+.ticket{border:1px dashed rgba(246,210,138,.86);border-radius:18px;padding:14px 12px;background:rgba(255,244,221,.08)}
+.rank{font-size:25px;font-weight:1000;margin-bottom:7px;color:var(--gold);text-shadow:0 0 16px rgba(246,210,138,.35)}.rank.rainbowText{background:linear-gradient(90deg,#ff3,#ff6868,#d65cff,#4cc9ff,#5dff8d,#ff3);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rainbowMove 1.2s linear infinite}@keyframes rainbowMove{to{background-position:220% center}}
+.prize{font-size:22px;font-weight:900;margin:8px 0 6px}.code{font-size:12px;line-height:1.55;color:#ffe8b8;margin-top:8px}.staff{margin-top:10px;padding:10px;border-radius:14px;background:rgba(0,0,0,.25);color:#f9dfaa;font-size:13px;line-height:1.6}.used{display:none;margin-top:11px;padding:14px 10px;border:2px solid rgba(255,80,80,.75);border-radius:16px;color:#ffb2a8;font-weight:1000;transform:rotate(-3deg);font-size:23px;letter-spacing:.12em}.used.show{display:block}
+.miniBtns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px}.mini{border:1px solid rgba(246,210,138,.34);background:rgba(255,255,255,.06);color:#f5dcaa;border-radius:999px;padding:10px 12px;font-size:13px}
+.rules{color:#d9bd85;font-size:12px;line-height:1.65;margin:13px 8px 0}
+.overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:20;background:rgba(0,0,0,.86)}.overlay.show{display:flex;animation:flashFade 1.2s ease both}@keyframes flashFade{0%,100%{opacity:0}14%,85%{opacity:1}}
+.hotText{text-align:center;font-size:36px;line-height:1.3;font-weight:1000;color:#fff;text-shadow:0 0 18px #fff,0 0 36px var(--gold),0 0 54px var(--orange);animation:pulse .45s ease-in-out infinite alternate}@keyframes pulse{to{transform:scale(1.08)}}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}.piece{position:absolute;top:-18px;width:9px;height:14px;animation:fall 1.8s linear forwards}@keyframes fall{to{transform:translateY(112vh) rotate(720deg)}}
+.screenShake{animation:shake .5s linear}@keyframes shake{0%,100%{transform:translateX(0)}15%{transform:translateX(-7px)}30%{transform:translateX(6px)}45%{transform:translateX(-5px)}60%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+</style>
 </head>
 <body>
-  <div class="grain"></div>
-  <div class="flash" id="flash"><div class="flashText" id="flashText">🔥 激ととのい<br>チャンス 🔥</div></div>
-  <div class="confetti" id="confetti"></div>
-  <main class="wrap">
-    <section class="card">
-      <div class="brand">LASPA</div>
-      <h1>🌿 夏のととのいくじ 🌿</h1>
-      <p class="sub">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
-      <div class="slotbox">
-        <div class="slots">
-          <div class="slot" id="s1">🧖</div>
-          <div class="slot" id="s2">🌿</div>
-          <div class="slot" id="s3">🧴</div>
-        </div>
-      </div>
-      <button class="btn" id="drawBtn">ガチャを回す</button>
-      <div class="result" id="result">
-        <div class="rank" id="rank"></div>
-        <div class="prize" id="prize"></div>
-        <div class="coupon" id="coupon"></div>
-        <div class="staff" id="staff"></div>
-        <div class="footerBtns">
-          <button class="smallbtn" id="againBtn">もう一度表示</button>
-          <button class="smallbtn" id="resetBtn">次のお客様へ</button>
-        </div>
-      </div>
-      <p class="note">※景品交換は当日限りです。<br>※スタッフにこの画面をお見せください。</p>
-    </section>
-  </main>
+<div class="overlay" id="overlay"><div class="hotText" id="hotText">🔥 激ととのい<br>チャンス 🔥</div></div>
+<div class="confetti" id="confetti"></div>
+<main class="wrap">
+<section class="app">
+<header class="header">
+<div style="font-size:26px;color:var(--gold)">♨</div>
+<h2 class="brand">LASPA</h2>
+<div class="subbrand">PRIVATE SAUNA</div>
+<div class="badge">7月限定キャンペーン</div>
+<h1>🌿 夏のととのいくじ 🌿</h1>
+<p class="lead">サウナ・よもぎ蒸しご利用で<br>その場で1回チャレンジ！</p>
+</header>
+<section class="stage">
+<div class="machine" id="machine"><div class="logo">LASPA<span>LUCKY GACHA</span></div><div class="handle"></div></div>
+<div class="capsule bronze" id="capsule"></div>
+<div class="icons" id="icons"><div class="ico" id="i1">🧖</div><div class="ico" id="i2">🌿</div><div class="ico" id="i3">🧴</div></div>
+</section>
+<section class="action">
+<button class="btn" id="drawBtn">ガチャを回す</button>
+<div class="result" id="result">
+<div class="ticket">
+<div class="rank" id="rank"></div>
+<div class="prize" id="prize"></div>
+<div class="code" id="code"></div>
+<div class="staff" id="staff"></div>
+<div class="used" id="used">使用済</div>
+</div>
+<div class="miniBtns"><button class="mini" id="useBtn">スタッフ確認：使用済みにする</button><button class="mini" id="resetBtn">次のお客様へ</button></div>
+</div>
+<p class="rules">※景品交換は当日限りです。<br>※スタッフにこの画面をお見せください。<br>※景品は変更になる場合があります。</p>
+</section>
+</section>
+</main>
 <script>
-const symbols=["🧖","🌿","🧴","🫧","♨️","✨","🔥"];
 const prizes=[
- {rank:"🌈 超ととのい賞",prize:"サウナ70分 無料券",weight:1,staff:"スタッフ確認：無料券をお渡しください。",hot:true},
- {rank:"🔥 激ととのい賞",prize:"よもぎ蒸し 無料券",weight:2,staff:"スタッフ確認：無料券をお渡しください。",hot:true},
- {rank:"♨️ ぽかぽか賞",prize:"無料延長30分",weight:7,staff:"スタッフ確認：延長30分を付与してください。"},
- {rank:"🌙 爆睡ととのい賞",prize:"めぐりズム",weight:15,staff:"スタッフ確認：めぐりズムを1点お渡しください。"},
- {rank:"🧴 美肌ととのい賞",prize:"フェイスパック",weight:25,staff:"スタッフ確認：フェイスパックを1点お渡しください。"},
- {rank:"🫧 さっぱり賞",prize:"汗拭きシート",weight:25,staff:"スタッフ確認：汗拭きシートを1点お渡しください。"},
- {rank:"🌿 ほっこり賞",prize:"入浴剤",weight:25,staff:"スタッフ確認：入浴剤を1点お渡しください。"}
+{rank:"🌈 超ととのい賞",prize:"サウナ70分無料券",weight:1,type:"rainbow",staff:"無料券をお渡しください。"},
+{rank:"🔥 激ととのい賞",prize:"よもぎ蒸し無料券",weight:2,type:"gold",staff:"無料券をお渡しください。"},
+{rank:"♨️ ぽかぽか賞",prize:"無料延長30分",weight:7,type:"gold",staff:"延長30分を付与してください。"},
+{rank:"🌙 爆睡ととのい賞",prize:"めぐりズム 1枚",weight:15,type:"silver",staff:"めぐりズムを1点お渡しください。"},
+{rank:"🧴 美肌ととのい賞",prize:"フェイスパック",weight:25,type:"silver",staff:"フェイスパックを1点お渡しください。"},
+{rank:"🫧 さっぱり賞",prize:"汗拭きシート",weight:25,type:"bronze",staff:"汗拭きシートを1点お渡しください。"},
+{rank:"🌿 ほっこり賞",prize:"入浴剤",weight:25,type:"bronze",staff:"入浴剤を1点お渡しください。"}
 ];
 const $=id=>document.getElementById(id);
-const btn=$("drawBtn"),result=$("result"),rank=$("rank"),prize=$("prize"),coupon=$("coupon"),staff=$("staff");
-const slots=[$("s1"),$("s2"),$("s3")];
-function pickPrize(){const total=prizes.reduce((s,p)=>s+p.weight,0);let r=Math.random()*total;for(const p of prizes){r-=p.weight;if(r<=0)return p;}return prizes[prizes.length-1];}
-function beep(type="normal"){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator();const g=ctx.createGain();o.connect(g);g.connect(ctx.destination);const now=ctx.currentTime;if(type==="hot"){o.frequency.setValueAtTime(880,now);o.frequency.exponentialRampToValueAtTime(1320,now+.16);o.frequency.exponentialRampToValueAtTime(1760,now+.32);}else{o.frequency.setValueAtTime(440,now);o.frequency.exponentialRampToValueAtTime(700,now+.18);}g.gain.setValueAtTime(.0001,now);g.gain.exponentialRampToValueAtTime(.22,now+.03);g.gain.exponentialRampToValueAtTime(.0001,now+.45);o.start(now);o.stop(now+.48);}catch(e){}}
-function confetti(){const box=$("confetti");box.innerHTML="";for(let i=0;i<70;i++){const p=document.createElement("div");p.className="piece";p.style.left=Math.random()*100+"vw";p.style.background=["#f6d28a","#fff4dd","#b82f23","#6aa66a","#ff8c42"][Math.floor(Math.random()*5)];p.style.animationDelay=(Math.random()*.45)+"s";p.style.animationDuration=(1.35+Math.random()*1.2)+"s";box.appendChild(p);}setTimeout(()=>box.innerHTML="",2800);}
-function flash(text,hot=false){$("flashText").innerHTML=hot?'<span class="rainbow">🌈 超ととのい<br>降臨 🌈</span>':text;$("flash").classList.add("show");setTimeout(()=>$("flash").classList.remove("show"),1050);}
-function showResult(p){rank.textContent=p.rank;prize.textContent="🎁 "+p.prize;coupon.textContent="交換コード：LASPA-"+new Date().toLocaleDateString("ja-JP").replaceAll("/","")+"-"+Math.floor(1000+Math.random()*9000);staff.textContent=p.staff;staff.classList.add("show");result.classList.add("show");}
-async function draw(){btn.disabled=true;result.classList.remove("show");staff.classList.remove("show");slots.forEach(s=>s.classList.add("spin"));let timer=setInterval(()=>{slots.forEach(s=>s.textContent=symbols[Math.floor(Math.random()*symbols.length)]);},80);const p=pickPrize();await new Promise(r=>setTimeout(r,1450));clearInterval(timer);slots.forEach(s=>s.classList.remove("spin"));if(p.hot||Math.random()<.12){flash("🔥 激ととのい<br>チャンス 🔥",p.rank.includes("超"));beep("hot");await new Promise(r=>setTimeout(r,900));}else{beep("normal");}if(p.rank.includes("超")){slots[0].textContent="🌈";slots[1].textContent="🌈";slots[2].textContent="🌈";}else if(p.rank.includes("激")){slots[0].textContent="🔥";slots[1].textContent="🔥";slots[2].textContent="🔥";}else{slots[0].textContent="🧖";slots[1].textContent="🌿";slots[2].textContent="🧴";}confetti();showResult(p);btn.disabled=false;btn.textContent="もう一度ガチャを回す";}
-btn.addEventListener("click",draw);
-$("againBtn").addEventListener("click",()=>result.classList.toggle("show"));
-$("resetBtn").addEventListener("click",()=>{result.classList.remove("show");btn.textContent="ガチャを回す";slots[0].textContent="🧖";slots[1].textContent="🌿";slots[2].textContent="🧴";window.scrollTo({top:0,behavior:"smooth"});});
+const machine=$("machine"),capsule=$("capsule"),icons=$("icons"),drawBtn=$("drawBtn"),result=$("result"),rank=$("rank"),prize=$("prize"),code=$("code"),staff=$("staff"),used=$("used");
+function pickPrize(){const t=prizes.reduce((s,p)=>s+p.weight,0);let r=Math.random()*t;for(const p of prizes){r-=p.weight;if(r<=0)return p}return prizes[prizes.length-1]}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+function sound(kind="normal"){try{const ctx=new (window.AudioContext||window.webkitAudioContext)();const m=ctx.createGain();m.connect(ctx.destination);m.gain.value=.18;function tone(f,s,d,type="sine"){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(f,ctx.currentTime+s);g.gain.setValueAtTime(.0001,ctx.currentTime+s);g.gain.exponentialRampToValueAtTime(.8,ctx.currentTime+s+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+s+d);o.connect(g);g.connect(m);o.start(ctx.currentTime+s);o.stop(ctx.currentTime+s+d+.02)}if(kind==="roll"){tone(180,0,.1,"square");tone(220,.12,.1,"square");tone(260,.24,.1,"square")}else if(kind==="hot"){tone(880,0,.18);tone(1320,.18,.18);tone(1760,.36,.26)}else{tone(523,0,.14);tone(659,.14,.14);tone(784,.28,.22)}}catch(e){}}
+function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
+function confetti(n=70){const box=$("confetti");box.innerHTML="";const colors=["#f6d28a","#fff4dd","#ff7043","#7bd66f","#54c7ff","#ff5cf0"];for(let i=0;i<n;i++){const p=document.createElement("div");p.className="piece";p.style.left=Math.random()*100+"vw";p.style.background=colors[Math.floor(Math.random()*colors.length)];p.style.animationDelay=Math.random()*0.55+"s";p.style.animationDuration=(1.25+Math.random()*1.35)+"s";box.appendChild(p)}setTimeout(()=>box.innerHTML="",3000)}
+function flash(text,rainbow=false){$("hotText").innerHTML=rainbow?'<span class="rank rainbowText">🌈 超ととのい<br>降臨 🌈</span>':text;$("overlay").classList.add("show");setTimeout(()=>$("overlay").classList.remove("show"),1180)}
+function resetVisual(){machine.classList.remove("turn");capsule.className="capsule bronze";icons.classList.remove("show");result.classList.remove("show");rank.classList.remove("rainbowText");used.classList.remove("show");$("i1").textContent="🧖";$("i2").textContent="🌿";$("i3").textContent="🧴"}
+async function draw(){drawBtn.disabled=true;drawBtn.textContent="抽選中...";resetVisual();const p=pickPrize();capsule.className="capsule "+p.type;machine.classList.add("turn");sound("roll");vibrate([60,40,60]);await sleep(900);capsule.classList.add("roll");await sleep(1150);if(p.type==="rainbow"){document.body.classList.add("screenShake");flash("",true);sound("hot");vibrate([100,40,100,40,160]);await sleep(1050);document.body.classList.remove("screenShake")}else if(p.type==="gold"){document.body.classList.add("screenShake");flash("🔥 激ととのい<br>チャンス 🔥");sound("hot");vibrate([80,50,100]);await sleep(950);document.body.classList.remove("screenShake")}else{sound("normal");vibrate(80)}capsule.classList.add("open");await sleep(460);if(p.type==="rainbow"){$("i1").textContent="🌈";$("i2").textContent="🌈";$("i3").textContent="🌈"}else if(p.type==="gold"){$("i1").textContent="🔥";$("i2").textContent="🔥";$("i3").textContent="🔥"}else if(p.type==="silver"){$("i1").textContent="🌙";$("i2").textContent="🧴";$("i3").textContent="✨"}else{$("i1").textContent="🧖";$("i2").textContent="🌿";$("i3").textContent="🫧"}icons.classList.add("show");rank.textContent=p.rank;if(p.type==="rainbow")rank.classList.add("rainbowText");prize.textContent="🎁 "+p.prize;const now=new Date();code.innerHTML="交換コード：<b>LASPA-"+now.toLocaleDateString("ja-JP").replaceAll("/","")+"-"+Math.floor(1000+Math.random()*9000)+"</b><br>表示時刻："+now.toLocaleString("ja-JP");staff.textContent="スタッフ確認："+p.staff;confetti(p.type==="rainbow"?140:p.type==="gold"?100:70);result.classList.add("show");drawBtn.disabled=false;drawBtn.textContent="もう一度ガチャを回す"}
+drawBtn.addEventListener("click",draw);
+$("useBtn").addEventListener("click",()=>{used.classList.add("show");vibrate(80)});
+$("resetBtn").addEventListener("click",()=>{resetVisual();drawBtn.textContent="ガチャを回す";window.scrollTo({top:0,behavior:"smooth"})});
 </script>
 </body>
 </html>
