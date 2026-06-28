@@ -1,1012 +1,714 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>LASPA Digital Rewards</title>
-  <style>
-    :root {
-      --bg: #05070c;
-      --bg2: #0a1020;
-      --card: rgba(255,255,255,.075);
-      --card2: rgba(255,255,255,.11);
-      --gold: #d8b76a;
-      --gold2: #fff0b8;
-      --text: #f7f3e8;
-      --muted: rgba(247,243,232,.68);
-      --line: rgba(216,183,106,.22);
-      --blue: #112748;
-      --green: #103227;
-      --danger: #9d2f2f;
-      --shadow: 0 24px 80px rgba(0,0,0,.48);
-      --radius: 28px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LASPA PREMIUM SLOT Ver12 Evolution</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
+body{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,215,112,.22),transparent 28%),
+    radial-gradient(circle at 16% 36%,rgba(110,240,255,.14),transparent 28%),
+    radial-gradient(circle at 86% 42%,rgba(255,55,90,.12),transparent 26%),
+    linear-gradient(180deg,#090b19 0%,#03040b 60%,#010105 100%);
+}
+.bg,.steam,.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bg{z-index:0}
+.bg:before,.bg:after{
+  content:"";position:absolute;inset:-20%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1.7px);
+  background-size:44px 44px;opacity:.13;animation:stars 19s linear infinite
+}
+.bg:after{background-size:76px 76px;opacity:.08;animation-duration:33s}
+@keyframes stars{to{transform:translateY(130px)}}
+.steam{z-index:1}
+.steam span{
+  position:absolute;bottom:-190px;width:115px;height:270px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.18),rgba(255,255,255,0) 72%);
+  filter:blur(13px);opacity:0;animation:steam 7s linear infinite
+}
+@keyframes steam{
+  0%{transform:translateY(0) scale(.7);opacity:0}
+  18%{opacity:.42}
+  100%{transform:translateY(-116vh) scale(1.85);opacity:0}
+}
+.app{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:12px}
+.machine{
+  width:min(440px,100%);border-radius:36px;padding:13px;position:relative;
+  background:linear-gradient(145deg,#241205,#a96507 16%,#fff1aa 31%,#ffbb33 42%,#603005 62%,#110603 100%);
+  box-shadow:0 0 30px rgba(255,211,106,.4),0 22px 80px rgba(0,0,0,.82),inset 0 0 20px rgba(255,255,255,.28)
+}
+.machine:before{content:"";position:absolute;inset:5px;border-radius:31px;border:1px solid rgba(255,255,255,.24)}
+.inner{
+  position:relative;overflow:hidden;border-radius:27px;padding:14px 13px 16px;
+  background:radial-gradient(circle at 50% 0%,rgba(255,211,106,.15),transparent 34%),linear-gradient(180deg,#111936,#070814 52%,#120612 100%);
+  box-shadow:inset 0 0 38px rgba(0,0,0,.88)
+}
+.inner:after{
+  content:"";position:absolute;inset:-30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-125%) rotate(16deg);animation:shine 5.5s ease-in-out infinite
+}
+@keyframes shine{55%,100%{transform:translateX(125%) rotate(16deg)}}
+.nav{
+  position:relative;z-index:10;display:flex;gap:8px;margin-bottom:10px
+}
+.nav button{
+  flex:1;border:1px solid rgba(116,247,255,.28);border-radius:999px;padding:9px 8px;
+  color:#dffcff;background:rgba(4,10,22,.72);font-size:12px;font-weight:1000;cursor:pointer;
+  box-shadow:inset 0 0 12px rgba(116,247,255,.05)
+}
+.nav button.active{background:linear-gradient(90deg,#74f7ff,#ffd36a);color:#071018;border-color:transparent}
+.demo-toggle{
+  position:absolute;right:12px;top:60px;z-index:20;border:1px solid rgba(116,247,255,.45);
+  border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;color:#dffcff;background:rgba(4,10,22,.75);cursor:pointer
+}
+.demo-panel{
+  display:none;position:absolute;right:12px;top:94px;z-index:40;width:215px;padding:10px;border-radius:14px;background:rgba(4,6,16,.96);
+  border:1px solid rgba(116,247,255,.35);box-shadow:0 18px 35px rgba(0,0,0,.55)
+}
+.demo-panel.show{display:block}
+.demo-panel button{width:100%;margin:4px 0;padding:9px;border-radius:10px;border:0;background:linear-gradient(90deg,#74f7ff,#ffd36a);color:#071018;font-weight:900}
+.lamps{display:flex;justify-content:space-between;margin:4px 12px 9px;position:relative;z-index:4}
+.lamp{width:15px;height:15px;border-radius:50%;background:#ffd36a;box-shadow:0 0 12px #ffd36a,0 0 25px #ff9f1a;animation:lamp .8s infinite alternate}
+.lamp:nth-child(2n){background:#74f7ff;box-shadow:0 0 14px #74f7ff;animation-delay:.15s}
+.lamp:nth-child(3n){background:#ff2d55;box-shadow:0 0 14px #ff2d55;animation-delay:.3s}
+@keyframes lamp{from{opacity:.28;transform:scale(.78)}to{opacity:1;transform:scale(1.2)}}
+.logo{text-align:center;position:relative;z-index:4}
+.logo .label{font-size:11px;letter-spacing:.26em;color:#d5fcff;text-shadow:0 0 10px rgba(116,247,255,.75)}
+.logo h1{
+  margin:4px 0 0;font-size:34px;line-height:.98;font-weight:1000;letter-spacing:.05em;
+  background:linear-gradient(180deg,#fffde1,#ffd36a 42%,#ff8c00 68%,#fff1a1);
+  -webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px rgba(255,181,31,.45))
+}
+.logo .sub{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);color:#071018;font-size:13px;font-weight:1000}
+.view{display:none;position:relative;z-index:4}
+.view.active{display:block;animation:viewIn .35s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.screen{
+  position:relative;z-index:4;margin:16px 0 12px;border-radius:23px;padding:10px 9px 12px;
+  background:radial-gradient(circle at 50% 0%,rgba(116,247,255,.1),transparent 36%),linear-gradient(180deg,#050712,#10183b 55%,#04050d);
+  border:2px solid rgba(255,211,106,.76);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.92),0 0 25px rgba(255,211,106,.2);overflow:hidden
+}
+.status{min-height:36px;text-align:center;font-size:15px;font-weight:1000;color:#fff3b8;display:flex;align-items:center;justify-content:center;text-shadow:0 0 12px rgba(255,211,106,.6);line-height:1.35}
+.canvas-wrap{
+  position:relative;border-radius:19px;overflow:hidden;
+  background:linear-gradient(180deg,#fff8d9,#fff,#dcf8ff);
+  border:2px solid #ffdf83;
+  box-shadow:inset 0 14px 24px rgba(255,255,255,.62),inset 0 -20px 22px rgba(0,0,0,.18),0 0 20px rgba(255,211,106,.26)
+}
+canvas{display:block;width:100%;height:auto}
+.canvas-wrap:before,.canvas-wrap:after{content:"";position:absolute;left:0;right:0;height:58px;z-index:3;pointer-events:none}
+.canvas-wrap:before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent)}
+.canvas-wrap:after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.32),transparent)}
+.center-glow{
+  position:absolute;left:8px;right:8px;top:50%;height:78px;transform:translateY(-50%);z-index:2;border-radius:16px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,211,106,.05),rgba(255,255,255,.13),rgba(116,247,255,.05));
+  border:1px solid rgba(255,211,106,.12);box-shadow:inset 0 0 18px rgba(255,255,255,.06),0 0 16px rgba(255,211,106,.09)
+}
+.chance{
+  display:none;position:absolute;inset:0;z-index:30;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:radial-gradient(circle,rgba(255,45,85,.34),rgba(0,0,0,.82))
+}
+.chance.show{display:flex;animation:chanceFade 1.25s ease forwards}
+.chance strong{font-size:46px;color:#fff;text-shadow:0 0 18px #ff2d55,0 0 34px #ffd36a;font-weight:1000}
+.chance small{font-size:15px;color:#fff2ad;font-weight:900}
+@keyframes chanceFade{0%{opacity:0}20%,78%{opacity:1}100%{opacity:0}}
+.controls{position:relative;z-index:4;margin-top:12px;border-radius:19px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.13)}
+.push{
+  width:100%;height:76px;border:0;border-radius:23px;color:#2a0800;font-size:24px;font-weight:1000;letter-spacing:.08em;
+  background:radial-gradient(circle at 50% 22%,#fff7c5,#ffd36a 38%,#ff8b00 70%,#6a2200);
+  box-shadow:0 9px 0 #5b1d00,0 0 24px rgba(255,179,0,.65),inset 0 5px 11px rgba(255,255,255,.82);
+  animation:pushPulse 1.35s ease-in-out infinite
+}
+.push:active{transform:translateY(7px);box-shadow:0 2px 0 #5b1d00,0 0 20px rgba(255,179,0,.65)}
+.push:disabled{filter:grayscale(.8);opacity:.65;animation:none}
+@keyframes pushPulse{50%{transform:scale(1.018);filter:brightness(1.15)}}
+.note{text-align:center;font-size:12px;line-height:1.62;color:#c3d8e8;margin-top:10px}
+.ticket{
+  display:none;margin-top:13px;border-radius:22px;padding:14px;background:linear-gradient(135deg,rgba(255,211,106,.24),rgba(116,247,255,.1),rgba(255,45,85,.08)),rgba(255,255,255,.055);
+  border:1px solid rgba(255,211,106,.62);box-shadow:0 0 28px rgba(255,211,106,.18);position:relative;overflow:hidden
+}
+.ticket.show{display:block;animation:ticketIn .55s cubic-bezier(.2,1.35,.2,1)}
+@keyframes ticketIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+.ticket .rank{font-size:13px;color:#89fbff;font-weight:1000;letter-spacing:.12em}
+.ticket .prize{font-size:24px;font-weight:1000;color:#fff4b2;margin:5px 0;text-shadow:0 0 14px rgba(255,211,106,.56)}
+.ticket .meta{font-size:12px;line-height:1.62;color:#e9f7ff}
+.code{margin-top:10px;padding:10px;border-radius:13px;background:#03040b;border:1px dashed rgba(255,211,106,.78);text-align:center;font-size:20px;font-weight:1000;letter-spacing:.12em;color:#fff}
+.badge{display:inline-block;margin-top:9px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:1000;background:rgba(108,255,184,.14);color:#91ffc9;border:1px solid rgba(108,255,184,.5)}
+.badge.next{background:rgba(255,211,106,.15);color:#ffe596;border-color:rgba(255,211,106,.55)}
+.footer{text-align:center;margin-top:10px;font-size:10px;color:#748397;position:relative;z-index:4}
+.jackpot{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle,rgba(255,235,138,.38),rgba(255,45,85,.18) 38%,rgba(0,0,0,.88));pointer-events:none}
+.jackpot.show{display:flex;animation:jackpotOut 3.2s forwards}
+.jackpot .box{animation:jackpotPop .65s cubic-bezier(.2,1.4,.2,1)}
+.jackpot h2{font-size:48px;line-height:1.02;margin:0;color:#fff3a7;font-weight:1000;text-shadow:0 0 18px #ffb300,0 0 38px #ff2d55}
+.jackpot p{font-size:16px;font-weight:1000;color:#fff;margin:10px 0 0;letter-spacing:.12em}
+@keyframes jackpotPop{from{transform:scale(.35);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes jackpotOut{0%,82%{opacity:1}100%{opacity:0}}
+.confetti{z-index:90}
+.confetti i{position:absolute;top:-30px;width:8px;height:15px;border-radius:2px;background:#ffd36a;animation:fall 3.2s linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(840deg);opacity:.15}}
+.flash{animation:flash .55s ease-in-out 2}
+@keyframes flash{50%{filter:brightness(2.3) saturate(1.7)}}
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background:
-        radial-gradient(circle at 20% 0%, rgba(216,183,106,.18), transparent 28%),
-        radial-gradient(circle at 80% 10%, rgba(40,84,150,.22), transparent 32%),
-        linear-gradient(180deg, #070914 0%, #05070c 52%, #030407 100%);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(120deg, transparent 0%, rgba(255,255,255,.045) 45%, transparent 58%),
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.06), transparent 42%);
-      opacity: .65;
-      mix-blend-mode: screen;
-    }
-
-    .app {
-      width: min(100%, 460px);
-      margin: 0 auto;
-      min-height: 100dvh;
-      padding: 22px 18px calc(24px + env(safe-area-inset-bottom));
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .brand {
-      letter-spacing: .32em;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--gold2);
-      text-shadow: 0 0 24px rgba(216,183,106,.38);
-    }
-
-    .version {
-      color: var(--muted);
-      font-size: 11px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 6px 10px;
-      background: rgba(255,255,255,.045);
-    }
-
-    .screen { display: none; animation: fadeUp .42s ease both; }
-    .screen.active { display: block; }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 28px 22px;
-      background:
-        linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045)),
-        radial-gradient(circle at 10% 0%, rgba(216,183,106,.20), transparent 45%);
-      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.12);
-      backdrop-filter: blur(18px);
-    }
-
-    .eyebrow {
-      color: var(--gold);
-      letter-spacing: .22em;
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 34px;
-      line-height: 1.08;
-      margin: 0 0 12px;
-      letter-spacing: -.04em;
-    }
-
-    h2 {
-      font-size: 24px;
-      margin: 0 0 10px;
-      letter-spacing: -.03em;
-    }
-
-    p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.75;
-      margin: 0;
-    }
-
-    .actions {
-      display: grid;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 18px;
-      padding: 15px 18px;
-      font-weight: 800;
-      font-size: 15px;
-      color: #12100a;
-      background: linear-gradient(135deg, var(--gold2), var(--gold));
-      box-shadow: 0 14px 34px rgba(216,183,106,.20), inset 0 1px 0 rgba(255,255,255,.45);
-      cursor: pointer;
-    }
-
-    button.secondary {
-      color: var(--text);
-      background: rgba(255,255,255,.075);
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: none;
-    }
-
-    button.danger {
-      color: #fff;
-      background: linear-gradient(135deg, #823333, #5d1f1f);
-      box-shadow: none;
-    }
-
-    button:disabled {
-      opacity: .42;
-      cursor: not-allowed;
-      filter: grayscale(.35);
-    }
-
-    .grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .tile {
-      border: 1px solid rgba(255,255,255,.10);
-      border-radius: 24px;
-      padding: 18px;
-      background: linear-gradient(145deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
-      box-shadow: 0 18px 50px rgba(0,0,0,.25);
-    }
-
-    .tile-title {
-      font-weight: 900;
-      font-size: 18px;
-      margin-bottom: 5px;
-    }
-
-    .status {
-      margin-top: 14px;
-      padding: 13px 14px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      color: var(--gold2);
-      background: rgba(216,183,106,.08);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .notice {
-      margin-top: 14px;
-      color: rgba(247,243,232,.56);
-      font-size: 11px;
-      line-height: 1.7;
-      text-align: center;
-    }
-
-    .slot-wrap {
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      padding: 16px;
-      margin-top: 16px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(216,183,106,.16), transparent 50%),
-        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
-      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.12);
-    }
-
-    canvas {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 22px;
-      background: #060912;
-    }
-
-    .result-name {
-      margin-top: 16px;
-      text-align: center;
-      font-weight: 900;
-      font-size: 21px;
-      color: var(--gold2);
-      text-shadow: 0 0 24px rgba(216,183,106,.28);
-      min-height: 34px;
-    }
-
-    .ticket-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 30px;
-      padding: 22px;
-      margin-top: 16px;
-      border: 1px solid rgba(255,255,255,.16);
-      box-shadow: var(--shadow), inset 0 1px 0 rgba(255,255,255,.18);
-      background:
-        radial-gradient(circle at 12% 0%, rgba(255,255,255,.22), transparent 38%),
-        linear-gradient(135deg, rgba(216,183,106,.22), rgba(25,38,70,.50));
-    }
-
-    .ticket-card.sauna { background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.18), transparent 38%), linear-gradient(135deg, #0a1c35, #153c67); }
-    .ticket-card.yomogi { background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.18), transparent 38%), linear-gradient(135deg, #0b251d, #1d5a43); }
-    .ticket-card.discount { background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.20), transparent 38%), linear-gradient(135deg, #3d2d0c, #9b792a); }
-    .ticket-card.pack { background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.24), transparent 38%), linear-gradient(135deg, #222936, #6f7b8e); }
-    .ticket-card.juice { background: radial-gradient(circle at 12% 0%, rgba(255,255,255,.18), transparent 38%), linear-gradient(135deg, #341018, #743040); }
-
-    .ticket-card::after {
-      content: "";
-      position: absolute;
-      inset: auto -40px -60px auto;
-      width: 170px;
-      height: 170px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-    }
-
-    .ticket-label {
-      font-size: 11px;
-      letter-spacing: .22em;
-      color: rgba(255,255,255,.72);
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .ticket-name {
-      font-size: 23px;
-      font-weight: 950;
-      line-height: 1.28;
-      letter-spacing: -.03em;
-      margin-bottom: 18px;
-    }
-
-    .meta {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 18px;
-    }
-
-    .meta div {
-      border-radius: 16px;
-      padding: 10px;
-      background: rgba(0,0,0,.18);
-      border: 1px solid rgba(255,255,255,.10);
-    }
-
-    .meta span {
-      display: block;
-      color: rgba(255,255,255,.58);
-      font-size: 10px;
-      margin-bottom: 4px;
-    }
-
-    .meta strong {
-      font-size: 13px;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: 999px;
-      padding: 8px 12px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.14);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .used-stamp {
-      position: absolute;
-      right: 16px;
-      top: 16px;
-      transform: rotate(10deg);
-      font-size: 30px;
-      font-weight: 1000;
-      letter-spacing: .08em;
-      color: rgba(255,255,255,.88);
-      border: 3px solid rgba(255,255,255,.72);
-      border-radius: 14px;
-      padding: 6px 10px;
-      mix-blend-mode: screen;
-    }
-
-    .empty {
-      text-align: center;
-      padding: 36px 18px;
-      border-radius: 26px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.055);
-      margin-top: 16px;
-    }
-
-    .modal {
-      position: fixed;
-      inset: 0;
-      display: none;
-      place-items: end center;
-      padding: 18px;
-      background: rgba(0,0,0,.66);
-      z-index: 50;
-    }
-
-    .modal.active { display: grid; }
-
-    .modal-card {
-      width: min(100%, 430px);
-      border-radius: 28px;
-      padding: 22px;
-      background: linear-gradient(180deg, rgba(24,27,36,.96), rgba(8,10,16,.98));
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-    }
-
-    .glow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0;
-      background: radial-gradient(circle at 50% 45%, rgba(255,230,151,.55), transparent 36%);
-      transition: opacity .6s ease;
-      z-index: 20;
-    }
-    .glow.show { opacity: 1; }
-
-    .footer-tools {
-      margin-top: auto;
-      padding-top: 22px;
-      text-align: center;
-    }
-
-    .text-link {
-      color: rgba(247,243,232,.42);
-      background: none;
-      border: 0;
-      box-shadow: none;
-      padding: 8px;
-      font-size: 11px;
-      width: auto;
-    }
-
-    .prize-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .prize-pill {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 11px 12px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.055);
-      border: 1px solid rgba(255,255,255,.08);
-      color: rgba(247,243,232,.82);
-      font-size: 12px;
-    }
-
-    @media (max-width: 360px) {
-      .app { padding-inline: 14px; }
-      h1 { font-size: 30px; }
-      .ticket-name { font-size: 20px; }
-      .meta { grid-template-columns: 1fr; }
-    }
-  </style>
+/* Ticket / Home panels */
+.panel{
+  margin-top:14px;border-radius:22px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.13);box-shadow:0 15px 40px rgba(0,0,0,.35);position:relative;z-index:4
+}
+.panel h2{margin:0 0 8px;font-size:22px;color:#fff4b2;text-shadow:0 0 12px rgba(255,211,106,.45)}
+.panel p{margin:0;font-size:13px;line-height:1.65;color:#d7e6f4}
+.home-status{
+  margin:12px 0 0;padding:12px;border-radius:15px;background:rgba(0,0,0,.3);border:1px solid rgba(255,211,106,.35);
+  color:#fff3b8;font-weight:900;text-align:center;font-size:13px;line-height:1.55
+}
+.main-actions{display:grid;gap:10px;margin-top:12px}
+.main-actions button{
+  border:0;border-radius:16px;padding:14px 12px;font-weight:1000;font-size:16px;cursor:pointer;color:#08101a;
+  background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);box-shadow:0 0 20px rgba(255,211,106,.25)
+}
+.main-actions button.secondary{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14);box-shadow:none}
+.ticket-card{
+  margin-top:12px;border-radius:22px;padding:14px;background:linear-gradient(135deg,rgba(255,211,106,.22),rgba(116,247,255,.10),rgba(255,45,85,.08)),rgba(255,255,255,.055);
+  border:1px solid rgba(255,211,106,.55);box-shadow:0 0 24px rgba(255,211,106,.16);position:relative;overflow:hidden
+}
+.ticket-card.used{filter:saturate(.7);opacity:.86}
+.ticket-card.expired{filter:grayscale(.65);opacity:.72}
+.ticket-card .used-stamp{
+  position:absolute;right:12px;top:12px;transform:rotate(10deg);border:3px solid rgba(255,255,255,.76);border-radius:10px;
+  color:rgba(255,255,255,.9);font-size:28px;font-weight:1000;letter-spacing:.08em;padding:4px 8px
+}
+.ticket-card .tlabel{font-size:11px;color:#89fbff;font-weight:1000;letter-spacing:.16em}
+.ticket-card .tname{font-size:22px;font-weight:1000;color:#fff4b2;margin:6px 0;text-shadow:0 0 14px rgba(255,211,106,.45);line-height:1.22}
+.ticket-card .tmeta{font-size:12px;line-height:1.7;color:#e9f7ff}
+.ticket-card .use{
+  width:100%;margin-top:10px;border:0;border-radius:14px;padding:13px;background:linear-gradient(90deg,#ffd36a,#ff9f1a);font-weight:1000;color:#1c0900;font-size:15px
+}
+.ticket-card .use:disabled{opacity:.55;filter:grayscale(1)}
+.empty{text-align:center;margin-top:12px;padding:25px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:#c3d8e8;font-size:13px;line-height:1.7}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:flex-end;justify-content:center;padding:14px}
+.modal.show{display:flex}
+.modal-card{width:min(430px,100%);border-radius:24px;padding:16px;background:linear-gradient(180deg,#111936,#060712);border:2px solid rgba(255,211,106,.65);box-shadow:0 20px 70px rgba(0,0,0,.7)}
+.modal-card h2{margin:0 0 8px;color:#fff4b2}
+.modal-card p{font-size:13px;line-height:1.65;color:#d7e6f4}
+.modal-card button{width:100%;margin-top:9px;border:0;border-radius:15px;padding:13px;font-weight:1000}
+.modal-card .ok{background:linear-gradient(90deg,#ffd36a,#ff9f1a);color:#1c0900}
+.modal-card .cancel{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14)}
+.line-gate{display:none}
+.warn{color:#ffefb0;font-size:11px;line-height:1.55;text-align:center;margin-top:10px}
+@media(max-width:370px){
+  .logo h1{font-size:30px}
+  .push{height:68px;font-size:21px}
+  .demo-toggle{top:58px}
+}
+</style>
 </head>
-
 <body>
-  <div class="glow" id="glow"></div>
+<div class="bg"></div>
+<div class="steam" id="steam"></div>
+<div class="confetti" id="confetti"></div>
+<div class="jackpot" id="jackpot"><div class="box"><h2 id="jackpotTitle">CONGRATULATIONS</h2><p id="jackpotSub">PREMIUM BONUS</p></div></div>
 
-  <main class="app">
-    <div class="topbar">
-      <div class="brand">LASPA</div>
-      <div class="version">Ver12 α</div>
+<main class="app">
+  <section class="machine" id="machine">
+    <div class="inner" id="inner">
+      <div class="nav">
+        <button id="navHome" class="active">HOME</button>
+        <button id="navSlot">SLOT</button>
+        <button id="navTickets">TICKET</button>
+      </div>
+
+      <div class="demo-toggle" id="demoToggle">🧪 DEMO</div>
+      <div class="demo-panel" id="demoPanel">
+        <button data-demo="超ととのい賞">サウナ90分無料</button>
+        <button data-demo="激ととのい賞">よもぎ蒸し60分無料</button>
+        <button data-demo="500円賞">500円割引</button>
+        <button data-demo="300円賞">300円割引</button>
+        <button data-demo="100円賞">100円割引</button>
+        <button data-demo="美肌ととのい賞">冷感フェイスパック</button>
+        <button data-demo="さっぱり賞">ミニ缶ジュース</button>
+        <button data-demo="random">ランダム</button>
+        <button id="resetToday">デモ用：全データリセット</button>
+      </div>
+
+      <div class="lamps"><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div></div>
+
+      <div class="logo">
+        <div class="label">LASPA PREMIUM SLOT</div>
+        <h1>夏の<br>ととのいくじ</h1>
+        <div class="sub">LINE限定・本日1回チャレンジ</div>
+      </div>
+
+      <div class="line-gate" id="lineGate">
+        <div class="panel">
+          <h2>LINE友達登録者限定</h2>
+          <p>正式運用時はLINE登録確認と連携予定です。社長確認用のため、下のボタンから進めます。</p>
+          <div class="main-actions">
+            <button id="lineBtn">LINE登録済みとして進む</button>
+          </div>
+          <div class="warn">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
+        </div>
+      </div>
+
+      <div class="view active" id="homeView">
+        <div class="panel">
+          <h2>Today’s Chance</h2>
+          <p>本日の抽選とマイチケットを確認できます。</p>
+          <div class="home-status" id="homeStatus">確認中...</div>
+          <div class="main-actions">
+            <button id="homeToSlot">今日の抽選へ</button>
+            <button class="secondary" id="homeToTickets">マイチケットを見る</button>
+          </div>
+          <div class="warn">未使用チケットがある場合は、使用後に次回抽選できます。</div>
+        </div>
+      </div>
+
+      <div class="view" id="slotView">
+        <div class="screen">
+          <div class="status" id="status">PUSH TO START</div>
+          <div class="canvas-wrap">
+            <canvas id="slotCanvas" width="1180" height="520"></canvas>
+            <div class="center-glow"></div>
+          </div>
+          <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
+        </div>
+
+        <div class="controls">
+          <button class="push" id="spinBtn">🔴 PUSH</button>
+          <div class="note">同じスマホでは1日1回まで。<br>当選チケットはマイチケットへ保存されます。</div>
+          <div class="ticket" id="ticket">
+            <div class="rank" id="rank"></div>
+            <div class="prize" id="prize"></div>
+            <div class="meta" id="meta"></div>
+            <div class="code" id="code"></div>
+            <div class="badge next" id="badge">マイチケット保存済み</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view" id="ticketsView">
+        <div class="panel">
+          <h2>My Tickets</h2>
+          <p>スタッフ確認後、お客様自身で「使用する」を押してください。</p>
+          <div id="ticketsList"></div>
+          <div class="warn">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
+        </div>
+      </div>
+
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12 Evolution</div>
     </div>
+  </section>
+</main>
 
-    <section class="screen" id="screenLine">
-      <div class="hero">
-        <div class="eyebrow">Digital Rewards</div>
-        <h1>LINE友達登録者限定</h1>
-        <p>LASPAをご利用のお客様限定で、本日の抽選に参加できます。正式運用時はLINE登録確認と連携予定です。</p>
-        <div class="actions">
-          <button id="btnLine">LINE登録済みとして進む</button>
-        </div>
-        <div class="notice">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
-      </div>
-    </section>
-
-    <section class="screen" id="screenHome">
-      <div class="hero">
-        <div class="eyebrow">LASPA Digital Rewards</div>
-        <h1>Today’s Chance</h1>
-        <p>本日の抽選と、獲得済みチケットを確認できます。</p>
-        <div class="status" id="homeStatus"></div>
-        <div class="actions">
-          <button id="btnGoSlot">今日の抽選へ</button>
-          <button class="secondary" id="btnGoTickets">マイチケットを見る</button>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="tile">
-          <div class="tile-title">🎰 今日の抽選</div>
-          <p>1日1回限定。未使用チケットがある場合は、使用後に次回抽選できます。</p>
-        </div>
-        <div class="tile">
-          <div class="tile-title">🎫 My Tickets</div>
-          <p>当選チケットは自動保存。スタッフ確認後、お客様自身で「使用する」を押してください。</p>
-        </div>
-      </div>
-      <div class="notice">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
-    </section>
-
-    <section class="screen" id="screenSlot">
-      <div class="hero">
-        <div class="eyebrow">Premium Slot</div>
-        <h2>本日の抽選</h2>
-        <p>リール停止後、当選チケットがマイチケットに保存されます。</p>
-
-        <div class="slot-wrap">
-          <canvas id="slotCanvas" width="760" height="430"></canvas>
-        </div>
-
-        <div class="result-name" id="resultName"></div>
-
-        <div class="actions">
-          <button id="btnSpin">スロットを回す</button>
-          <button class="secondary" id="btnSlotHome">ホームに戻る</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="screen" id="screenWin">
-      <div class="hero">
-        <div class="eyebrow">Congratulations</div>
-        <h1>当選しました</h1>
-        <p id="winText"></p>
-        <div class="actions">
-          <button id="btnWinTickets">マイチケットを見る</button>
-          <button class="secondary" id="btnWinHome">ホームに戻る</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="screen" id="screenTickets">
-      <div class="hero">
-        <div class="eyebrow">My Tickets</div>
-        <h2>マイチケット</h2>
-        <p>店頭でスタッフ確認後、お客様自身で「使用する」を押してください。</p>
-      </div>
-      <div id="ticketsList"></div>
-      <div class="actions">
-        <button class="secondary" id="btnTicketsHome">ホームに戻る</button>
-      </div>
-      <div class="notice">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
-    </section>
-
-    <section class="screen" id="screenPrizes">
-      <div class="hero">
-        <div class="eyebrow">Prize Lineup</div>
-        <h2>景品一覧</h2>
-        <div class="prize-list" id="prizeList"></div>
-      </div>
-    </section>
-
-    <div class="footer-tools">
-      <button class="text-link" id="btnDemoReset">デモ確認用リセット</button>
-    </div>
-  </main>
-
-  <div class="modal" id="useModal">
-    <div class="modal-card">
-      <div class="eyebrow">Ticket Use</div>
-      <h2>このチケットを使用しますか？</h2>
-      <p id="modalTicketName"></p>
-      <div class="status">使用後はUSED表示となり、元に戻せません。スタッフ確認後に押してください。</div>
-      <div class="actions">
-        <button id="btnConfirmUse">使用する</button>
-        <button class="secondary" id="btnCancelUse">キャンセル</button>
-      </div>
-    </div>
+<div class="modal" id="useModal">
+  <div class="modal-card">
+    <h2>このチケットを使用しますか？</h2>
+    <p id="modalText">使用後はUSED表示となり、元に戻せません。スタッフ確認後に押してください。</p>
+    <button class="ok" id="confirmUse">使用する</button>
+    <button class="cancel" id="cancelUse">キャンセル</button>
   </div>
+</div>
 
 <script>
-/* =========================================================
-  LASPA SLOT PROJECT Ver12 α
-  index.html 1 file / GitHub Pages ready
-========================================================= */
-
-/* =========================
-  CONFIG
-========================= */
-const CONFIG = {
-  storageKeys: {
-    lineRegistered: "laspa_v12_line_registered",
-    lastSpinDate: "laspa_v12_last_spin_date",
-    tickets: "laspa_v12_tickets"
-  },
-  prizes: [
-    { id: "sauna90", name: "サウナ90分無料チケット", weight: 1, type: "sauna", icon: "SAUNA" },
-    { id: "yomogi60", name: "よもぎ蒸し60分無料チケット", weight: 2, type: "yomogi", icon: "YOMOGI" },
-    { id: "discount500", name: "500円割引チケット", weight: 5, type: "discount", icon: "¥500" },
-    { id: "discount300", name: "300円割引チケット", weight: 12, type: "discount", icon: "¥300" },
-    { id: "discount100", name: "100円割引チケット", weight: 25, type: "discount", icon: "¥100" },
-    { id: "pack", name: "冷感フェイスパック", weight: 25, type: "pack", icon: "PACK" },
-    { id: "juice", name: "ミニ缶ジュース", weight: 30, type: "juice", icon: "DRINK" }
-  ],
-  spinDuration: 3600
+/* ===============================
+   LASPA SLOT PROJECT Ver12 Evolution
+   Ver10.1のワクワク感 + Ver12チケット運用
+================================= */
+const CONFIG={
+  pin:"0716",
+  storage:{
+    line:"laspaV12_lineRegistered",
+    draw:"laspaV12_drawDate",
+    last:"laspaV12_lastTicket",
+    tickets:"laspaV12_tickets"
+  }
 };
 
-/* =========================
-  STATE
-========================= */
-const state = {
-  currentScreen: "",
-  isSpinning: false,
-  selectedTicketId: null,
-  canvas: null,
-  ctx: null,
-  reelOffsets: [0, 0, 0],
-  reelSpeeds: [36, 42, 48],
-  finalPrize: null
-};
+const canvas=document.getElementById("slotCanvas");
+const ctx=canvas.getContext("2d");
+const W=canvas.width,H=canvas.height;
+const REEL_W=340, GAP=35, START_X=70;
+const VIEW_H=420, VIEW_Y=52;
+const CELL=150;
+const CENTER_Y=VIEW_Y+VIEW_H/2;
+const statusEl=document.getElementById("status");
+const spinBtn=document.getElementById("spinBtn");
+const ticket=document.getElementById("ticket");
+const rankEl=document.getElementById("rank");
+const prizeEl=document.getElementById("prize");
+const metaEl=document.getElementById("meta");
+const codeEl=document.getElementById("code");
+const badgeEl=document.getElementById("badge");
+const chance=document.getElementById("chance");
+const inner=document.getElementById("inner");
 
-/* =========================
-  STORAGE
-========================= */
-function getLineRegistered() {
-  return localStorage.getItem(CONFIG.storageKeys.lineRegistered) === "true";
+const todayKey=()=>new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+const nowText=()=>new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
+const makeDate=(iso)=>new Date(iso).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+function addMonths(date,months){const d=new Date(date);const day=d.getDate();d.setMonth(d.getMonth()+months);if(d.getDate()!==day)d.setDate(0);return d}
+function makeCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="LASPA-";for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
+
+/* 景品：社長確認用 Ver12確定名 */
+const prizes=[
+ {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"sauna",emoji:"👑"},
+ {rank:"激ととのい賞",name:"よもぎ蒸し60分無料チケット",rate:2,type:"yomogi",emoji:"🔥"},
+ {rank:"500円賞",name:"500円割引チケット",rate:5,type:"discount",emoji:"💴"},
+ {rank:"300円賞",name:"300円割引チケット",rate:12,type:"discount",emoji:"💰"},
+ {rank:"100円賞",name:"100円割引チケット",rate:25,type:"discount",emoji:"🪙"},
+ {rank:"美肌ととのい賞",name:"冷感フェイスパック",rate:25,type:"pack",emoji:"✨"},
+ {rank:"さっぱり賞",name:"ミニ缶ジュース",rate:30,type:"juice",emoji:"🥤"}
+];
+
+const symbols=[
+ ["👑","サウナ90分"],["🔥","よもぎ60分"],["💴","500円"],["💰","300円"],["🪙","100円"],["✨","パック"],["🥤","ジュース"],["🌿","よもぎ"],["🧖","サウナ"]
+];
+
+function pickPrize(){const r=Math.random()*100;let a=0;for(const p of prizes){a+=p.rate;if(r<a)return p}return prizes[prizes.length-1]}
+function getPrizeByRank(rank){if(rank==="random")return pickPrize();return prizes.find(p=>p.rank===rank)||pickPrize()}
+function symbolIndex(p){const i=symbols.findIndex(s=>s[0]===p.emoji);return i<0?0:i}
+
+/* 音 */
+function beep(freq=520,dur=.08,type="sine",gain=.04){
+ try{const ac=new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator();const g=ac.createGain();o.type=type;o.frequency.value=freq;g.gain.value=gain;o.connect(g);g.connect(ac.destination);o.start();setTimeout(()=>{o.stop();ac.close()},dur*1000)}catch(e){}
 }
-function setLineRegistered(value) {
-  localStorage.setItem(CONFIG.storageKeys.lineRegistered, String(value));
+function soundStart(){beep(440,.08,"sawtooth",.04);setTimeout(()=>beep(660,.08,"sawtooth",.04),90);setTimeout(()=>beep(880,.12,"sawtooth",.04),180)}
+function soundStop(i){beep(620+i*120,.055,"triangle",.04);setTimeout(()=>beep(980+i*120,.05,"triangle",.028),55)}
+function soundPremium(){beep(880,.12,"square",.045);setTimeout(()=>beep(1320,.14,"square",.045),150);setTimeout(()=>beep(1760,.18,"square",.045),320)}
+function soundWin(){beep(740,.08,"triangle",.04);setTimeout(()=>beep(930,.08,"triangle",.04),110);setTimeout(()=>beep(1180,.12,"triangle",.04),220)}
+
+/* チケット保存 */
+function getTickets(){try{return JSON.parse(localStorage.getItem(CONFIG.storage.tickets)||"[]")}catch(e){return[]}}
+function saveTickets(arr){localStorage.setItem(CONFIG.storage.tickets,JSON.stringify(arr))}
+function isExpired(t){return t.status==="unused" && new Date(t.expiresAt).getTime()<Date.now()}
+function normalizedTickets(){
+  const arr=getTickets().map(t=>isExpired(t)?{...t,status:"expired"}:t);
+  saveTickets(arr);return arr
 }
-function getLastSpinDate() {
-  return localStorage.getItem(CONFIG.storageKeys.lastSpinDate) || "";
+function hasUnusedTicket(){return normalizedTickets().some(t=>t.status==="unused")}
+function alreadyDrawn(){return localStorage.getItem(CONFIG.storage.draw)===todayKey()}
+function canSpin(){return !alreadyDrawn()&&!hasUnusedTicket()}
+function createTicketFromPrize(p,isDemo=false){
+ const issued=new Date();
+ const expires=addMonths(issued,2);
+ const rec={
+  id:"ticket_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
+  rank:p.rank,prize:p.name,type:p.type,code:makeCode(),
+  issuedAt:issued.toISOString(),expiresAt:expires.toISOString(),
+  drawnAt:nowText(),usedAt:null,status:"unused",demo:isDemo
+ };
+ if(!isDemo){
+   const all=getTickets();all.unshift(rec);saveTickets(all);
+   localStorage.setItem(CONFIG.storage.draw,todayKey());
+   localStorage.setItem(CONFIG.storage.last,JSON.stringify(rec));
+ }
+ return rec
 }
-function setLastSpinDate(dateKey) {
-  localStorage.setItem(CONFIG.storageKeys.lastSpinDate, dateKey);
-}
-function getTickets() {
-  try {
-    return JSON.parse(localStorage.getItem(CONFIG.storageKeys.tickets) || "[]");
-  } catch {
-    return [];
-  }
-}
-function saveTickets(tickets) {
-  localStorage.setItem(CONFIG.storageKeys.tickets, JSON.stringify(tickets));
+let selectedTicketId=null;
+function useTicket(id){
+ const arr=normalizedTickets().map(t=>t.id===id&&t.status==="unused"?{...t,status:"used",usedAt:new Date().toISOString()}:t);
+ saveTickets(arr)
 }
 
-/* =========================
-  DATE UTILS
-========================= */
-function dateKey(date = new Date()) {
-  const y = date.getFullYear();
-  const m = String(date.getMonth() + 1).padStart(2, "0");
-  const d = String(date.getDate()).padStart(2, "0");
-  return `${y}-${m}-${d}`;
+/* 画面 */
+function setView(name){
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+ document.getElementById(name+"View").classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ const nav=document.getElementById("nav"+name.charAt(0).toUpperCase()+name.slice(1));
+ if(nav)nav.classList.add("active");
+ if(name==="home")renderHome();
+ if(name==="tickets")renderTickets();
+ if(name==="slot")updateSpinState();
 }
-function formatDate(iso) {
-  const d = new Date(iso);
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, "0");
-  const day = String(d.getDate()).padStart(2, "0");
-  return `${y}.${m}.${day}`;
+function renderHome(){
+ const hs=document.getElementById("homeStatus");
+ const btn=document.getElementById("homeToSlot");
+ if(hasUnusedTicket()){hs.textContent="未使用チケットがあります。使用後に次回抽選できます。";btn.disabled=true}
+ else if(alreadyDrawn()){hs.textContent="本日の抽選は利用済みです。次回は明日以降にご参加ください。";btn.disabled=true}
+ else{hs.textContent="本日の抽選に参加できます。PUSHで運試し！";btn.disabled=false}
 }
-function addMonths(date, months) {
-  const d = new Date(date);
-  const day = d.getDate();
-  d.setMonth(d.getMonth() + months);
-  if (d.getDate() !== day) d.setDate(0);
-  return d;
+function updateSpinState(){
+ if(hasUnusedTicket()){spinBtn.disabled=true;spinBtn.textContent="チケット使用後に抽選可能";statusEl.textContent="未使用チケットがあります"}
+ else if(alreadyDrawn()){spinBtn.disabled=true;spinBtn.textContent="本日は抽選済み";statusEl.textContent="本日の抽選は利用済み"}
+ else{spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="PUSH TO START"}
 }
-function isExpired(ticket) {
-  return new Date(ticket.expiresAt).getTime() < Date.now() && ticket.status !== "used";
+function showTicket(record){
+ ticket.classList.add("show");rankEl.textContent=record.rank;prizeEl.textContent=record.prize;codeEl.textContent=record.code;
+ metaEl.innerHTML=`抽選日時：${record.drawnAt}<br>有効期限：${makeDate(record.expiresAt)}まで<br>※マイチケット画面をスタッフへご提示ください。`;
+ badgeEl.className="badge next";badgeEl.textContent="マイチケット保存済み";
 }
+function renderTickets(){
+ const list=document.getElementById("ticketsList");
+ const arr=normalizedTickets();
+ if(!arr.length){list.innerHTML='<div class="empty">現在利用できるチケットはありません。<br>本日の抽選で当選したチケットがここに保存されます。</div>';return}
+ list.innerHTML=arr.map(t=>{
+  const st=t.status==="used"?"使用済み":t.status==="expired"?"期限切れ":"未使用";
+  const stamp=t.status==="used"?'<div class="used-stamp">USED</div>':(t.status==="expired"?'<div class="used-stamp">期限切れ</div>':"");
+  const cls=t.status==="used"?"used":(t.status==="expired"?"expired":"");
+  const btn=t.status==="unused"?`<button class="use" data-use="${t.id}">使用する</button>`:`<button class="use" disabled>${st}</button>`;
+  return `<div class="ticket-card ${cls}">
+   ${stamp}
+   <div class="tlabel">LASPA DIGITAL TICKET</div>
+   <div class="tname">${t.prize}</div>
+   <div class="tmeta">
+    状態：${st}<br>
+    発行日：${makeDate(t.issuedAt)}<br>
+    有効期限：${makeDate(t.expiresAt)}まで<br>
+    交換コード：${t.code}
+   </div>
+   ${btn}
+  </div>`
+ }).join("");
+ list.querySelectorAll("[data-use]").forEach(b=>b.addEventListener("click",()=>openUseModal(b.dataset.use)))
+}
+function openUseModal(id){
+ selectedTicketId=id;
+ const t=normalizedTickets().find(x=>x.id===id);
+ document.getElementById("modalText").innerHTML=`${t.prize}<br><br>使用後はUSED表示となり、元に戻せません。スタッフ確認後に押してください。`;
+ document.getElementById("useModal").classList.add("show")
+}
+function closeUseModal(){selectedTicketId=null;document.getElementById("useModal").classList.remove("show")}
 
-/* =========================
-  TICKET LOGIC
-========================= */
-function getNormalizedTickets() {
-  const tickets = getTickets().map(t => {
-    if (t.status !== "used" && isExpired(t)) {
-      return { ...t, status: "expired" };
+/* Canvas Reel */
+class Reel{
+ constructor(i){
+  this.i=i;this.x=START_X+i*(REEL_W+GAP);this.offset=0;this.speed=0;this.state="idle";this.finalIdx=0;this.stopAt=0;this.flash=0;this.glow=0;this.lastTick=0;
+ }
+ start(finalIdx,delay,spinMs,stopMs){
+  this.finalIdx=finalIdx;this.state="delay";this.delay=delay;this.spinMs=spinMs;this.stopMs=stopMs;this.startTime=performance.now();this.speed=38+this.i*4;this.flash=0;this.glow=0;
+ }
+ update(now,dt){
+  if(this.state==="delay"){if(now-this.startTime>=this.delay){this.state="spin";this.spinStart=now;this.offset=0;this.lastTick=0;}return null}
+  if(this.state==="spin"){
+    this.offset+=this.speed*(dt/16.67);
+    const tick=Math.floor(this.offset/CELL);
+    if(tick!==this.lastTick && tick%2===0){this.lastTick=tick; if(tick%4===0) beep(115+this.i*24,.009,"square",.008)}
+    if(now-this.spinStart>=this.spinMs){
+      this.state="stop";this.stopStart=now;this.from=this.offset;
+      const mod=((this.offset% (symbols.length*CELL))+symbols.length*CELL)%(symbols.length*CELL);
+      const desired=this.finalIdx*CELL;
+      let dist=(desired-mod+symbols.length*CELL)%(symbols.length*CELL);
+      dist+=(4+this.i*2)*symbols.length*CELL;
+      this.to=this.offset+dist;
     }
-    return t;
-  });
-  saveTickets(tickets);
-  return tickets;
-}
-function hasUnusedTicket() {
-  return getNormalizedTickets().some(t => t.status === "unused");
-}
-function canSpinToday() {
-  return !hasUnusedTicket() && getLastSpinDate() !== dateKey();
-}
-function createTicket(prize) {
-  const issued = new Date();
-  const expires = addMonths(issued, 2);
-  const ticket = {
-    id: `ticket_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-    prizeId: prize.id,
-    name: prize.name,
-    type: prize.type,
-    issuedAt: issued.toISOString(),
-    expiresAt: expires.toISOString(),
-    status: "unused",
-    usedAt: null
-  };
-  const tickets = getTickets();
-  tickets.unshift(ticket);
-  saveTickets(tickets);
-  return ticket;
-}
-function useTicket(ticketId) {
-  const tickets = getNormalizedTickets().map(t => {
-    if (t.id === ticketId && t.status === "unused") {
-      return { ...t, status: "used", usedAt: new Date().toISOString() };
+  }else if(this.state==="stop"){
+    let t=Math.min((now-this.stopStart)/this.stopMs,1);
+    let e=1-Math.pow(1-t,4);
+    let overshoot=Math.sin(t*Math.PI)*CELL*.38;
+    this.offset=this.from+(this.to-this.from)*e+overshoot;
+    const tick=Math.floor(this.offset/CELL);
+    if(tick!==this.lastTick && tick%2===0 && t<.9){this.lastTick=tick;beep(130+this.i*25,.008,"square",.008)}
+    if(t>=1){
+      this.offset=this.finalIdx*CELL;
+      this.state="stopped";this.flash=1;this.glow=1;soundStop(this.i);vibrate([40,30,80]);
+      return "stopped";
     }
-    return t;
-  });
-  saveTickets(tickets);
-}
-
-/* =========================
-  SLOT LOGIC
-========================= */
-function pickPrize() {
-  const total = CONFIG.prizes.reduce((sum, p) => sum + p.weight, 0);
-  let r = Math.random() * total;
-  for (const prize of CONFIG.prizes) {
-    r -= prize.weight;
-    if (r <= 0) return prize;
   }
-  return CONFIG.prizes[CONFIG.prizes.length - 1];
-}
-
-/* =========================
-  UI RENDER
-========================= */
-function $(id) { return document.getElementById(id); }
-
-function showScreen(id) {
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  $(id).classList.add("active");
-  state.currentScreen = id;
-
-  if (id === "screenHome") renderHome();
-  if (id === "screenTickets") renderTickets();
-  if (id === "screenSlot") {
-    drawSlot();
-    $("resultName").textContent = "";
-    $("btnSpin").disabled = !canSpinToday();
-  }
-}
-
-function renderHome() {
-  const status = $("homeStatus");
-  const btn = $("btnGoSlot");
-
-  if (hasUnusedTicket()) {
-    status.textContent = "未使用チケットがあります。使用後に次回抽選できます。";
-    btn.disabled = true;
-  } else if (getLastSpinDate() === dateKey()) {
-    status.textContent = "本日の抽選は利用済みです。次回は明日以降にご参加ください。";
-    btn.disabled = true;
-  } else {
-    status.textContent = "本日の抽選に参加できます。";
-    btn.disabled = false;
-  }
-}
-
-function renderTickets() {
-  const list = $("ticketsList");
-  const tickets = getNormalizedTickets();
-
-  if (tickets.length === 0) {
-    list.innerHTML = `<div class="empty"><h2>チケットはありません</h2><p>本日の抽選で当選したチケットがここに保存されます。</p></div>`;
-    return;
-  }
-
-  list.innerHTML = tickets.map(ticket => {
-    const statusText = ticket.status === "used" ? "使用済み" : ticket.status === "expired" ? "期限切れ" : "未使用";
-    const usedStamp = ticket.status === "used" ? `<div class="used-stamp">USED</div>` : "";
-    const expiredStamp = ticket.status === "expired" ? `<div class="used-stamp">EXPIRED</div>` : "";
-    const button = ticket.status === "unused"
-      ? `<button data-use="${ticket.id}">使用する</button>`
-      : `<button disabled>${statusText}</button>`;
-
-    return `
-      <div class="ticket-card ${ticket.type}">
-        ${usedStamp}${expiredStamp}
-        <div class="ticket-label">LASPA DIGITAL TICKET</div>
-        <div class="ticket-name">${ticket.name}</div>
-        <div class="meta">
-          <div><span>発行日</span><strong>${formatDate(ticket.issuedAt)}</strong></div>
-          <div><span>有効期限</span><strong>${formatDate(ticket.expiresAt)}</strong></div>
-        </div>
-        <div class="meta">
-          <div><span>状態</span><strong>${statusText}</strong></div>
-          <div><span>確認</span><strong>店頭QR画面のみ有効</strong></div>
-        </div>
-        <div class="actions">${button}</div>
-      </div>
-    `;
-  }).join("");
-
-  list.querySelectorAll("[data-use]").forEach(btn => {
-    btn.addEventListener("click", () => openUseModal(btn.dataset.use));
-  });
-}
-
-function renderPrizeList() {
-  $("prizeList").innerHTML = CONFIG.prizes.map(p => `
-    <div class="prize-pill"><span>${p.name}</span><strong>${p.weight}%目安</strong></div>
-  `).join("");
-}
-
-/* =========================
-  CANVAS DRAWING
-========================= */
-function initCanvas() {
-  state.canvas = $("slotCanvas");
-  state.ctx = state.canvas.getContext("2d");
-  drawSlot();
-}
-
-function drawSlot() {
-  const ctx = state.ctx;
-  if (!ctx) return;
-
-  const w = state.canvas.width;
-  const h = state.canvas.height;
-  ctx.clearRect(0, 0, w, h);
-
-  const grad = ctx.createLinearGradient(0, 0, 0, h);
-  grad.addColorStop(0, "#111a2f");
-  grad.addColorStop(.55, "#050811");
-  grad.addColorStop(1, "#030407");
-  ctx.fillStyle = grad;
-  roundRect(ctx, 0, 0, w, h, 32);
-  ctx.fill();
-
-  ctx.strokeStyle = "rgba(216,183,106,.42)";
-  ctx.lineWidth = 3;
-  roundRect(ctx, 16, 16, w-32, h-32, 28);
-  ctx.stroke();
-
-  ctx.fillStyle = "rgba(216,183,106,.08)";
-  roundRect(ctx, 42, 62, w-84, h-122, 26);
-  ctx.fill();
-
-  const reelW = (w - 122) / 3;
-  const reelH = 250;
-  const top = 92;
-  const itemH = 82;
-
-  for (let i = 0; i < 3; i++) {
-    const x = 44 + i * (reelW + 17);
-    const rg = ctx.createLinearGradient(x, top, x, top + reelH);
-    rg.addColorStop(0, "rgba(255,255,255,.16)");
-    rg.addColorStop(.5, "rgba(255,255,255,.045)");
-    rg.addColorStop(1, "rgba(0,0,0,.26)");
-    ctx.fillStyle = rg;
-    roundRect(ctx, x, top, reelW, reelH, 20);
-    ctx.fill();
-
-    ctx.save();
-    roundClip(ctx, x, top, reelW, reelH, 20);
-    const offset = state.reelOffsets[i] % (CONFIG.prizes.length * itemH);
-    for (let n = -2; n < CONFIG.prizes.length + 4; n++) {
-      const prize = CONFIG.prizes[(n + CONFIG.prizes.length) % CONFIG.prizes.length];
-      const y = top + n * itemH - offset + 86;
-      drawPrizeItem(ctx, prize, x, y, reelW, itemH);
-    }
-    ctx.restore();
-
-    ctx.strokeStyle = "rgba(255,255,255,.12)";
-    ctx.lineWidth = 2;
-    roundRect(ctx, x, top, reelW, reelH, 20);
-    ctx.stroke();
-  }
-
-  ctx.fillStyle = "rgba(216,183,106,.24)";
-  roundRect(ctx, 62, top + 89, w - 124, 74, 18);
-  ctx.fill();
-  ctx.strokeStyle = "rgba(255,240,184,.50)";
-  ctx.lineWidth = 2;
-  roundRect(ctx, 62, top + 89, w - 124, 74, 18);
-  ctx.stroke();
-
-  ctx.fillStyle = "rgba(255,240,184,.85)";
-  ctx.font = "900 22px -apple-system, BlinkMacSystemFont, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText("LASPA REWARD SLOT", w / 2, 46);
-}
-
-function drawPrizeItem(ctx, prize, x, y, width, height) {
-  ctx.fillStyle = "rgba(255,255,255,.06)";
-  roundRect(ctx, x + 12, y, width - 24, height - 12, 16);
-  ctx.fill();
-
-  ctx.fillStyle = "#fff0b8";
-  ctx.font = "900 21px -apple-system, BlinkMacSystemFont, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText(prize.icon, x + width / 2, y + 34);
-
-  ctx.fillStyle = "rgba(247,243,232,.82)";
-  ctx.font = "800 16px -apple-system, BlinkMacSystemFont, sans-serif";
-  const short = prize.name
-    .replace("チケット", "")
-    .replace("よもぎ蒸し60分無料", "よもぎ60分無料")
-    .replace("サウナ90分無料", "サウナ90分無料");
-  ctx.fillText(short, x + width / 2, y + 60);
-}
-
-function roundRect(ctx, x, y, w, h, r) {
+  if(this.flash>0)this.flash=Math.max(0,this.flash-dt/520);
+  if(this.glow>0)this.glow=Math.max(0,this.glow-dt/2100);
+  return null;
+ }
+ draw(){
+  ctx.save();
   ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-}
-function roundClip(ctx, x, y, w, h, r) {
-  roundRect(ctx, x, y, w, h, r);
-  ctx.clip();
-}
+  roundRect(this.x,VIEW_Y,REEL_W,VIEW_H,28);ctx.clip();
 
-function spinSlot() {
-  if (state.isSpinning || !canSpinToday()) return;
+  const bg=ctx.createLinearGradient(0,VIEW_Y,0,VIEW_Y+VIEW_H);
+  bg.addColorStop(0,"#fff7d8");bg.addColorStop(.48,"#ffffff");bg.addColorStop(1,"#d9f6ff");
+  ctx.fillStyle=bg;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
 
-  state.isSpinning = true;
-  $("btnSpin").disabled = true;
-  $("resultName").textContent = "";
-  state.finalPrize = pickPrize();
+  const yBase=-(this.offset%(symbols.length*CELL));
+  for(let loop=-1;loop<5;loop++){
+    for(let j=0;j<symbols.length;j++){
+      const y=VIEW_Y+yBase+(loop*symbols.length+j)*CELL;
+      if(y<-CELL||y>VIEW_Y+VIEW_H+CELL)continue;
+      const cy=y+CELL/2;
+      const dist=Math.abs(cy-CENTER_Y);
+      const centerBoost = Math.max(0, 1 - dist / 210);
+      const scale = .82 + centerBoost * .48;
+      const alpha = .38 + centerBoost * .62;
 
-  if (navigator.vibrate) navigator.vibrate(30);
-
-  const start = performance.now();
-
-  function animate(now) {
-    const elapsed = now - start;
-    const t = Math.min(elapsed / CONFIG.spinDuration, 1);
-    const easeOut = 1 - Math.pow(1 - t, 3);
-    const speedFactor = 1 - easeOut;
-
-    for (let i = 0; i < 3; i++) {
-      const stopDelay = i * 0.18;
-      const localT = Math.max(0, Math.min((t - stopDelay) / (1 - stopDelay), 1));
-      const localEase = 1 - Math.pow(1 - localT, 3);
-      const factor = Math.max(.04, 1 - localEase);
-      state.reelOffsets[i] += state.reelSpeeds[i] * factor;
-    }
-
-    drawSlot();
-
-    if (t < 1) {
-      requestAnimationFrame(animate);
-    } else {
-      finishSpin();
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      ctx.translate(this.x+REEL_W/2,cy);
+      ctx.scale(scale,scale);
+      ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.shadowColor="rgba(0,0,0,.32)";
+      ctx.shadowBlur=10;
+      ctx.shadowOffsetY=6;
+      ctx.font="900 112px system-ui, Apple Color Emoji, Segoe UI Emoji";
+      ctx.fillText(symbols[j][0],0,-18);
+      ctx.shadowBlur=0;
+      ctx.shadowOffsetY=0;
+      ctx.font="900 19px system-ui,sans-serif";
+      ctx.fillStyle="#202020";
+      ctx.fillText(symbols[j][1],0,62);
+      if(centerBoost > .72){
+        ctx.globalAlpha=(centerBoost-.72)*1.8;
+        ctx.fillStyle="rgba(255,255,255,.72)";
+        ctx.beginPath();ctx.arc(62,-60,8,0,Math.PI*2);ctx.fill();
+      }
+      ctx.restore();
     }
   }
 
-  requestAnimationFrame(animate);
-}
+  const side=ctx.createLinearGradient(this.x,0,this.x+REEL_W,0);
+  side.addColorStop(0,"rgba(0,0,0,.18)");side.addColorStop(.18,"rgba(255,255,255,.06)");side.addColorStop(.82,"rgba(255,255,255,.06)");side.addColorStop(1,"rgba(0,0,0,.18)");
+  ctx.fillStyle=side;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
 
-function finishSpin() {
-  state.isSpinning = false;
-
-  createTicket(state.finalPrize);
-  setLastSpinDate(dateKey());
-
-  $("resultName").textContent = state.finalPrize.name;
-  $("winText").textContent = `${state.finalPrize.name}をマイチケットへ保存しました。`;
-
-  showGlow();
-  if (navigator.vibrate) navigator.vibrate([45, 40, 70]);
-
-  setTimeout(() => showScreen("screenWin"), 720);
-}
-
-function showGlow() {
-  const glow = $("glow");
-  glow.classList.add("show");
-  setTimeout(() => glow.classList.remove("show"), 900);
-}
-
-/* =========================
-  MODAL
-========================= */
-function openUseModal(ticketId) {
-  const ticket = getNormalizedTickets().find(t => t.id === ticketId);
-  if (!ticket || ticket.status !== "unused") return;
-  state.selectedTicketId = ticketId;
-  $("modalTicketName").textContent = ticket.name;
-  $("useModal").classList.add("active");
-}
-function closeUseModal() {
-  state.selectedTicketId = null;
-  $("useModal").classList.remove("active");
-}
-function confirmUseTicket() {
-  if (!state.selectedTicketId) return;
-  useTicket(state.selectedTicketId);
-  closeUseModal();
-  showGlow();
-  renderTickets();
-}
-
-/* =========================
-  EVENT HANDLERS
-========================= */
-function bindEvents() {
-  $("btnLine").addEventListener("click", () => {
-    setLineRegistered(true);
-    showScreen("screenHome");
-  });
-
-  $("btnGoSlot").addEventListener("click", () => showScreen("screenSlot"));
-  $("btnGoTickets").addEventListener("click", () => showScreen("screenTickets"));
-  $("btnSpin").addEventListener("click", spinSlot);
-  $("btnSlotHome").addEventListener("click", () => showScreen("screenHome"));
-  $("btnWinTickets").addEventListener("click", () => showScreen("screenTickets"));
-  $("btnWinHome").addEventListener("click", () => showScreen("screenHome"));
-  $("btnTicketsHome").addEventListener("click", () => showScreen("screenHome"));
-  $("btnCancelUse").addEventListener("click", closeUseModal);
-  $("btnConfirmUse").addEventListener("click", confirmUseTicket);
-
-  $("useModal").addEventListener("click", (e) => {
-    if (e.target.id === "useModal") closeUseModal();
-  });
-
-  $("btnDemoReset").addEventListener("click", () => {
-    const ok = confirm("デモ確認用にLINE登録・抽選日・チケットをリセットしますか？");
-    if (!ok) return;
-    Object.values(CONFIG.storageKeys).forEach(key => localStorage.removeItem(key));
-    location.reload();
-  });
-}
-
-/* =========================
-  INIT
-========================= */
-function init() {
-  bindEvents();
-  initCanvas();
-  renderPrizeList();
-
-  if (!getLineRegistered()) {
-    showScreen("screenLine");
-  } else {
-    showScreen("screenHome");
+  if(this.flash>0){
+    ctx.globalAlpha=this.flash;
+    ctx.fillStyle="rgba(255,246,180,.82)";
+    ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+    ctx.globalAlpha=this.flash*.9;
+    const burst=ctx.createRadialGradient(this.x+REEL_W/2,CENTER_Y,12,this.x+REEL_W/2,CENTER_Y,190);
+    burst.addColorStop(0,"rgba(255,255,255,.95)");
+    burst.addColorStop(.38,"rgba(255,211,106,.42)");
+    burst.addColorStop(1,"rgba(255,211,106,0)");
+    ctx.fillStyle=burst;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
   }
+  if(this.glow>0){
+    ctx.globalAlpha=this.glow;
+    ctx.strokeStyle="rgba(255,211,106,.98)";ctx.lineWidth=10;
+    roundRect(this.x+5,VIEW_Y+5,REEL_W-10,VIEW_H-10,24);ctx.stroke();
+    ctx.globalAlpha=this.glow*.55;
+    ctx.strokeStyle="rgba(116,247,255,.75)";ctx.lineWidth=4;
+    roundRect(this.x+14,VIEW_Y+14,REEL_W-28,VIEW_H-28,19);ctx.stroke();
+  }
+  ctx.restore();
+ }
+}
+function roundRect(x,y,w,h,r){
+ ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+}
+const reels=[new Reel(0),new Reel(1),new Reel(2)];
+let last=performance.now(), spinning=false, stopCount=0, resultPrize=null, demoMode=false;
+
+function drawFrame(now){
+ const dt=Math.min(now-last,34);last=now;
+ ctx.clearRect(0,0,W,H);
+ ctx.fillStyle="rgba(0,0,0,.42)";
+ ctx.fillRect(START_X+REEL_W+GAP/2-5,VIEW_Y,10,VIEW_H);
+ ctx.fillRect(START_X+(REEL_W+GAP)*2-GAP/2-5,VIEW_Y,10,VIEW_H);
+
+ for(const r of reels){
+  const ev=r.update(now,dt);
+  if(ev==="stopped"){
+    stopCount++;
+    if(stopCount===1)statusEl.textContent="1st STOP… 図柄点灯！";
+    if(stopCount===2){
+      statusEl.textContent="2nd STOP… ラストに注目";
+      if(resultPrize && (resultPrize.rank.includes("超")||resultPrize.rank.includes("激")||resultPrize.rank.includes("500"))){
+        chance.classList.add("show");inner.classList.add("flash");beep(1200,.18,"square",.045);vibrate([80,60,130]);
+        setTimeout(()=>{chance.classList.remove("show");inner.classList.remove("flash")},980);
+      }
+    }
+    if(stopCount===3)finishSpin();
+  }
+  r.draw();
+ }
+
+ const gradTop=ctx.createLinearGradient(0,VIEW_Y,0,VIEW_Y+80);
+ gradTop.addColorStop(0,"rgba(0,0,0,.34)");gradTop.addColorStop(1,"rgba(0,0,0,0)");
+ ctx.fillStyle=gradTop;ctx.fillRect(START_X,VIEW_Y,REEL_W*3+GAP*2,80);
+ const gradBottom=ctx.createLinearGradient(0,VIEW_Y+VIEW_H-80,0,VIEW_Y+VIEW_H);
+ gradBottom.addColorStop(0,"rgba(0,0,0,0)");gradBottom.addColorStop(1,"rgba(0,0,0,.32)");
+ ctx.fillStyle=gradBottom;ctx.fillRect(START_X,VIEW_Y+VIEW_H-80,REEL_W*3+GAP*2,80);
+
+ requestAnimationFrame(drawFrame);
+}
+requestAnimationFrame(drawFrame);
+
+async function startSpin(forcedRank=null,isDemo=false){
+ if(spinning)return;
+ if(!isDemo && !canSpin()){updateSpinState();return}
+ ticket.classList.remove("show");
+ spinBtn.disabled=true;spinning=true;stopCount=0;demoMode=isDemo;
+ resultPrize=forcedRank?getPrizeByRank(forcedRank):pickPrize();
+ const idx=symbolIndex(resultPrize);
+ statusEl.textContent="全リール始動！ ととのいを掴め！";
+ soundStart();vibrate(80);
+ await wait(280);
+ reels[0].start(idx,0,1150,1350);
+ reels[1].start(idx,0,1700,1500);
+ reels[2].start(idx,0,2250,1650);
+}
+function finishSpin(){
+ statusEl.textContent=resultPrize.rank+" 確定！";
+ reels.forEach(r=>{r.flash=1;r.glow=1.15});
+ const record=createTicketFromPrize(resultPrize,demoMode);
+ showTicket(record);
+ if(resultPrize.rank.includes("超")){
+  premiumShow("CONGRATULATIONS","サウナ90分無料チケット");
+  confetti(170);soundPremium();vibrate([140,80,140,80,300]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1500);
+ }else if(resultPrize.rank.includes("激")){
+  premiumShow("激ととのい!!","よもぎ蒸し60分無料チケット");
+  confetti(125);soundPremium();vibrate([120,70,220]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1300);
+ }else if(resultPrize.rank.includes("500")){
+  premiumShow("BIG BONUS","500円割引チケット");
+  confetti(100);soundPremium();vibrate([90,60,160]);
+ }else{
+  confetti(75);soundWin();vibrate(120);
+ }
+ spinning=false;
+ if(demoMode){spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="DEMO結果：もう一度確認できます"}
+ else{spinBtn.textContent="本日は抽選済み"}
+ renderHome();
 }
 
-document.addEventListener("DOMContentLoaded", init);
+/* Effect */
+function confetti(amount=90){
+ const box=document.getElementById("confetti");const colors=["#ffd36a","#74f7ff","#ff2d55","#6cffb8","#ffffff","#b56cff"];
+ for(let i=0;i<amount;i++){const e=document.createElement("i");e.style.left=Math.random()*100+"vw";e.style.background=colors[Math.floor(Math.random()*colors.length)];e.style.animationDelay=Math.random()*0.9+"s";e.style.transform=`rotate(${Math.random()*360}deg)`;box.appendChild(e);setTimeout(()=>e.remove(),4300)}
+}
+function premiumShow(title,sub){
+ const j=document.getElementById("jackpot");document.getElementById("jackpotTitle").textContent=title;document.getElementById("jackpotSub").textContent=sub;
+ j.classList.remove("show");void j.offsetWidth;j.classList.add("show");setTimeout(()=>j.classList.remove("show"),3300)
+}
+
+/* Events */
+document.getElementById("navHome").addEventListener("click",()=>setView("home"));
+document.getElementById("navSlot").addEventListener("click",()=>setView("slot"));
+document.getElementById("navTickets").addEventListener("click",()=>setView("tickets"));
+document.getElementById("homeToSlot").addEventListener("click",()=>setView("slot"));
+document.getElementById("homeToTickets").addEventListener("click",()=>setView("tickets"));
+spinBtn.addEventListener("click",()=>startSpin());
+
+document.getElementById("confirmUse").addEventListener("click",()=>{
+ if(selectedTicketId){useTicket(selectedTicketId);closeUseModal();renderTickets();renderHome();updateSpinState();premiumShow("USED","チケットを使用済みにしました");}
+});
+document.getElementById("cancelUse").addEventListener("click",closeUseModal);
+document.getElementById("useModal").addEventListener("click",(e)=>{if(e.target.id==="useModal")closeUseModal()});
+
+document.getElementById("demoToggle").addEventListener("click",()=>document.getElementById("demoPanel").classList.toggle("show"));
+document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>{document.getElementById("demoPanel").classList.remove("show");setView("slot");startSpin(btn.dataset.demo,true)}));
+document.getElementById("resetToday").addEventListener("click",()=>{
+ if(!confirm("デモ確認用に全データをリセットしますか？"))return;
+ Object.values(CONFIG.storage).forEach(k=>localStorage.removeItem(k));
+ location.reload();
+});
+
+/* LINE gate */
+document.getElementById("lineBtn").addEventListener("click",()=>{
+ localStorage.setItem(CONFIG.storage.line,"true");
+ document.getElementById("lineGate").style.display="none";
+ setView("home");
+});
+
+/* init */
+const steamBox=document.getElementById("steam");
+for(let i=0;i<10;i++){const s=document.createElement("span");s.style.left=(Math.random()*95)+"vw";s.style.animationDelay=(Math.random()*6)+"s";s.style.animationDuration=(5.5+Math.random()*4.5)+"s";steamBox.appendChild(s)}
+
+if(localStorage.getItem(CONFIG.storage.line)!=="true"){
+ document.getElementById("lineGate").style.display="block";
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+}else{
+ setView("home");
+}
+updateSpinState();
 </script>
 </body>
 </html>
