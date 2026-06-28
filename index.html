@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>LASPA 夏のととのいくじ PREMIUM SLOT Ver8</title>
+<title>LASPA 夏のととのいくじ PREMIUM SLOT Ver9</title>
 <style>
 :root{
   --gold:#ffd36a;
@@ -292,6 +292,62 @@ button,input{font-family:inherit}
   100%{transform:translateY(0) scale(1)}
 }
 
+
+/* Ver9 Reel Engine */
+.reel{
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.22),transparent 18%,transparent 82%,rgba(0,0,0,.22)),
+    linear-gradient(180deg,#fff8d9,#fff,#dcf8ff);
+}
+.reel:before{
+  z-index:8;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.36),transparent 55%),
+    radial-gradient(ellipse at top,rgba(255,255,255,.42),transparent 58%);
+}
+.reel:after{
+  z-index:8;
+  background:
+    linear-gradient(0deg,rgba(0,0,0,.36),transparent 55%),
+    radial-gradient(ellipse at bottom,rgba(255,211,106,.22),transparent 60%);
+}
+.reel .strip{
+  will-change:transform;
+}
+.reel.running{
+  box-shadow:
+    inset 0 14px 24px rgba(255,255,255,.55),
+    inset 0 -20px 22px rgba(0,0,0,.18),
+    0 0 18px rgba(116,247,255,.25);
+}
+.reel.running .strip{
+  filter:blur(.6px);
+}
+.reel.stop-flash{
+  animation:reelStopFlash .42s ease;
+}
+.reel.stop-flash .symbol:nth-child(odd){
+  text-shadow:0 0 12px rgba(255,211,106,.55);
+}
+@keyframes reelStopFlash{
+  0%{filter:brightness(1)}
+  35%{filter:brightness(2.25) saturate(1.45)}
+  100%{filter:brightness(1)}
+}
+.reel.final-win{
+  animation:finalWinGlow .95s ease-in-out 2;
+}
+@keyframes finalWinGlow{
+  50%{
+    box-shadow:
+      inset 0 14px 24px rgba(255,255,255,.72),
+      inset 0 -20px 22px rgba(0,0,0,.18),
+      0 0 24px rgba(255,211,106,.85),
+      0 0 44px rgba(255,45,85,.28);
+    filter:brightness(1.24);
+  }
+}
+
 @media(max-width:370px){
   .logo h1{font-size:30px}
   .reel{height:144px}
@@ -376,7 +432,7 @@ button,input{font-family:inherit}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver8</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver9</div>
     </div>
   </section>
 </main>
@@ -519,52 +575,88 @@ function spinReel(strip, reelNo, finalIdx, duration){
   return new Promise(resolve=>{
     const reel = strip.parentElement;
     const total = symbols.length;
-    const loops = 16 + reelNo * 5;
+    const finalY = (18 * total + finalIdx) * CELL - Math.round(CELL / 2);
+    const startTime = performance.now();
+    const minSpinTime = duration * 0.55;
+    const decelTime = duration * 0.45;
+    let y = 0;
+    let speed = 34 + reelNo * 4;
+    let lastTick = 0;
+    let stopping = false;
+    let stopStart = 0;
+    let stopFrom = 0;
+    const stopTo = finalY + Math.round(CELL * .42);
 
-    // Center the final symbol in the taller reel window
-    const centerOffset = Math.round(CELL / 2);
-    const baseTarget = (loops * total + finalIdx) * CELL - centerOffset;
-    const overshoot = Math.round(CELL * (0.42 + reelNo * 0.06));
-
-    reel.classList.add("spinning");
-    reel.classList.remove("slam","winGlow");
+    reel.classList.add("running");
+    reel.classList.remove("slam","winGlow","stop-flash","final-win");
     strip.style.transition = "none";
     strip.style.transform = "translateY(0px)";
 
-    let lastTick = 0;
-    const startTime = performance.now();
-
-    function easeOutQuint(x){ return 1 - Math.pow(1 - x, 5); }
+    function easeOutBack(x){
+      const c1 = 1.70158;
+      const c3 = c1 + 1;
+      return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+    }
+    function easeOutCubic(x){ return 1 - Math.pow(1 - x, 3); }
 
     function frame(now){
-      const t = Math.min((now - startTime) / duration, 1);
-      const eased = easeOutQuint(t);
-      const y = (baseTarget + overshoot) * eased;
-      strip.style.transform = `translateY(-${y}px)`;
+      const elapsed = now - startTime;
 
-      const currentTick = Math.floor(y / CELL);
-      if(currentTick !== lastTick && currentTick % 2 === 0 && t < .9){
-        lastTick = currentTick;
-        beep(135 + reelNo * 28, .012, "square", .010);
+      if(!stopping && elapsed < minSpinTime){
+        y += speed;
+        strip.style.transform = `translateY(-${y % (total * CELL * 20)}px)`;
+        const tick = Math.floor(y / CELL);
+        if(tick !== lastTick && tick % 2 === 0){
+          lastTick = tick;
+          beep(120 + reelNo * 24, .009, "square", .008);
+        }
+        requestAnimationFrame(frame);
+        return;
+      }
+
+      if(!stopping){
+        stopping = true;
+        stopStart = now;
+        const normalizedCurrent = y % (total * CELL);
+        const finalModulo = (finalIdx * CELL - Math.round(CELL / 2) + total * CELL) % (total * CELL);
+        let distance = (finalModulo - normalizedCurrent + total * CELL) % (total * CELL);
+        distance += (9 + reelNo * 3) * total * CELL;
+        stopFrom = y;
+        strip.dataset.stopTarget = String(y + distance + Math.round(CELL * .45));
+      }
+
+      const t = Math.min((now - stopStart) / decelTime, 1);
+      const target = Number(strip.dataset.stopTarget);
+      const eased = easeOutCubic(t);
+      const currentY = stopFrom + (target - stopFrom) * eased;
+      strip.style.transform = `translateY(-${currentY}px)`;
+
+      const tick = Math.floor(currentY / CELL);
+      if(tick !== lastTick && tick % 2 === 0 && t < .9){
+        lastTick = tick;
+        beep(135 + reelNo * 28, .010, "square", .009);
       }
 
       if(t < 1){
         requestAnimationFrame(frame);
       }else{
-        reel.classList.remove("spinning");
+        reel.classList.remove("running");
 
-        // Slight overshoot, then bounce back to the exact final symbol
-        strip.style.transition = "transform 310ms cubic-bezier(.05,1.72,.22,1)";
-        strip.style.transform = `translateY(-${baseTarget}px)`;
+        // Snap with visible overshoot -> bounce back
+        strip.style.transition = "transform 330ms cubic-bezier(.05,1.72,.22,1)";
+        strip.style.transform = `translateY(-${finalY}px)`;
 
-        reel.classList.add("slam","winGlow");
+        reel.classList.add("slam","winGlow","stop-flash");
         machine.classList.add("shake");
-        setTimeout(()=>machine.classList.remove("shake"),430);
-        setTimeout(()=>reel.classList.remove("slam"),360);
+        setTimeout(()=>machine.classList.remove("shake"),420);
+        setTimeout(()=>reel.classList.remove("slam","stop-flash"),430);
 
-        vibrate([40,30,80]);
-        soundStop(reelNo);
-        setTimeout(resolve,330);
+        // Stop flash sound
+        beep(620 + reelNo * 120, .055, "triangle", .04);
+        setTimeout(()=>beep(980 + reelNo * 120, .05, "triangle", .028),55);
+        vibrate([40,30,85]);
+
+        setTimeout(resolve,350);
       }
     }
     requestAnimationFrame(frame);
@@ -623,11 +715,14 @@ async function runSpin(forcedRank=null,isDemo=false){
 
   await showCountdown();
 
-  statusEl.textContent="高速回転中… ととのいを掴め！";
+  statusEl.textContent="全リール始動！ ととのいを掴め！";
   const first = spinReel(strips[0],0,idx,2600);
   const second = spinReel(strips[1],1,idx,3550);
+  const third = spinReel(strips[2],2,idx,4550);
+
   await first;
-  statusEl.textContent="1st STOP…";
+  statusEl.textContent="1st STOP… 図柄点灯！";
+
   await second;
   statusEl.textContent="2nd STOP… ラストに注目";
 
@@ -641,11 +736,14 @@ async function runSpin(forcedRank=null,isDemo=false){
     machineInner.classList.remove("flashRed");
   }
 
-  await spinReel(strips[2],2,idx,4350);
+  await third;
 
   statusEl.textContent=p.rank+" 確定！";
   const record = saveRecord(p,makeCode(),nowText(),isDemo);
   showTicket(record);
+
+  strips.forEach(s=>s.parentElement.classList.add("final-win"));
+  setTimeout(()=>strips.forEach(s=>s.parentElement.classList.remove("final-win")),2100);
 
   if(p.rank.includes("超")){
     premiumShow("CONGRATULATIONS", "超ととのい賞 / サウナ90分無料チケット");
