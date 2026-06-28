@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LASPA PREMIUM SLOT Ver12.2 Synced</title>
+<title>LASPA PREMIUM SLOT Ver13 Official</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
@@ -221,8 +221,8 @@ canvas{display:block;width:100%;height:auto}
 
       <div class="demo-toggle" id="demoToggle">🧪 DEMO</div>
       <div class="demo-panel" id="demoPanel">
-        <button data-demo="超ととのい賞">サウナ90分無料</button>
-        <button data-demo="激ととのい賞">よもぎ蒸し60分無料</button>
+        <button data-demo="超ととのい賞">サウナ90分半額</button>
+        <button data-demo="激ととのい賞">よもぎ蒸し60分半額</button>
         <button data-demo="500円賞">500円割引</button>
         <button data-demo="300円賞">300円割引</button>
         <button data-demo="100円賞">100円割引</button>
@@ -296,7 +296,7 @@ canvas{display:block;width:100%;height:auto}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12.2 Synced</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver13 Official</div>
     </div>
   </section>
 </main>
@@ -312,7 +312,7 @@ canvas{display:block;width:100%;height:auto}
 
 <script>
 /* ===============================
-   LASPA SLOT PROJECT Ver12.2 Synced
+   LASPA SLOT PROJECT Ver13 Official
    Ver10.1のワクワク感 + Ver12チケット運用
 ================================= */
 const CONFIG={
@@ -353,8 +353,8 @@ function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
 
 /* 景品：社長確認用 Ver12確定名 */
 const prizes=[
- {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"sauna",symbol:"sauna",theme:"#ffd36a"},
- {rank:"激ととのい賞",name:"よもぎ蒸し60分無料チケット",rate:2,type:"yomogi",symbol:"yomogi",theme:"#6cffb8"},
+ {rank:"超ととのい賞",name:"サウナ90分半額チケット",rate:1,type:"sauna",symbol:"sauna",theme:"#ffd36a"},
+ {rank:"激ととのい賞",name:"よもぎ蒸し60分半額チケット",rate:2,type:"yomogi",symbol:"yomogi",theme:"#6cffb8"},
  {rank:"500円賞",name:"500円割引チケット",rate:5,type:"discount",symbol:"discount500",theme:"#fff1aa"},
  {rank:"300円賞",name:"300円割引チケット",rate:12,type:"discount",symbol:"discount300",theme:"#ffd36a"},
  {rank:"100円賞",name:"100円割引チケット",rate:25,type:"discount",symbol:"discount100",theme:"#ffcc66"},
@@ -363,8 +363,8 @@ const prizes=[
 ];
 
 const symbols=[
- {key:"sauna", label:"サウナ90分無料チケット", color:"#ffd36a"},
- {key:"yomogi", label:"よもぎ蒸し60分無料チケット", color:"#6cffb8"},
+ {key:"sauna", label:"サウナ90分半額チケット", color:"#ffd36a"},
+ {key:"yomogi", label:"よもぎ蒸し60分半額チケット", color:"#6cffb8"},
  {key:"discount500", label:"500円割引チケット", color:"#fff1aa"},
  {key:"discount300", label:"300円割引チケット", color:"#ffd36a"},
  {key:"discount100", label:"100円割引チケット", color:"#ffcc66"},
@@ -409,7 +409,7 @@ function alreadyDrawn(){return localStorage.getItem(CONFIG.storage.draw)===today
 function canSpin(){return !alreadyDrawn()&&!hasUnusedTicket()}
 function createTicketFromPrize(p,isDemo=false){
  const issued=new Date();
- const expires=addMonths(issued,2);
+ const expires=addMonths(issued,1);
  const rec={
   id:"ticket_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
   rank:p.rank,prize:p.name,type:p.type,code:makeCode(),
@@ -491,26 +491,41 @@ function closeUseModal(){selectedTicketId=null;document.getElementById("useModal
 
 
 
-/* 景品連動Canvas図柄：画像は使わずコードで描画
-   Ver12.2：ダサい手描き絵を廃止し、スロット向け高級シンボルに統一
+
+/* 景品連動Canvas図柄：画像・絵文字に依存しない固定シンボル
+   Ver13 Official：PC / iPhone / Androidで見た目が変わらないCanvas描画
 */
 function drawPrizeSymbol(ctx, symbol, boost=1){
  const key=symbol.key;
  const data={
-  sauna:{main:"👑",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"emoji"},
-  yomogi:{main:"🌿",sub:"",color:"#6cffb8",dark:"#0b5837",font:"emoji"},
-  discount500:{main:"¥500",sub:"",color:"#fff1aa",dark:"#5b1d00",font:"money"},
-  discount300:{main:"¥300",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"money"},
-  discount100:{main:"¥100",sub:"",color:"#ffcc66",dark:"#5b1d00",font:"money"},
-  pack:{main:"ICE",sub:"PACK",color:"#74f7ff",dark:"#10587a",font:"text"},
-  juice:{main:"🥤",sub:"",color:"#ff5a7d",dark:"#5e0920",font:"emoji"}
+  sauna:{main:"SAUNA",sub:"50%",color:"#ffd36a",dark:"#5b1d00",kind:"crown"},
+  yomogi:{main:"YOMOGI",sub:"50%",color:"#6cffb8",dark:"#0b5837",kind:"leaf"},
+  discount500:{main:"¥500",sub:"",color:"#fff1aa",dark:"#5b1d00",kind:"ticket"},
+  discount300:{main:"¥300",sub:"",color:"#ffd36a",dark:"#5b1d00",kind:"ticket"},
+  discount100:{main:"¥100",sub:"",color:"#ffcc66",dark:"#5b1d00",kind:"ticket"},
+  pack:{main:"COOL",sub:"PACK",color:"#74f7ff",dark:"#10587a",kind:"pack"},
+  juice:{main:"DRINK",sub:"",color:"#ff5a7d",dark:"#5e0920",kind:"can"}
  }[key];
 
  ctx.save();
  ctx.textAlign="center";
  ctx.textBaseline="middle";
+ ctx.lineCap="round";
+ ctx.lineJoin="round";
 
- // outer premium medallion
+ drawSymbolBase(ctx,data);
+
+ if(data.kind==="crown") drawFixedCrown(ctx,data);
+ if(data.kind==="leaf") drawFixedLeaf(ctx,data);
+ if(data.kind==="ticket") drawFixedTicket(ctx,data);
+ if(data.kind==="pack") drawFixedPack(ctx,data);
+ if(data.kind==="can") drawFixedCan(ctx,data);
+
+ drawSymbolShine(ctx);
+ ctx.restore();
+}
+
+function drawSymbolBase(ctx,data){
  const outer=ctx.createRadialGradient(0,-18,14,0,0,92);
  outer.addColorStop(0,"rgba(255,255,255,.96)");
  outer.addColorStop(.28,data.color);
@@ -519,12 +534,10 @@ function drawPrizeSymbol(ctx, symbol, boost=1){
  ctx.fillStyle=outer;
  ctx.strokeStyle="rgba(255,255,255,.82)";
  ctx.lineWidth=5;
- ctx.beginPath();
- ctx.roundRect(-88,-72,176,144,28);
+ roundRectCanvas(ctx,-88,-72,176,144,28);
  ctx.fill();
  ctx.stroke();
 
- // inner dark glass
  const inner=ctx.createLinearGradient(0,-62,0,62);
  inner.addColorStop(0,"rgba(8,12,25,.96)");
  inner.addColorStop(.5,"rgba(23,28,45,.86)");
@@ -532,68 +545,197 @@ function drawPrizeSymbol(ctx, symbol, boost=1){
  ctx.fillStyle=inner;
  ctx.strokeStyle="rgba(255,255,255,.20)";
  ctx.lineWidth=2;
- ctx.beginPath();
- ctx.roundRect(-76,-60,152,120,22);
+ roundRectCanvas(ctx,-76,-60,152,120,22);
  ctx.fill();
  ctx.stroke();
 
- // glow ring
  ctx.shadowColor=data.color;
  ctx.shadowBlur=22;
  ctx.strokeStyle=data.color;
- ctx.globalAlpha=.42 + boost*.28;
+ ctx.globalAlpha=.48;
  ctx.lineWidth=4;
- ctx.beginPath();
- ctx.roundRect(-70,-54,140,108,18);
+ roundRectCanvas(ctx,-70,-54,140,108,18);
  ctx.stroke();
  ctx.globalAlpha=1;
-
- // main symbol
- ctx.shadowColor=data.color;
- ctx.shadowBlur=24;
- if(data.font==="money"){
-   const g=ctx.createLinearGradient(-60,-30,60,35);
-   g.addColorStop(0,"#ffffff");
-   g.addColorStop(.48,data.color);
-   g.addColorStop(1,"#ff9f1a");
-   ctx.fillStyle=g;
-   ctx.strokeStyle="rgba(0,0,0,.55)";
-   ctx.lineWidth=6;
-   ctx.font="1000 54px system-ui,sans-serif";
-   ctx.strokeText(data.main,0,2);
-   ctx.fillText(data.main,0,2);
-
-   // ticket cuts
-   ctx.shadowBlur=0;
-   ctx.fillStyle="rgba(255,255,255,.14)";
-   ctx.beginPath();ctx.arc(-78,0,12,0,Math.PI*2);ctx.arc(78,0,12,0,Math.PI*2);ctx.fill();
- }else if(data.font==="text"){
-   ctx.fillStyle="#eaffff";
-   ctx.strokeStyle="rgba(0,0,0,.55)";
-   ctx.lineWidth=5;
-   ctx.font="1000 48px system-ui,sans-serif";
-   ctx.strokeText(data.main,0,-10);
-   ctx.fillText(data.main,0,-10);
-   ctx.font="1000 25px system-ui,sans-serif";
-   ctx.strokeText(data.sub,0,34);
-   ctx.fillText(data.sub,0,34);
- }else{
-   ctx.font="900 88px system-ui, Apple Color Emoji, Segoe UI Emoji";
-   ctx.fillText(data.main,0,0);
- }
-
- // glossy highlight
  ctx.shadowBlur=0;
- const shine=ctx.createLinearGradient(-62,-56,62,-20);
- shine.addColorStop(0,"rgba(255,255,255,.0)");
- shine.addColorStop(.5,"rgba(255,255,255,.28)");
- shine.addColorStop(1,"rgba(255,255,255,.0)");
- ctx.fillStyle=shine;
+}
+
+function drawFixedCrown(ctx,data){
+ const g=ctx.createLinearGradient(-60,-46,60,54);
+ g.addColorStop(0,"#fff6bd");
+ g.addColorStop(.42,"#ffd36a");
+ g.addColorStop(1,"#ff8b00");
+ ctx.fillStyle=g;
+ ctx.strokeStyle="#3b1600";
+ ctx.lineWidth=6;
  ctx.beginPath();
- ctx.roundRect(-64,-56,128,26,13);
+ ctx.moveTo(-58,22);
+ ctx.lineTo(-48,-34);
+ ctx.lineTo(-18,0);
+ ctx.lineTo(0,-46);
+ ctx.lineTo(18,0);
+ ctx.lineTo(48,-34);
+ ctx.lineTo(58,22);
+ ctx.closePath();
+ ctx.fill();ctx.stroke();
+
+ ctx.fillStyle="#fff3a7";
+ ctx.strokeStyle="#3b1600";
+ ctx.lineWidth=4;
+ [-48,0,48].forEach((x,i)=>{
+   ctx.beginPath();
+   ctx.arc(x,i===1?-46:-34,i===1?8:7,0,Math.PI*2);
+   ctx.fill();ctx.stroke();
+ });
+
+ ctx.fillStyle="#9b3b00";
+ ctx.strokeStyle="#3b1600";
+ ctx.lineWidth=4;
+ roundRectCanvas(ctx,-60,22,120,24,8);
+ ctx.fill();ctx.stroke();
+
+ ctx.fillStyle="#fff7c5";
+ roundRectCanvas(ctx,-42,28,84,6,3);
  ctx.fill();
 
- ctx.restore();
+ ctx.fillStyle="#fff6bd";
+ ctx.font="1000 24px system-ui,sans-serif";
+ ctx.fillText("SAUNA",0,56);
+}
+
+function drawFixedLeaf(ctx,data){
+ ctx.strokeStyle="#0b5837";
+ ctx.lineWidth=7;
+ ctx.beginPath();
+ ctx.moveTo(0,52);
+ ctx.bezierCurveTo(-8,20,4,-18,0,-50);
+ ctx.stroke();
+
+ const leaves=[
+  [-18,-28,-64,-48],
+  [-12,-2,-62,-2],
+  [-8,24,-52,34],
+  [18,-28,64,-48],
+  [12,-2,62,-2],
+  [8,24,52,34]
+ ];
+ leaves.forEach(([x,y,ex,ey])=>{
+   const grad=ctx.createLinearGradient(x,y,ex,ey);
+   grad.addColorStop(0,"#d5ffe1");
+   grad.addColorStop(.45,"#6cffb8");
+   grad.addColorStop(1,"#13915d");
+   ctx.fillStyle=grad;
+   ctx.strokeStyle="#0b5837";
+   ctx.lineWidth=4;
+   ctx.beginPath();
+   ctx.moveTo(x,y);
+   ctx.quadraticCurveTo((x+ex)/2, y-24, ex, ey);
+   ctx.quadraticCurveTo((x+ex)/2, y+22, x,y);
+   ctx.closePath();
+   ctx.fill();ctx.stroke();
+ });
+
+ ctx.fillStyle="#eaffef";
+ ctx.font="1000 28px system-ui,sans-serif";
+ ctx.fillText("50%",0,56);
+}
+
+function drawFixedTicket(ctx,data){
+ const g=ctx.createLinearGradient(-62,-34,62,36);
+ g.addColorStop(0,"#ffffff");
+ g.addColorStop(.5,data.color);
+ g.addColorStop(1,"#ff9f1a");
+ ctx.fillStyle=g;
+ ctx.strokeStyle="#3b1600";
+ ctx.lineWidth=5;
+ ctx.beginPath();
+ ctx.moveTo(-66,-42);
+ ctx.lineTo(66,-42);
+ ctx.quadraticCurveTo(56,-18,66,0);
+ ctx.quadraticCurveTo(56,18,66,42);
+ ctx.lineTo(-66,42);
+ ctx.quadraticCurveTo(-56,18,-66,0);
+ ctx.quadraticCurveTo(-56,-18,-66,-42);
+ ctx.closePath();
+ ctx.fill();ctx.stroke();
+
+ ctx.strokeStyle="rgba(59,22,0,.4)";
+ ctx.lineWidth=3;
+ ctx.setLineDash([7,7]);
+ ctx.beginPath();ctx.moveTo(-42,-32);ctx.lineTo(-42,32);ctx.stroke();
+ ctx.setLineDash([]);
+
+ ctx.fillStyle="#2a0800";
+ ctx.font="1000 48px system-ui,sans-serif";
+ ctx.fillText(data.main,10,4);
+}
+
+function drawFixedPack(ctx,data){
+ const g=ctx.createLinearGradient(-52,-56,52,60);
+ g.addColorStop(0,"#ffffff");
+ g.addColorStop(.42,"#bdfbff");
+ g.addColorStop(1,"#5bc7ff");
+ ctx.fillStyle=g;
+ ctx.strokeStyle="#10587a";
+ ctx.lineWidth=5;
+ roundRectCanvas(ctx,-52,-58,104,116,18);
+ ctx.fill();ctx.stroke();
+
+ ctx.fillStyle="rgba(255,255,255,.62)";
+ roundRectCanvas(ctx,-34,-42,68,18,9);
+ ctx.fill();
+
+ ctx.fillStyle="#10587a";
+ ctx.font="1000 31px system-ui,sans-serif";
+ ctx.fillText("COOL",0,-4);
+ ctx.font="1000 22px system-ui,sans-serif";
+ ctx.fillText("PACK",0,30);
+}
+
+function drawFixedCan(ctx,data){
+ const g=ctx.createLinearGradient(-42,-60,50,62);
+ g.addColorStop(0,"#fff0f4");
+ g.addColorStop(.25,"#ff5a7d");
+ g.addColorStop(1,"#9a1734");
+ ctx.fillStyle=g;
+ ctx.strokeStyle="#5e0920";
+ ctx.lineWidth=5;
+ roundRectCanvas(ctx,-42,-58,84,116,22);
+ ctx.fill();ctx.stroke();
+
+ ctx.fillStyle="rgba(255,255,255,.34)";
+ roundRectCanvas(ctx,-26,-46,18,92,9);
+ ctx.fill();
+
+ ctx.fillStyle="#fff7c5";
+ ctx.strokeStyle="#5e0920";
+ ctx.lineWidth=4;
+ ctx.beginPath();ctx.ellipse(0,-58,36,11,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.beginPath();ctx.ellipse(0,58,36,11,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+
+ ctx.fillStyle="#fff";
+ ctx.font="1000 26px system-ui,sans-serif";
+ ctx.fillText("DRINK",0,2);
+}
+
+function drawSymbolShine(ctx){
+ const shine=ctx.createLinearGradient(-62,-56,62,-20);
+ shine.addColorStop(0,"rgba(255,255,255,0)");
+ shine.addColorStop(.5,"rgba(255,255,255,.25)");
+ shine.addColorStop(1,"rgba(255,255,255,0)");
+ ctx.fillStyle=shine;
+ roundRectCanvas(ctx,-64,-56,128,24,12);
+ ctx.fill();
+}
+
+function roundRectCanvas(ctx,x,y,w,h,r){
+ ctx.beginPath();
+ ctx.moveTo(x+r,y);
+ ctx.arcTo(x+w,y,x+w,y+h,r);
+ ctx.arcTo(x+w,y+h,x,y+h,r);
+ ctx.arcTo(x,y+h,x,y,r);
+ ctx.arcTo(x,y,x+w,y,r);
+ ctx.closePath();
 }
 
 /* Canvas Reel */
@@ -771,10 +913,10 @@ function finishSpin(){
  const record=createTicketFromPrize(resultPrize,demoMode);
  showTicket(record);
  if(resultPrize.rank.includes("超")){
-  premiumShow("CONGRATULATIONS","サウナ90分無料チケット");
+  premiumShow("CONGRATULATIONS","サウナ90分半額チケット");
   confetti(170);soundPremium();vibrate([140,80,140,80,300]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1500);
  }else if(resultPrize.rank.includes("激")){
-  premiumShow("激ととのい!!","よもぎ蒸し60分無料チケット");
+  premiumShow("激ととのい!!","よもぎ蒸し60分半額チケット");
   confetti(125);soundPremium();vibrate([120,70,220]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1300);
  }else if(resultPrize.rank.includes("500")){
   premiumShow("BIG BONUS","500円割引チケット");
