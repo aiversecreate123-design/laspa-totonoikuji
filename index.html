@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LASPA PREMIUM SLOT Ver12.1 Symbol</title>
+<title>LASPA PREMIUM SLOT Ver12.2 Synced</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
@@ -296,7 +296,7 @@ canvas{display:block;width:100%;height:auto}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12.1 Symbol</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12.2 Synced</div>
     </div>
   </section>
 </main>
@@ -312,7 +312,7 @@ canvas{display:block;width:100%;height:auto}
 
 <script>
 /* ===============================
-   LASPA SLOT PROJECT Ver12.1 Symbol
+   LASPA SLOT PROJECT Ver12.2 Synced
    Ver10.1のワクワク感 + Ver12チケット運用
 ================================= */
 const CONFIG={
@@ -492,7 +492,7 @@ function closeUseModal(){selectedTicketId=null;document.getElementById("useModal
 
 
 /* 景品連動Canvas図柄：画像は使わずコードで描画
-   Ver12.1：ダサい手描き絵を廃止し、スロット向け高級シンボルに統一
+   Ver12.2：ダサい手描き絵を廃止し、スロット向け高級シンボルに統一
 */
 function drawPrizeSymbol(ctx, symbol, boost=1){
  const key=symbol.key;
@@ -612,11 +612,17 @@ class Reel{
     if(tick!==this.lastTick && tick%2===0){this.lastTick=tick; if(tick%4===0) beep(115+this.i*24,.009,"square",.008)}
     if(now-this.spinStart>=this.spinMs){
       this.state="stop";this.stopStart=now;this.from=this.offset;
-      const mod=((this.offset% (symbols.length*CELL))+symbols.length*CELL)%(symbols.length*CELL);
-      const desired=this.finalIdx*CELL;
-      let dist=(desired-mod+symbols.length*CELL)%(symbols.length*CELL);
-      dist+=(4+this.i*2)*symbols.length*CELL;
-      this.to=this.offset+dist;
+      const cycle = symbols.length * CELL;
+      const mod = ((this.offset % cycle) + cycle) % cycle;
+
+      // 中央ラインに finalIdx の図柄が来るように補正する。
+      // 描画上、中央に来るoffsetは「finalIdx*CELL - 中央補正値」。
+      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
+      const desired = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
+
+      let dist = (desired - mod + cycle) % cycle;
+      dist += (4 + this.i * 2) * cycle;
+      this.to = this.offset + dist;
     }
   }else if(this.state==="stop"){
     let t=Math.min((now-this.stopStart)/this.stopMs,1);
@@ -626,7 +632,9 @@ class Reel{
     const tick=Math.floor(this.offset/CELL);
     if(tick!==this.lastTick && tick%2===0 && t<.9){this.lastTick=tick;beep(130+this.i*25,.008,"square",.008)}
     if(t>=1){
-      this.offset=this.finalIdx*CELL;
+      const cycle = symbols.length * CELL;
+      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
+      this.offset = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
       this.state="stopped";this.flash=1;this.glow=1;soundStop(this.i);vibrate([40,30,80]);
       return "stopped";
     }
