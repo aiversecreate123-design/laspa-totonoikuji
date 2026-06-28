@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>LASPA PREMIUM SLOT Ver10.1</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+body{
+  background:
+    radial-gradient(circle at 50% 0%,rgba(255,215,112,.22),transparent 28%),
+    radial-gradient(circle at 16% 36%,rgba(110,240,255,.14),transparent 28%),
+    radial-gradient(circle at 86% 42%,rgba(255,55,90,.12),transparent 26%),
+    linear-gradient(180deg,#090b19 0%,#03040b 60%,#010105 100%);
+}
+.bg,.steam,.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.bg{z-index:0}
+.bg:before,.bg:after{
+  content:"";position:absolute;inset:-20%;
+  background-image:radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1.7px);
+  background-size:44px 44px;opacity:.13;animation:stars 19s linear infinite
+}
+.bg:after{background-size:76px 76px;opacity:.08;animation-duration:33s}
+@keyframes stars{to{transform:translateY(130px)}}
+.steam{z-index:1}
+.steam span{
+  position:absolute;bottom:-190px;width:115px;height:270px;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(255,255,255,.18),rgba(255,255,255,0) 72%);
+  filter:blur(13px);opacity:0;animation:steam 7s linear infinite
+}
+@keyframes steam{
+  0%{transform:translateY(0) scale(.7);opacity:0}
+  18%{opacity:.42}
+  100%{transform:translateY(-116vh) scale(1.85);opacity:0}
+}
+.app{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:12px}
+.machine{
+  width:min(440px,100%);border-radius:36px;padding:13px;position:relative;
+  background:linear-gradient(145deg,#241205,#a96507 16%,#fff1aa 31%,#ffbb33 42%,#603005 62%,#110603 100%);
+  box-shadow:0 0 30px rgba(255,211,106,.4),0 22px 80px rgba(0,0,0,.82),inset 0 0 20px rgba(255,255,255,.28)
+}
+.machine:before{content:"";position:absolute;inset:5px;border-radius:31px;border:1px solid rgba(255,255,255,.24)}
+.inner{
+  position:relative;overflow:hidden;border-radius:27px;padding:14px 13px 16px;
+  background:radial-gradient(circle at 50% 0%,rgba(255,211,106,.15),transparent 34%),linear-gradient(180deg,#111936,#070814 52%,#120612 100%);
+  box-shadow:inset 0 0 38px rgba(0,0,0,.88)
+}
+.inner:after{
+  content:"";position:absolute;inset:-30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-125%) rotate(16deg);animation:shine 5.5s ease-in-out infinite
+}
+@keyframes shine{55%,100%{transform:translateX(125%) rotate(16deg)}}
+.demo-toggle{
+  position:absolute;right:12px;top:12px;z-index:20;border:1px solid rgba(116,247,255,.45);
+  border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;color:#dffcff;background:rgba(4,10,22,.75);cursor:pointer
+}
+.demo-panel{
+  display:none;position:absolute;right:12px;top:46px;z-index:40;width:190px;padding:10px;border-radius:14px;background:rgba(4,6,16,.96);
+  border:1px solid rgba(116,247,255,.35);box-shadow:0 18px 35px rgba(0,0,0,.55)
+}
+.demo-panel.show{display:block}
+.demo-panel button{width:100%;margin:4px 0;padding:9px;border-radius:10px;border:0;background:linear-gradient(90deg,#74f7ff,#ffd36a);color:#071018;font-weight:900}
+.lamps{display:flex;justify-content:space-between;margin:4px 12px 9px;position:relative;z-index:4}
+.lamp{width:15px;height:15px;border-radius:50%;background:#ffd36a;box-shadow:0 0 12px #ffd36a,0 0 25px #ff9f1a;animation:lamp .8s infinite alternate}
+.lamp:nth-child(2n){background:#74f7ff;box-shadow:0 0 14px #74f7ff;animation-delay:.15s}
+.lamp:nth-child(3n){background:#ff2d55;box-shadow:0 0 14px #ff2d55;animation-delay:.3s}
+@keyframes lamp{from{opacity:.28;transform:scale(.78)}to{opacity:1;transform:scale(1.2)}}
+.logo{text-align:center;position:relative;z-index:4}
+.logo .label{font-size:11px;letter-spacing:.26em;color:#d5fcff;text-shadow:0 0 10px rgba(116,247,255,.75)}
+.logo h1{
+  margin:4px 0 0;font-size:34px;line-height:.98;font-weight:1000;letter-spacing:.05em;
+  background:linear-gradient(180deg,#fffde1,#ffd36a 42%,#ff8c00 68%,#fff1a1);
+  -webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px rgba(255,181,31,.45))
+}
+.logo .sub{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);color:#071018;font-size:13px;font-weight:1000}
+.screen{
+  position:relative;z-index:4;margin:16px 0 12px;border-radius:23px;padding:10px 9px 12px;
+  background:radial-gradient(circle at 50% 0%,rgba(116,247,255,.1),transparent 36%),linear-gradient(180deg,#050712,#10183b 55%,#04050d);
+  border:2px solid rgba(255,211,106,.76);
+  box-shadow:inset 0 0 30px rgba(0,0,0,.92),0 0 25px rgba(255,211,106,.2);overflow:hidden
+}
+.status{height:36px;text-align:center;font-size:15px;font-weight:1000;color:#fff3b8;display:flex;align-items:center;justify-content:center;text-shadow:0 0 12px rgba(255,211,106,.6)}
+.canvas-wrap{
+  position:relative;border-radius:19px;overflow:hidden;
+  background:linear-gradient(180deg,#fff8d9,#fff,#dcf8ff);
+  border:2px solid #ffdf83;
+  box-shadow:inset 0 14px 24px rgba(255,255,255,.62),inset 0 -20px 22px rgba(0,0,0,.18),0 0 20px rgba(255,211,106,.26)
+}
+canvas{display:block;width:100%;height:auto}
+.canvas-wrap:before,.canvas-wrap:after{content:"";position:absolute;left:0;right:0;height:58px;z-index:3;pointer-events:none}
+.canvas-wrap:before{top:0;background:linear-gradient(180deg,rgba(0,0,0,.32),transparent)}
+.canvas-wrap:after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.32),transparent)}
+.center-glow{
+  position:absolute;left:8px;right:8px;top:50%;height:78px;transform:translateY(-50%);z-index:2;border-radius:16px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(255,211,106,.05),rgba(255,255,255,.13),rgba(116,247,255,.05));
+  border:1px solid rgba(255,211,106,.12);box-shadow:inset 0 0 18px rgba(255,255,255,.06),0 0 16px rgba(255,211,106,.09)
+}
+.chance{
+  display:none;position:absolute;inset:0;z-index:30;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:radial-gradient(circle,rgba(255,45,85,.34),rgba(0,0,0,.82))
+}
+.chance.show{display:flex;animation:chanceFade 1.25s ease forwards}
+.chance strong{font-size:46px;color:#fff;text-shadow:0 0 18px #ff2d55,0 0 34px #ffd36a;font-weight:1000}
+.chance small{font-size:15px;color:#fff2ad;font-weight:900}
+@keyframes chanceFade{0%{opacity:0}20%,78%{opacity:1}100%{opacity:0}}
+.controls{position:relative;z-index:4;margin-top:12px;border-radius:19px;padding:12px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.13)}
+.push{
+  width:100%;height:76px;border:0;border-radius:23px;color:#2a0800;font-size:24px;font-weight:1000;letter-spacing:.08em;
+  background:radial-gradient(circle at 50% 22%,#fff7c5,#ffd36a 38%,#ff8b00 70%,#6a2200);
+  box-shadow:0 9px 0 #5b1d00,0 0 24px rgba(255,179,0,.65),inset 0 5px 11px rgba(255,255,255,.82);
+  animation:pushPulse 1.35s ease-in-out infinite
+}
+.push:active{transform:translateY(7px);box-shadow:0 2px 0 #5b1d00,0 0 20px rgba(255,179,0,.65)}
+.push:disabled{filter:grayscale(.8);opacity:.65;animation:none}
+@keyframes pushPulse{50%{transform:scale(1.018);filter:brightness(1.15)}}
+.note{text-align:center;font-size:12px;line-height:1.62;color:#c3d8e8;margin-top:10px}
+.ticket{
+  display:none;margin-top:13px;border-radius:22px;padding:14px;background:linear-gradient(135deg,rgba(255,211,106,.24),rgba(116,247,255,.1),rgba(255,45,85,.08)),rgba(255,255,255,.055);
+  border:1px solid rgba(255,211,106,.62);box-shadow:0 0 28px rgba(255,211,106,.18);position:relative;overflow:hidden
+}
+.ticket.show{display:block;animation:ticketIn .55s cubic-bezier(.2,1.35,.2,1)}
+@keyframes ticketIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:none}}
+.ticket .rank{font-size:13px;color:#89fbff;font-weight:1000;letter-spacing:.12em}
+.ticket .prize{font-size:24px;font-weight:1000;color:#fff4b2;margin:5px 0;text-shadow:0 0 14px rgba(255,211,106,.56)}
+.ticket .meta{font-size:12px;line-height:1.62;color:#e9f7ff}
+.code{margin-top:10px;padding:10px;border-radius:13px;background:#03040b;border:1px dashed rgba(255,211,106,.78);text-align:center;font-size:20px;font-weight:1000;letter-spacing:.12em;color:#fff}
+.badge{display:inline-block;margin-top:9px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:1000;background:rgba(108,255,184,.14);color:#91ffc9;border:1px solid rgba(108,255,184,.5)}
+.badge.next{background:rgba(255,211,106,.15);color:#ffe596;border-color:rgba(255,211,106,.55)}
+.admin-link{margin-top:10px;text-align:center;font-size:12px;color:#768aa0;text-decoration:underline;cursor:pointer}
+.admin{display:none;margin-top:12px;padding:12px;border-radius:16px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}
+.admin input{width:100%;padding:12px;margin:5px 0;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:#050611;color:white;font-size:16px}
+.admin button{width:100%;padding:12px;margin-top:6px;border:0;border-radius:12px;background:linear-gradient(90deg,#ffd36a,#ff9f1a);font-weight:1000;color:#1c0900}
+.admin-result{font-size:13px;line-height:1.6;color:#e9f7ff;margin-top:8px}
+.footer{text-align:center;margin-top:10px;font-size:10px;color:#748397;position:relative;z-index:4}
+.jackpot{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle,rgba(255,235,138,.38),rgba(255,45,85,.18) 38%,rgba(0,0,0,.88));pointer-events:none}
+.jackpot.show{display:flex;animation:jackpotOut 3.2s forwards}
+.jackpot .box{animation:jackpotPop .65s cubic-bezier(.2,1.4,.2,1)}
+.jackpot h2{font-size:48px;line-height:1.02;margin:0;color:#fff3a7;font-weight:1000;text-shadow:0 0 18px #ffb300,0 0 38px #ff2d55}
+.jackpot p{font-size:16px;font-weight:1000;color:#fff;margin:10px 0 0;letter-spacing:.12em}
+@keyframes jackpotPop{from{transform:scale(.35);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes jackpotOut{0%,82%{opacity:1}100%{opacity:0}}
+.confetti{z-index:90}
+.confetti i{position:absolute;top:-30px;width:8px;height:15px;border-radius:2px;background:#ffd36a;animation:fall 3.2s linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(840deg);opacity:.15}}
+.flash{animation:flash .55s ease-in-out 2}
+@keyframes flash{50%{filter:brightness(2.3) saturate(1.7)}}
+@media(max-width:370px){
+  .logo h1{font-size:30px}
+  .push{height:68px;font-size:21px}
+}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="steam" id="steam"></div>
+<div class="confetti" id="confetti"></div>
+<div class="jackpot" id="jackpot"><div class="box"><h2 id="jackpotTitle">CONGRATULATIONS</h2><p id="jackpotSub">PREMIUM BONUS</p></div></div>
+
+<main class="app">
+  <section class="machine" id="machine">
+    <div class="inner" id="inner">
+      <div class="demo-toggle" id="demoToggle">🧪 DEMO</div>
+      <div class="demo-panel" id="demoPanel">
+        <button data-demo="超ととのい賞">超ととのい</button>
+        <button data-demo="激ととのい賞">激ととのい</button>
+        <button data-demo="ぽかぽか賞">延長30分</button>
+        <button data-demo="爆睡ととのい賞">めぐりズム</button>
+        <button data-demo="random">ランダム</button>
+        <button id="resetToday">本日の制限リセット</button>
+      </div>
+
+      <div class="lamps"><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div></div>
+
+      <div class="logo">
+        <div class="label">LASPA PREMIUM SLOT</div>
+        <h1>夏の<br>ととのいくじ</h1>
+        <div class="sub">7月限定・本日1回チャレンジ</div>
+      </div>
+
+      <div class="screen">
+        <div class="status" id="status">PUSH TO START</div>
+        <div class="canvas-wrap">
+          <canvas id="slotCanvas" width="1180" height="520"></canvas>
+          <div class="center-glow"></div>
+        </div>
+        <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
+      </div>
+
+      <div class="controls">
+        <button class="push" id="spinBtn">🔴 PUSH</button>
+        <div class="note">同じスマホでは1日1回まで。<br>当選画面をスタッフへご提示ください。</div>
+        <div class="ticket" id="ticket">
+          <div class="rank" id="rank"></div>
+          <div class="prize" id="prize"></div>
+          <div class="meta" id="meta"></div>
+          <div class="code" id="code"></div>
+          <div class="badge" id="badge"></div>
+        </div>
+        <div class="admin-link" id="adminToggle">スタッフ確認モード</div>
+        <div class="admin" id="admin">
+          <input id="pin" placeholder="スタッフPIN" inputmode="numeric">
+          <input id="checkCode" placeholder="交換コードを入力">
+          <button id="useBtn">このコードを使用済みにする</button>
+          <div class="admin-result" id="adminResult"></div>
+        </div>
+      </div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver10.1 Canvas</div>
+    </div>
+  </section>
+</main>
+
+<script>
+const ADMIN_PIN="0716";
+const canvas=document.getElementById("slotCanvas");
+const ctx=canvas.getContext("2d");
+const W=canvas.width,H=canvas.height;
+const REEL_W=340, GAP=35, START_X=70;
+const VIEW_H=420, VIEW_Y=52;
+const CELL=150;
+const CENTER_Y=VIEW_Y+VIEW_H/2;
+const statusEl=document.getElementById("status");
+const spinBtn=document.getElementById("spinBtn");
+const ticket=document.getElementById("ticket");
+const rankEl=document.getElementById("rank");
+const prizeEl=document.getElementById("prize");
+const metaEl=document.getElementById("meta");
+const codeEl=document.getElementById("code");
+const badgeEl=document.getElementById("badge");
+const chance=document.getElementById("chance");
+const inner=document.getElementById("inner");
+
+const todayKey=()=>new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+const nowText=()=>new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
+const addDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return d.toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});};
+
+const prizes=[
+ {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"next",emoji:"👑",expire:30},
+ {rank:"激ととのい賞",name:"よもぎ蒸し無料券",rate:2,type:"next",emoji:"🔥",expire:30},
+ {rank:"ぽかぽか賞",name:"無料延長30分",rate:7,type:"today",emoji:"⏰",expire:0},
+ {rank:"爆睡ととのい賞",name:"めぐりズム",rate:15,type:"today",emoji:"😴",expire:0},
+ {rank:"美肌ととのい賞",name:"フェイスパック",rate:25,type:"today",emoji:"✨",expire:0},
+ {rank:"さっぱり賞",name:"汗拭きシート",rate:25,type:"today",emoji:"💧",expire:0},
+ {rank:"ほっこり賞",name:"入浴剤",rate:25,type:"today",emoji:"♨️",expire:0}
+];
+const symbols=[
+ ["👑","超ととのい"],["🔥","激ととのい"],["⏰","延長30分"],["😴","めぐりズム"],["✨","美肌"],["💧","さっぱり"],["♨️","ほっこり"],["🌿","よもぎ"],["🧖","サウナ"]
+];
+
+function pickPrize(){const r=Math.random()*100;let a=0;for(const p of prizes){a+=p.rate;if(r<a)return p}return prizes[prizes.length-1]}
+function getPrizeByRank(rank){if(rank==="random")return pickPrize();return prizes.find(p=>p.rank===rank)||pickPrize()}
+function symbolIndex(p){const i=symbols.findIndex(s=>s[0]===p.emoji);return i<0?0:i}
+function makeCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="LASPA-";for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
+function beep(freq=520,dur=.08,type="sine",gain=.04){
+ try{const ac=new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator();const g=ac.createGain();o.type=type;o.frequency.value=freq;g.gain.value=gain;o.connect(g);g.connect(ac.destination);o.start();setTimeout(()=>{o.stop();ac.close()},dur*1000)}catch(e){}
+}
+function soundStart(){beep(440,.08,"sawtooth",.04);setTimeout(()=>beep(660,.08,"sawtooth",.04),90);setTimeout(()=>beep(880,.12,"sawtooth",.04),180)}
+function soundStop(i){beep(620+i*120,.055,"triangle",.04);setTimeout(()=>beep(980+i*120,.05,"triangle",.028),55)}
+function soundPremium(){beep(880,.12,"square",.045);setTimeout(()=>beep(1320,.14,"square",.045),150);setTimeout(()=>beep(1760,.18,"square",.045),320)}
+function soundWin(){beep(740,.08,"triangle",.04);setTimeout(()=>beep(930,.08,"triangle",.04),110);setTimeout(()=>beep(1180,.12,"triangle",.04),220)}
+
+class Reel{
+ constructor(i){
+  this.i=i;this.x=START_X+i*(REEL_W+GAP);this.offset=0;this.speed=0;this.state="idle";this.finalIdx=0;this.stopAt=0;this.flash=0;this.glow=0;this.lastTick=0;
+ }
+ start(finalIdx,delay,spinMs,stopMs){
+  this.finalIdx=finalIdx;this.state="delay";this.delay=delay;this.spinMs=spinMs;this.stopMs=stopMs;this.startTime=performance.now();this.speed=38+this.i*4;this.flash=0;this.glow=0;
+ }
+ update(now,dt){
+  if(this.state==="delay"){if(now-this.startTime>=this.delay){this.state="spin";this.spinStart=now;this.offset=0;this.lastTick=0;}return null}
+  if(this.state==="spin"){
+    this.offset+=this.speed*(dt/16.67);
+    const tick=Math.floor(this.offset/CELL);
+    if(tick!==this.lastTick && tick%2===0){this.lastTick=tick; if(tick%4===0) beep(115+this.i*24,.009,"square",.008)}
+    if(now-this.spinStart>=this.spinMs){
+      this.state="stop";this.stopStart=now;this.from=this.offset;
+      const mod=((this.offset% (symbols.length*CELL))+symbols.length*CELL)%(symbols.length*CELL);
+      const desired=this.finalIdx*CELL;
+      let dist=(desired-mod+symbols.length*CELL)%(symbols.length*CELL);
+      dist+=(4+this.i*2)*symbols.length*CELL;
+      this.to=this.offset+dist;
+    }
+  }else if(this.state==="stop"){
+    let t=Math.min((now-this.stopStart)/this.stopMs,1);
+    let e=1-Math.pow(1-t,4);
+    let overshoot=Math.sin(t*Math.PI)*CELL*.38;
+    this.offset=this.from+(this.to-this.from)*e+overshoot;
+    const tick=Math.floor(this.offset/CELL);
+    if(tick!==this.lastTick && tick%2===0 && t<.9){this.lastTick=tick;beep(130+this.i*25,.008,"square",.008)}
+    if(t>=1){
+      this.offset=this.finalIdx*CELL;
+      this.state="stopped";this.flash=1;this.glow=1;soundStop(this.i);vibrate([40,30,80]);
+      return "stopped";
+    }
+  }
+  if(this.flash>0)this.flash=Math.max(0,this.flash-dt/520);
+  if(this.glow>0)this.glow=Math.max(0,this.glow-dt/2100);
+  return null;
+ }
+ draw(){
+  ctx.save();
+  ctx.beginPath();
+  roundRect(this.x,VIEW_Y,REEL_W,VIEW_H,28);ctx.clip();
+
+  const bg=ctx.createLinearGradient(0,VIEW_Y,0,VIEW_Y+VIEW_H);
+  bg.addColorStop(0,"#fff7d8");bg.addColorStop(.48,"#ffffff");bg.addColorStop(1,"#d9f6ff");
+  ctx.fillStyle=bg;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+
+  const yBase=-(this.offset%(symbols.length*CELL));
+  for(let loop=-1;loop<5;loop++){
+    for(let j=0;j<symbols.length;j++){
+      const y=VIEW_Y+yBase+(loop*symbols.length+j)*CELL;
+      if(y<-CELL||y>VIEW_Y+VIEW_H+CELL)continue;
+      const cy=y+CELL/2;
+      const dist=Math.abs(cy-CENTER_Y);
+      const centerBoost = Math.max(0, 1 - dist / 210);
+      const scale = .82 + centerBoost * .48;
+      const alpha = .38 + centerBoost * .62;
+
+      ctx.save();
+      ctx.globalAlpha=alpha;
+      ctx.translate(this.x+REEL_W/2,cy);
+      ctx.scale(scale,scale);
+      ctx.textAlign="center";ctx.textBaseline="middle";
+
+      // Icon shadow / glossy depth
+      ctx.shadowColor="rgba(0,0,0,.32)";
+      ctx.shadowBlur=10;
+      ctx.shadowOffsetY=6;
+
+      ctx.font="900 112px system-ui, Apple Color Emoji, Segoe UI Emoji";
+      ctx.fillText(symbols[j][0],0,-18);
+
+      ctx.shadowBlur=0;
+      ctx.shadowOffsetY=0;
+      ctx.font="900 19px system-ui,sans-serif";
+      ctx.fillStyle="#202020";
+      ctx.fillText(symbols[j][1],0,62);
+
+      // Center highlight sparkle
+      if(centerBoost > .72){
+        ctx.globalAlpha=(centerBoost-.72)*1.8;
+        ctx.fillStyle="rgba(255,255,255,.72)";
+        ctx.beginPath();
+        ctx.arc(62,-60,8,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  // side glass
+  const side=ctx.createLinearGradient(this.x,0,this.x+REEL_W,0);
+  side.addColorStop(0,"rgba(0,0,0,.18)");side.addColorStop(.18,"rgba(255,255,255,.06)");side.addColorStop(.82,"rgba(255,255,255,.06)");side.addColorStop(1,"rgba(0,0,0,.18)");
+  ctx.fillStyle=side;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+
+  if(this.flash>0){
+    ctx.globalAlpha=this.flash;
+    ctx.fillStyle="rgba(255,246,180,.82)";
+    ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+
+    ctx.globalAlpha=this.flash*.9;
+    const burst=ctx.createRadialGradient(this.x+REEL_W/2,CENTER_Y,12,this.x+REEL_W/2,CENTER_Y,190);
+    burst.addColorStop(0,"rgba(255,255,255,.95)");
+    burst.addColorStop(.38,"rgba(255,211,106,.42)");
+    burst.addColorStop(1,"rgba(255,211,106,0)");
+    ctx.fillStyle=burst;
+    ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+  }
+  if(this.glow>0){
+    ctx.globalAlpha=this.glow;
+    ctx.strokeStyle="rgba(255,211,106,.98)";
+    ctx.lineWidth=10;
+    roundRect(this.x+5,VIEW_Y+5,REEL_W-10,VIEW_H-10,24);ctx.stroke();
+
+    ctx.globalAlpha=this.glow*.55;
+    ctx.strokeStyle="rgba(116,247,255,.75)";
+    ctx.lineWidth=4;
+    roundRect(this.x+14,VIEW_Y+14,REEL_W-28,VIEW_H-28,19);ctx.stroke();
+  }
+  ctx.restore();
+ }
+}
+function roundRect(x,y,w,h,r){
+ ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+}
+const reels=[new Reel(0),new Reel(1),new Reel(2)];
+let last=performance.now(), spinning=false, stopCount=0, resultPrize=null, demoMode=false;
+
+function drawFrame(now){
+ const dt=Math.min(now-last,34);last=now;
+ ctx.clearRect(0,0,W,H);
+
+ // separators
+ ctx.fillStyle="rgba(0,0,0,.42)";
+ ctx.fillRect(START_X+REEL_W+GAP/2-5,VIEW_Y,10,VIEW_H);
+ ctx.fillRect(START_X+(REEL_W+GAP)*2-GAP/2-5,VIEW_Y,10,VIEW_H);
+
+ for(const r of reels){
+  const ev=r.update(now,dt);
+  if(ev==="stopped"){
+    stopCount++;
+    if(stopCount===1)statusEl.textContent="1st STOP… 図柄点灯！";
+    if(stopCount===2){
+      statusEl.textContent="2nd STOP… ラストに注目";
+      if(resultPrize && (resultPrize.rank.includes("超")||resultPrize.rank.includes("激"))){
+        chance.classList.add("show");inner.classList.add("flash");beep(1200,.18,"square",.045);vibrate([80,60,130]);
+        setTimeout(()=>{chance.classList.remove("show");inner.classList.remove("flash")},980);
+      }
+    }
+    if(stopCount===3)finishSpin();
+  }
+  r.draw();
+ }
+
+ // top/bottom glass on canvas
+ const gradTop=ctx.createLinearGradient(0,VIEW_Y,0,VIEW_Y+80);
+ gradTop.addColorStop(0,"rgba(0,0,0,.34)");gradTop.addColorStop(1,"rgba(0,0,0,0)");
+ ctx.fillStyle=gradTop;ctx.fillRect(START_X,VIEW_Y,REEL_W*3+GAP*2,80);
+ const gradBottom=ctx.createLinearGradient(0,VIEW_Y+VIEW_H-80,0,VIEW_Y+VIEW_H);
+ gradBottom.addColorStop(0,"rgba(0,0,0,0)");gradBottom.addColorStop(1,"rgba(0,0,0,.32)");
+ ctx.fillStyle=gradBottom;ctx.fillRect(START_X,VIEW_Y+VIEW_H-80,REEL_W*3+GAP*2,80);
+
+ requestAnimationFrame(drawFrame);
+}
+requestAnimationFrame(drawFrame);
+
+async function startSpin(forcedRank=null,isDemo=false){
+ if(alreadyDrawn()&&!isDemo)return;
+ ticket.classList.remove("show");
+ spinBtn.disabled=true;spinning=true;stopCount=0;demoMode=isDemo;
+ resultPrize=forcedRank?getPrizeByRank(forcedRank):pickPrize();
+ const idx=symbolIndex(resultPrize);
+ statusEl.textContent="全リール始動！ ととのいを掴め！";
+ soundStart();vibrate(80);
+ await wait(280);
+ reels[0].start(idx,0,1150,1350);
+ reels[1].start(idx,0,1700,1500);
+ reels[2].start(idx,0,2250,1650);
+}
+function finishSpin(){
+ statusEl.textContent=resultPrize.rank+" 確定！";
+ reels.forEach(r=>{r.flash=1;r.glow=1.15});
+ const record=saveRecord(resultPrize,makeCode(),nowText(),demoMode);
+ showTicket(record);
+ if(resultPrize.rank.includes("超")){
+  premiumShow("CONGRATULATIONS","超ととのい賞 / サウナ90分無料チケット");
+  confetti(170);soundPremium();vibrate([140,80,140,80,300]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1500);
+ }else if(resultPrize.rank.includes("激")){
+  premiumShow("激ととのい!!","よもぎ蒸し無料券");
+  confetti(125);soundPremium();vibrate([120,70,220]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1300);
+ }else{
+  confetti(75);soundWin();vibrate(120);
+ }
+ spinning=false;
+ if(demoMode){spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="DEMO結果：もう一度確認できます"}
+ else{spinBtn.textContent="本日は抽選済み"}
+}
+function saveRecord(p,code,drawnAt,isDemo=false){
+ const record={rank:p.rank,prize:p.name,type:p.type,code,drawnAt,expire:p.type==="next"?addDays(p.expire):todayKey(),used:false,demo:isDemo};
+ if(!isDemo){
+  localStorage.setItem("laspaDrawDate",todayKey());
+  localStorage.setItem("laspaLastTicket",JSON.stringify(record));
+  const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");all[code]=record;localStorage.setItem("laspaTickets",JSON.stringify(all));
+ }
+ return record;
+}
+function showTicket(record){
+ ticket.classList.add("show");rankEl.textContent=record.rank;prizeEl.textContent=record.prize;codeEl.textContent=record.code;
+ const line=record.type==="next"?`次回来店時利用：有効期限 ${record.expire}まで`:`当日交換：本日中にスタッフへ提示`;
+ metaEl.innerHTML=`抽選日時：${record.drawnAt}<br>${line}<br>※スクショ保存OK。交換時にこの画面をご提示ください。`;
+ badgeEl.className="badge "+(record.type==="next"?"next":"");badgeEl.textContent=record.type==="next"?"次回特典":"当日交換景品";
+}
+function alreadyDrawn(){return localStorage.getItem("laspaDrawDate")===todayKey()}
+function restore(){
+ const rec=localStorage.getItem("laspaLastTicket");
+ if(alreadyDrawn()&&rec){spinBtn.disabled=true;spinBtn.textContent="本日は抽選済み";statusEl.textContent="本日の抽選結果";showTicket(JSON.parse(rec))}
+}
+restore();
+
+function confetti(amount=90){
+ const box=document.getElementById("confetti");const colors=["#ffd36a","#74f7ff","#ff2d55","#6cffb8","#ffffff","#b56cff"];
+ for(let i=0;i<amount;i++){const e=document.createElement("i");e.style.left=Math.random()*100+"vw";e.style.background=colors[Math.floor(Math.random()*colors.length)];e.style.animationDelay=Math.random()*0.9+"s";e.style.transform=`rotate(${Math.random()*360}deg)`;box.appendChild(e);setTimeout(()=>e.remove(),4300)}
+}
+function premiumShow(title,sub){
+ const j=document.getElementById("jackpot");document.getElementById("jackpotTitle").textContent=title;document.getElementById("jackpotSub").textContent=sub;
+ j.classList.remove("show");void j.offsetWidth;j.classList.add("show");setTimeout(()=>j.classList.remove("show"),3300)
+}
+
+spinBtn.addEventListener("click",()=>startSpin());
+document.getElementById("demoToggle").addEventListener("click",()=>document.getElementById("demoPanel").classList.toggle("show"));
+document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>{document.getElementById("demoPanel").classList.remove("show");startSpin(btn.dataset.demo,true)}));
+document.getElementById("resetToday").addEventListener("click",()=>{localStorage.removeItem("laspaDrawDate");localStorage.removeItem("laspaLastTicket");spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";ticket.classList.remove("show");statusEl.textContent="制限リセット完了。PUSH TO START";document.getElementById("demoPanel").classList.remove("show")});
+document.getElementById("adminToggle").addEventListener("click",()=>{const a=document.getElementById("admin");a.style.display=a.style.display==="block"?"none":"block"});
+document.getElementById("useBtn").addEventListener("click",()=>{
+ const pin=document.getElementById("pin").value.trim(),code=document.getElementById("checkCode").value.trim().toUpperCase(),out=document.getElementById("adminResult");
+ if(pin!==ADMIN_PIN){out.textContent="PINが違います。";return}
+ const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");
+ if(!all[code]){out.textContent="この端末には該当コードの記録がありません。無料券は店頭メモ・スプレッドシート記録と照合してください。";return}
+ if(all[code].used){out.innerHTML="使用済みです。<br>使用日時："+all[code].usedAt;return}
+ all[code].used=true;all[code].usedAt=nowText();localStorage.setItem("laspaTickets",JSON.stringify(all));
+ out.innerHTML=`使用済みにしました。<br>${all[code].rank} / ${all[code].prize}<br>抽選日時：${all[code].drawnAt}`;
+});
+const steamBox=document.getElementById("steam");
+for(let i=0;i<10;i++){const s=document.createElement("span");s.style.left=(Math.random()*95)+"vw";s.style.animationDelay=(Math.random()*6)+"s";s.style.animationDuration=(5.5+Math.random()*4.5)+"s";steamBox.appendChild(s)}
+</script>
+</body>
+</html>
