@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LASPA PREMIUM SLOT Ver12 Evolution Icon</title>
+<title>LASPA PREMIUM SLOT Ver12.1 Symbol</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
@@ -296,7 +296,7 @@ canvas{display:block;width:100%;height:auto}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12 Evolution Icon</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12.1 Symbol</div>
     </div>
   </section>
 </main>
@@ -312,7 +312,7 @@ canvas{display:block;width:100%;height:auto}
 
 <script>
 /* ===============================
-   LASPA SLOT PROJECT Ver12 Evolution
+   LASPA SLOT PROJECT Ver12.1 Symbol
    Ver10.1のワクワク感 + Ver12チケット運用
 ================================= */
 const CONFIG={
@@ -353,38 +353,38 @@ function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
 
 /* 景品：社長確認用 Ver12確定名 */
 const prizes=[
- {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"sauna",emoji:"👑"},
- {rank:"激ととのい賞",name:"よもぎ蒸し60分無料チケット",rate:2,type:"yomogi",emoji:"🌿"},
- {rank:"500円賞",name:"500円割引チケット",rate:5,type:"discount",emoji:"💴"},
- {rank:"300円賞",name:"300円割引チケット",rate:12,type:"discount",emoji:"💰"},
- {rank:"100円賞",name:"100円割引チケット",rate:25,type:"discount",emoji:"🪙"},
- {rank:"美肌ととのい賞",name:"冷感フェイスパック",rate:25,type:"pack",emoji:"✨"},
- {rank:"さっぱり賞",name:"ミニ缶ジュース",rate:30,type:"juice",emoji:"🥤"}
+ {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"sauna",symbol:"sauna",theme:"#ffd36a"},
+ {rank:"激ととのい賞",name:"よもぎ蒸し60分無料チケット",rate:2,type:"yomogi",symbol:"yomogi",theme:"#6cffb8"},
+ {rank:"500円賞",name:"500円割引チケット",rate:5,type:"discount",symbol:"discount500",theme:"#fff1aa"},
+ {rank:"300円賞",name:"300円割引チケット",rate:12,type:"discount",symbol:"discount300",theme:"#ffd36a"},
+ {rank:"100円賞",name:"100円割引チケット",rate:25,type:"discount",symbol:"discount100",theme:"#ffcc66"},
+ {rank:"美肌ととのい賞",name:"冷感フェイスパック",rate:25,type:"pack",symbol:"pack",theme:"#74f7ff"},
+ {rank:"さっぱり賞",name:"ミニ缶ジュース",rate:30,type:"juice",symbol:"juice",theme:"#ff5a7d"}
 ];
 
 const symbols=[
- ["👑",""],
- ["🌿",""],
- ["🎟️500",""],
- ["🎟️300",""],
- ["🎟️100",""],
- ["🧊",""],
- ["🥤",""]
+ {key:"sauna", label:"サウナ90分無料チケット", color:"#ffd36a"},
+ {key:"yomogi", label:"よもぎ蒸し60分無料チケット", color:"#6cffb8"},
+ {key:"discount500", label:"500円割引チケット", color:"#fff1aa"},
+ {key:"discount300", label:"300円割引チケット", color:"#ffd36a"},
+ {key:"discount100", label:"100円割引チケット", color:"#ffcc66"},
+ {key:"pack", label:"冷感フェイスパック", color:"#74f7ff"},
+ {key:"juice", label:"ミニ缶ジュース", color:"#ff5a7d"}
 ];
 
 function pickPrize(){const r=Math.random()*100;let a=0;for(const p of prizes){a+=p.rate;if(r<a)return p}return prizes[prizes.length-1]}
 function getPrizeByRank(rank){if(rank==="random")return pickPrize();return prizes.find(p=>p.rank===rank)||pickPrize()}
 function symbolIndex(p){
  const map={
-  "👑":0,
-  "🌿":1,
-  "💴":2,
-  "💰":3,
-  "🪙":4,
-  "✨":5,
-  "🥤":6
+  sauna:0,
+  yomogi:1,
+  discount500:2,
+  discount300:3,
+  discount100:4,
+  pack:5,
+  juice:6
  };
- return map[p.emoji] ?? 0;
+ return map[p.symbol] ?? 0;
 }
 
 /* 音 */
@@ -489,6 +489,113 @@ function openUseModal(id){
 }
 function closeUseModal(){selectedTicketId=null;document.getElementById("useModal").classList.remove("show")}
 
+
+
+/* 景品連動Canvas図柄：画像は使わずコードで描画
+   Ver12.1：ダサい手描き絵を廃止し、スロット向け高級シンボルに統一
+*/
+function drawPrizeSymbol(ctx, symbol, boost=1){
+ const key=symbol.key;
+ const data={
+  sauna:{main:"👑",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"emoji"},
+  yomogi:{main:"🌿",sub:"",color:"#6cffb8",dark:"#0b5837",font:"emoji"},
+  discount500:{main:"¥500",sub:"",color:"#fff1aa",dark:"#5b1d00",font:"money"},
+  discount300:{main:"¥300",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"money"},
+  discount100:{main:"¥100",sub:"",color:"#ffcc66",dark:"#5b1d00",font:"money"},
+  pack:{main:"ICE",sub:"PACK",color:"#74f7ff",dark:"#10587a",font:"text"},
+  juice:{main:"🥤",sub:"",color:"#ff5a7d",dark:"#5e0920",font:"emoji"}
+ }[key];
+
+ ctx.save();
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+
+ // outer premium medallion
+ const outer=ctx.createRadialGradient(0,-18,14,0,0,92);
+ outer.addColorStop(0,"rgba(255,255,255,.96)");
+ outer.addColorStop(.28,data.color);
+ outer.addColorStop(.72,"rgba(255,211,106,.58)");
+ outer.addColorStop(1,data.dark);
+ ctx.fillStyle=outer;
+ ctx.strokeStyle="rgba(255,255,255,.82)";
+ ctx.lineWidth=5;
+ ctx.beginPath();
+ ctx.roundRect(-88,-72,176,144,28);
+ ctx.fill();
+ ctx.stroke();
+
+ // inner dark glass
+ const inner=ctx.createLinearGradient(0,-62,0,62);
+ inner.addColorStop(0,"rgba(8,12,25,.96)");
+ inner.addColorStop(.5,"rgba(23,28,45,.86)");
+ inner.addColorStop(1,"rgba(3,4,10,.98)");
+ ctx.fillStyle=inner;
+ ctx.strokeStyle="rgba(255,255,255,.20)";
+ ctx.lineWidth=2;
+ ctx.beginPath();
+ ctx.roundRect(-76,-60,152,120,22);
+ ctx.fill();
+ ctx.stroke();
+
+ // glow ring
+ ctx.shadowColor=data.color;
+ ctx.shadowBlur=22;
+ ctx.strokeStyle=data.color;
+ ctx.globalAlpha=.42 + boost*.28;
+ ctx.lineWidth=4;
+ ctx.beginPath();
+ ctx.roundRect(-70,-54,140,108,18);
+ ctx.stroke();
+ ctx.globalAlpha=1;
+
+ // main symbol
+ ctx.shadowColor=data.color;
+ ctx.shadowBlur=24;
+ if(data.font==="money"){
+   const g=ctx.createLinearGradient(-60,-30,60,35);
+   g.addColorStop(0,"#ffffff");
+   g.addColorStop(.48,data.color);
+   g.addColorStop(1,"#ff9f1a");
+   ctx.fillStyle=g;
+   ctx.strokeStyle="rgba(0,0,0,.55)";
+   ctx.lineWidth=6;
+   ctx.font="1000 54px system-ui,sans-serif";
+   ctx.strokeText(data.main,0,2);
+   ctx.fillText(data.main,0,2);
+
+   // ticket cuts
+   ctx.shadowBlur=0;
+   ctx.fillStyle="rgba(255,255,255,.14)";
+   ctx.beginPath();ctx.arc(-78,0,12,0,Math.PI*2);ctx.arc(78,0,12,0,Math.PI*2);ctx.fill();
+ }else if(data.font==="text"){
+   ctx.fillStyle="#eaffff";
+   ctx.strokeStyle="rgba(0,0,0,.55)";
+   ctx.lineWidth=5;
+   ctx.font="1000 48px system-ui,sans-serif";
+   ctx.strokeText(data.main,0,-10);
+   ctx.fillText(data.main,0,-10);
+   ctx.font="1000 25px system-ui,sans-serif";
+   ctx.strokeText(data.sub,0,34);
+   ctx.fillText(data.sub,0,34);
+ }else{
+   ctx.font="900 88px system-ui, Apple Color Emoji, Segoe UI Emoji";
+   ctx.fillText(data.main,0,0);
+ }
+
+ // glossy highlight
+ ctx.shadowBlur=0;
+ const shine=ctx.createLinearGradient(-62,-56,62,-20);
+ shine.addColorStop(0,"rgba(255,255,255,.0)");
+ shine.addColorStop(.5,"rgba(255,255,255,.28)");
+ shine.addColorStop(1,"rgba(255,255,255,.0)");
+ ctx.fillStyle=shine;
+ ctx.beginPath();
+ ctx.roundRect(-64,-56,128,26,13);
+ ctx.fill();
+
+ ctx.restore();
+}
+
 /* Canvas Reel */
 class Reel{
  constructor(i){
@@ -556,9 +663,7 @@ class Reel{
       ctx.shadowColor="rgba(0,0,0,.32)";
       ctx.shadowBlur=10;
       ctx.shadowOffsetY=6;
-      const icon = symbols[j][0];
-      ctx.font = icon.includes("🎟️") ? "900 64px system-ui, Apple Color Emoji, Segoe UI Emoji" : "900 120px system-ui, Apple Color Emoji, Segoe UI Emoji";
-      ctx.fillText(icon,0,0);
+      drawPrizeSymbol(ctx, symbols[j], centerBoost);
       ctx.shadowBlur=0;
       ctx.shadowOffsetY=0;
       if(centerBoost > .72){
@@ -653,6 +758,7 @@ async function startSpin(forcedRank=null,isDemo=false){
 }
 function finishSpin(){
  statusEl.textContent=resultPrize.rank+" 確定！";
+ document.documentElement.style.setProperty("--themeGlow", resultPrize.theme || "#ffd36a");
  reels.forEach(r=>{r.flash=1;r.glow=1.15});
  const record=createTicketFromPrize(resultPrize,demoMode);
  showTicket(record);
