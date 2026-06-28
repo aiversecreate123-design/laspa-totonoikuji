@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>LASPA 夏のととのいくじ PREMIUM SLOT Ver7.2</title>
+<title>LASPA 夏のととのいくじ PREMIUM SLOT Ver8</title>
 <style>
 :root{
   --gold:#ffd36a;
@@ -151,7 +151,7 @@ button,input{font-family:inherit}
 }
 .reels{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;position:relative;perspective:700px}
 .reel{
-  height:140px;border-radius:18px;position:relative;overflow:hidden;
+  height:156px;border-radius:18px;position:relative;overflow:hidden;
   background:linear-gradient(180deg,#fff9d9,#fff,#dbf8ff);
   border:2px solid #ffdf83;
   box-shadow:inset 0 14px 24px rgba(255,255,255,.78),inset 0 -20px 22px rgba(0,0,0,.20),0 0 18px rgba(255,211,106,.22);
@@ -161,14 +161,24 @@ button,input{font-family:inherit}
 .reel:after{bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.32),transparent)}
 .strip{position:absolute;left:0;right:0;top:0;will-change:transform}
 .symbol{
-  height:140px;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  height:78px;display:flex;align-items:center;justify-content:center;flex-direction:column;
   color:#111;text-align:center;font-weight:1000;font-size:43px
 }
 .symbol small{font-size:11px;margin-top:5px;line-height:1.12;color:#252525}
-.payline{
-  position:absolute;left:8px;right:8px;top:50%;height:3px;z-index:7;
-  background:linear-gradient(90deg,transparent,#ff2d55,#fff,#ff2d55,transparent);
-  box-shadow:0 0 17px #ff2d55
+.reels:after{
+  content:"";position:absolute;left:7px;right:7px;top:50%;height:74px;transform:translateY(-50%);
+  z-index:5;pointer-events:none;border-radius:15px;
+  background:
+    linear-gradient(90deg,rgba(255,211,106,.06),rgba(255,255,255,.13),rgba(116,247,255,.06)),
+    radial-gradient(ellipse at center,rgba(255,255,255,.13),transparent 68%);
+  border:1px solid rgba(255,211,106,.12);
+  box-shadow:inset 0 0 18px rgba(255,255,255,.06),0 0 16px rgba(255,211,106,.09);
+}
+.reel .symbol{
+  border-bottom:1px solid rgba(0,0,0,.04);
+}
+.reel.spinning .symbol{
+  opacity:.92;
 }
 .chance{
   display:none;position:absolute;inset:0;z-index:25;align-items:center;justify-content:center;flex-direction:column;text-align:center;
@@ -284,8 +294,8 @@ button,input{font-family:inherit}
 
 @media(max-width:370px){
   .logo h1{font-size:30px}
-  .reel{height:126px}
-  .symbol{height:126px;font-size:38px}
+  .reel{height:144px}
+  .symbol{height:72px;font-size:38px}
   .push{height:68px;font-size:21px}
 }
 </style>
@@ -335,7 +345,6 @@ button,input{font-family:inherit}
           <div class="reel"><div class="strip" id="strip0"></div></div>
           <div class="reel"><div class="strip" id="strip1"></div></div>
           <div class="reel"><div class="strip" id="strip2"></div></div>
-          <div class="payline"></div>
         </div>
         <div class="chance" id="chance">
           <strong>激アツ!!</strong>
@@ -367,14 +376,14 @@ button,input{font-family:inherit}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver7.2</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver8</div>
     </div>
   </section>
 </main>
 
 <script>
 const ADMIN_PIN = "0716";
-const CELL = window.innerWidth <= 370 ? 126 : 140;
+const CELL = window.innerWidth <= 370 ? 72 : 78;
 
 const todayKey = () => new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
 const nowText = () => new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
@@ -418,7 +427,7 @@ function buildStrips(){
   strips.forEach((strip)=>{
     strip.innerHTML="";
     let loop=[];
-    for(let r=0;r<22;r++) loop.push(...symbols);
+    for(let r=0;r<30;r++) loop.push(...symbols);
     loop.forEach(s=>{
       const div=document.createElement("div");
       div.className="symbol";
@@ -510,43 +519,52 @@ function spinReel(strip, reelNo, finalIdx, duration){
   return new Promise(resolve=>{
     const reel = strip.parentElement;
     const total = symbols.length;
-    const loops = 11 + reelNo * 4;
-    const totalSteps = loops * total + finalIdx;
-    const startTime = performance.now();
-    let lastStep = -1;
+    const loops = 16 + reelNo * 5;
+
+    // Center the final symbol in the taller reel window
+    const centerOffset = Math.round(CELL / 2);
+    const baseTarget = (loops * total + finalIdx) * CELL - centerOffset;
+    const overshoot = Math.round(CELL * (0.42 + reelNo * 0.06));
 
     reel.classList.add("spinning");
     reel.classList.remove("slam","winGlow");
     strip.style.transition = "none";
     strip.style.transform = "translateY(0px)";
 
-    function easeOutCubic(x){ return 1 - Math.pow(1 - x, 3); }
+    let lastTick = 0;
+    const startTime = performance.now();
+
+    function easeOutQuint(x){ return 1 - Math.pow(1 - x, 5); }
 
     function frame(now){
       const t = Math.min((now - startTime) / duration, 1);
-      const eased = easeOutCubic(t);
-      const step = Math.floor(eased * totalSteps);
-      if(step !== lastStep){
-        lastStep = step;
-        const visibleIndex = step % total;
-        strip.style.transform = `translateY(-${visibleIndex * CELL}px)`;
-        if(step % 3 === 0 && t < .82) beep(155 + reelNo * 30, .018, "square", .012);
+      const eased = easeOutQuint(t);
+      const y = (baseTarget + overshoot) * eased;
+      strip.style.transform = `translateY(-${y}px)`;
+
+      const currentTick = Math.floor(y / CELL);
+      if(currentTick !== lastTick && currentTick % 2 === 0 && t < .9){
+        lastTick = currentTick;
+        beep(135 + reelNo * 28, .012, "square", .010);
       }
+
       if(t < 1){
         requestAnimationFrame(frame);
       }else{
         reel.classList.remove("spinning");
-        strip.style.transition = "transform 230ms cubic-bezier(.05,1.55,.25,1)";
-        strip.style.transform = `translateY(-${finalIdx * CELL}px)`;
+
+        // Slight overshoot, then bounce back to the exact final symbol
+        strip.style.transition = "transform 310ms cubic-bezier(.05,1.72,.22,1)";
+        strip.style.transform = `translateY(-${baseTarget}px)`;
 
         reel.classList.add("slam","winGlow");
         machine.classList.add("shake");
         setTimeout(()=>machine.classList.remove("shake"),430);
         setTimeout(()=>reel.classList.remove("slam"),360);
 
-        vibrate([40,30,70]);
+        vibrate([40,30,80]);
         soundStop(reelNo);
-        setTimeout(resolve,260);
+        setTimeout(resolve,330);
       }
     }
     requestAnimationFrame(frame);
@@ -606,8 +624,8 @@ async function runSpin(forcedRank=null,isDemo=false){
   await showCountdown();
 
   statusEl.textContent="高速回転中… ととのいを掴め！";
-  const first = spinReel(strips[0],0,idx,2300);
-  const second = spinReel(strips[1],1,idx,3300);
+  const first = spinReel(strips[0],0,idx,2600);
+  const second = spinReel(strips[1],1,idx,3550);
   await first;
   statusEl.textContent="1st STOP…";
   await second;
@@ -623,7 +641,7 @@ async function runSpin(forcedRank=null,isDemo=false){
     machineInner.classList.remove("flashRed");
   }
 
-  await spinReel(strips[2],2,idx,4100);
+  await spinReel(strips[2],2,idx,4350);
 
   statusEl.textContent=p.rank+" 確定！";
   const record = saveRecord(p,makeCode(),nowText(),isDemo);
