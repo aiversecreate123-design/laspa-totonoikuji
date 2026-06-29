@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LASPA PREMIUM SLOT Ver11</title>
+<title>LASPA PREMIUM SLOT Ver12.2 Synced</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
 body{
   background:
     radial-gradient(circle at 50% 0%,rgba(255,215,112,.22),transparent 28%),
@@ -51,12 +51,21 @@ body{
   transform:translateX(-125%) rotate(16deg);animation:shine 5.5s ease-in-out infinite
 }
 @keyframes shine{55%,100%{transform:translateX(125%) rotate(16deg)}}
+.nav{
+  position:relative;z-index:10;display:flex;gap:8px;margin-bottom:10px
+}
+.nav button{
+  flex:1;border:1px solid rgba(116,247,255,.28);border-radius:999px;padding:9px 8px;
+  color:#dffcff;background:rgba(4,10,22,.72);font-size:12px;font-weight:1000;cursor:pointer;
+  box-shadow:inset 0 0 12px rgba(116,247,255,.05)
+}
+.nav button.active{background:linear-gradient(90deg,#74f7ff,#ffd36a);color:#071018;border-color:transparent}
 .demo-toggle{
-  position:absolute;right:12px;top:12px;z-index:20;border:1px solid rgba(116,247,255,.45);
+  position:absolute;right:12px;top:60px;z-index:20;border:1px solid rgba(116,247,255,.45);
   border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;color:#dffcff;background:rgba(4,10,22,.75);cursor:pointer
 }
 .demo-panel{
-  display:none;position:absolute;right:12px;top:46px;z-index:40;width:190px;padding:10px;border-radius:14px;background:rgba(4,6,16,.96);
+  display:none;position:absolute;right:12px;top:94px;z-index:40;width:215px;padding:10px;border-radius:14px;background:rgba(4,6,16,.96);
   border:1px solid rgba(116,247,255,.35);box-shadow:0 18px 35px rgba(0,0,0,.55)
 }
 .demo-panel.show{display:block}
@@ -74,13 +83,16 @@ body{
   -webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 15px rgba(255,181,31,.45))
 }
 .logo .sub{display:inline-block;margin-top:8px;padding:6px 14px;border-radius:999px;background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);color:#071018;font-size:13px;font-weight:1000}
+.view{display:none;position:relative;z-index:4}
+.view.active{display:block;animation:viewIn .35s ease both}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .screen{
   position:relative;z-index:4;margin:16px 0 12px;border-radius:23px;padding:10px 9px 12px;
   background:radial-gradient(circle at 50% 0%,rgba(116,247,255,.1),transparent 36%),linear-gradient(180deg,#050712,#10183b 55%,#04050d);
   border:2px solid rgba(255,211,106,.76);
   box-shadow:inset 0 0 30px rgba(0,0,0,.92),0 0 25px rgba(255,211,106,.2);overflow:hidden
 }
-.status{height:36px;text-align:center;font-size:15px;font-weight:1000;color:#fff3b8;display:flex;align-items:center;justify-content:center;text-shadow:0 0 12px rgba(255,211,106,.6)}
+.status{min-height:36px;text-align:center;font-size:15px;font-weight:1000;color:#fff3b8;display:flex;align-items:center;justify-content:center;text-shadow:0 0 12px rgba(255,211,106,.6);line-height:1.35}
 .canvas-wrap{
   position:relative;border-radius:19px;overflow:hidden;
   background:linear-gradient(180deg,#fff8d9,#fff,#dcf8ff);
@@ -126,77 +138,6 @@ canvas{display:block;width:100%;height:auto}
 .code{margin-top:10px;padding:10px;border-radius:13px;background:#03040b;border:1px dashed rgba(255,211,106,.78);text-align:center;font-size:20px;font-weight:1000;letter-spacing:.12em;color:#fff}
 .badge{display:inline-block;margin-top:9px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:1000;background:rgba(108,255,184,.14);color:#91ffc9;border:1px solid rgba(108,255,184,.5)}
 .badge.next{background:rgba(255,211,106,.15);color:#ffe596;border-color:rgba(255,211,106,.55)}
-
-/* Ver11 Wallet Ticket */
-.ticket{
-  display:none;
-  margin-top:15px;
-  border-radius:26px;
-  padding:16px 16px 15px;
-  background:
-    radial-gradient(circle at 15% 0%,rgba(255,255,255,.20),transparent 28%),
-    linear-gradient(135deg,rgba(255,211,106,.28),rgba(8,10,20,.92) 35%,rgba(0,0,0,.92) 100%);
-  border:1px solid rgba(255,211,106,.72);
-  box-shadow:0 0 34px rgba(255,211,106,.22),inset 0 0 25px rgba(255,255,255,.05);
-  position:relative;
-  overflow:hidden;
-}
-.ticket.show{display:block;animation:walletDrop .72s cubic-bezier(.16,1.35,.22,1)}
-.ticket:before{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(120deg,transparent,rgba(255,255,255,.12),transparent 42%),
-    repeating-linear-gradient(135deg,rgba(255,255,255,.035) 0 1px,transparent 1px 8px);
-  opacity:.65;pointer-events:none;
-}
-.ticket:after{
-  content:"";position:absolute;width:160px;height:160px;border-radius:50%;right:-62px;top:-52px;
-  background:radial-gradient(circle,rgba(255,211,106,.22),transparent 66%);
-}
-@keyframes walletDrop{
-  0%{opacity:0;transform:translateY(-28px) scale(.88) rotateX(15deg)}
-  65%{opacity:1;transform:translateY(5px) scale(1.025)}
-  100%{opacity:1;transform:none}
-}
-.ticket-top{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.ticket-brand{font-size:10px;letter-spacing:.18em;font-weight:1000;color:#dffcff}
-.ticket-chip{
-  padding:5px 9px;border-radius:999px;font-size:10px;font-weight:1000;color:#130900;
-  background:linear-gradient(90deg,#fff3a7,#ffd36a,#ff9f1a);box-shadow:0 0 16px rgba(255,211,106,.28)
-}
-.ticket-icon{position:relative;z-index:1;text-align:center;font-size:48px;line-height:1;margin:4px 0 2px;filter:drop-shadow(0 8px 12px rgba(0,0,0,.35))}
-.ticket .rank{position:relative;z-index:1;font-size:14px;color:#89fbff;font-weight:1000;letter-spacing:.12em;text-align:center}
-.ticket .prize{position:relative;z-index:1;font-size:25px;line-height:1.25;font-weight:1000;color:#fff4b2;margin:7px 0 9px;text-align:center;text-shadow:0 0 14px rgba(255,211,106,.56)}
-.ticket-divider{position:relative;z-index:1;height:1px;margin:10px 0;background:linear-gradient(90deg,transparent,rgba(255,211,106,.65),transparent)}
-.ticket .meta{
-  position:relative;z-index:1;font-size:12px;line-height:1.75;color:#e9f7ff;text-align:left;
-  background:rgba(0,0,0,.20);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px
-}
-.code{
-  position:relative;z-index:1;margin-top:11px;padding:11px;border-radius:14px;background:#03040b;
-  border:1px dashed rgba(255,211,106,.84);text-align:center;font-size:20px;font-weight:1000;letter-spacing:.12em;color:#fff
-}
-.barcode{
-  position:relative;z-index:1;height:46px;margin:10px auto 2px;border-radius:8px;
-  background:repeating-linear-gradient(90deg,#f8f8f8 0 3px,transparent 3px 6px,#f8f8f8 6px 8px,transparent 8px 13px,#f8f8f8 13px 18px,transparent 18px 22px);
-  opacity:.82;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)
-}
-.badge{
-  position:relative;z-index:1;display:inline-block;margin-top:10px;padding:7px 11px;border-radius:999px;
-  font-size:12px;font-weight:1000;background:rgba(108,255,184,.14);color:#91ffc9;border:1px solid rgba(108,255,184,.5)
-}
-.badge.next{background:rgba(255,211,106,.15);color:#ffe596;border-color:rgba(255,211,106,.55)}
-.ticket.ticket-super{background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.22),transparent 28%),linear-gradient(135deg,rgba(255,211,106,.34),rgba(8,8,14,.94) 38%,rgba(0,0,0,.94))}
-.ticket.ticket-fire{background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.18),transparent 28%),linear-gradient(135deg,rgba(255,45,85,.35),rgba(14,6,10,.94) 40%,rgba(0,0,0,.94));border-color:rgba(255,90,120,.7)}
-.ticket.ticket-green{background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.16),transparent 28%),linear-gradient(135deg,rgba(108,255,184,.24),rgba(5,18,15,.94) 40%,rgba(0,0,0,.94));border-color:rgba(108,255,184,.55)}
-.ticket.ticket-blue{background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.16),transparent 28%),linear-gradient(135deg,rgba(116,247,255,.26),rgba(5,12,24,.94) 40%,rgba(0,0,0,.94));border-color:rgba(116,247,255,.55)}
-.ticket.ticket-silver{background:radial-gradient(circle at 15% 0%,rgba(255,255,255,.22),transparent 28%),linear-gradient(135deg,rgba(230,236,245,.26),rgba(15,16,22,.94) 40%,rgba(0,0,0,.94));border-color:rgba(230,236,245,.55)}
-
-.admin-link{margin-top:10px;text-align:center;font-size:12px;color:#768aa0;text-decoration:underline;cursor:pointer}
-.admin{display:none;margin-top:12px;padding:12px;border-radius:16px;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.12)}
-.admin input{width:100%;padding:12px;margin:5px 0;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:#050611;color:white;font-size:16px}
-.admin button{width:100%;padding:12px;margin-top:6px;border:0;border-radius:12px;background:linear-gradient(90deg,#ffd36a,#ff9f1a);font-weight:1000;color:#1c0900}
-.admin-result{font-size:13px;line-height:1.6;color:#e9f7ff;margin-top:8px}
 .footer{text-align:center;margin-top:10px;font-size:10px;color:#748397;position:relative;z-index:4}
 .jackpot{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle,rgba(255,235,138,.38),rgba(255,45,85,.18) 38%,rgba(0,0,0,.88));pointer-events:none}
 .jackpot.show{display:flex;animation:jackpotOut 3.2s forwards}
@@ -210,9 +151,56 @@ canvas{display:block;width:100%;height:auto}
 @keyframes fall{to{transform:translateY(112vh) rotate(840deg);opacity:.15}}
 .flash{animation:flash .55s ease-in-out 2}
 @keyframes flash{50%{filter:brightness(2.3) saturate(1.7)}}
+
+/* Ticket / Home panels */
+.panel{
+  margin-top:14px;border-radius:22px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
+  border:1px solid rgba(255,255,255,.13);box-shadow:0 15px 40px rgba(0,0,0,.35);position:relative;z-index:4
+}
+.panel h2{margin:0 0 8px;font-size:22px;color:#fff4b2;text-shadow:0 0 12px rgba(255,211,106,.45)}
+.panel p{margin:0;font-size:13px;line-height:1.65;color:#d7e6f4}
+.home-status{
+  margin:12px 0 0;padding:12px;border-radius:15px;background:rgba(0,0,0,.3);border:1px solid rgba(255,211,106,.35);
+  color:#fff3b8;font-weight:900;text-align:center;font-size:13px;line-height:1.55
+}
+.main-actions{display:grid;gap:10px;margin-top:12px}
+.main-actions button{
+  border:0;border-radius:16px;padding:14px 12px;font-weight:1000;font-size:16px;cursor:pointer;color:#08101a;
+  background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);box-shadow:0 0 20px rgba(255,211,106,.25)
+}
+.main-actions button.secondary{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14);box-shadow:none}
+.ticket-card{
+  margin-top:12px;border-radius:22px;padding:14px;background:linear-gradient(135deg,rgba(255,211,106,.22),rgba(116,247,255,.10),rgba(255,45,85,.08)),rgba(255,255,255,.055);
+  border:1px solid rgba(255,211,106,.55);box-shadow:0 0 24px rgba(255,211,106,.16);position:relative;overflow:hidden
+}
+.ticket-card.used{filter:saturate(.7);opacity:.86}
+.ticket-card.expired{filter:grayscale(.65);opacity:.72}
+.ticket-card .used-stamp{
+  position:absolute;right:12px;top:12px;transform:rotate(10deg);border:3px solid rgba(255,255,255,.76);border-radius:10px;
+  color:rgba(255,255,255,.9);font-size:28px;font-weight:1000;letter-spacing:.08em;padding:4px 8px
+}
+.ticket-card .tlabel{font-size:11px;color:#89fbff;font-weight:1000;letter-spacing:.16em}
+.ticket-card .tname{font-size:22px;font-weight:1000;color:#fff4b2;margin:6px 0;text-shadow:0 0 14px rgba(255,211,106,.45);line-height:1.22}
+.ticket-card .tmeta{font-size:12px;line-height:1.7;color:#e9f7ff}
+.ticket-card .use{
+  width:100%;margin-top:10px;border:0;border-radius:14px;padding:13px;background:linear-gradient(90deg,#ffd36a,#ff9f1a);font-weight:1000;color:#1c0900;font-size:15px
+}
+.ticket-card .use:disabled{opacity:.55;filter:grayscale(1)}
+.empty{text-align:center;margin-top:12px;padding:25px 14px;border-radius:20px;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.25);color:#c3d8e8;font-size:13px;line-height:1.7}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:flex-end;justify-content:center;padding:14px}
+.modal.show{display:flex}
+.modal-card{width:min(430px,100%);border-radius:24px;padding:16px;background:linear-gradient(180deg,#111936,#060712);border:2px solid rgba(255,211,106,.65);box-shadow:0 20px 70px rgba(0,0,0,.7)}
+.modal-card h2{margin:0 0 8px;color:#fff4b2}
+.modal-card p{font-size:13px;line-height:1.65;color:#d7e6f4}
+.modal-card button{width:100%;margin-top:9px;border:0;border-radius:15px;padding:13px;font-weight:1000}
+.modal-card .ok{background:linear-gradient(90deg,#ffd36a,#ff9f1a);color:#1c0900}
+.modal-card .cancel{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.14)}
+.line-gate{display:none}
+.warn{color:#ffefb0;font-size:11px;line-height:1.55;text-align:center;margin-top:10px}
 @media(max-width:370px){
   .logo h1{font-size:30px}
   .push{height:68px;font-size:21px}
+  .demo-toggle{top:58px}
 }
 </style>
 </head>
@@ -225,14 +213,23 @@ canvas{display:block;width:100%;height:auto}
 <main class="app">
   <section class="machine" id="machine">
     <div class="inner" id="inner">
+      <div class="nav">
+        <button id="navHome" class="active">HOME</button>
+        <button id="navSlot">SLOT</button>
+        <button id="navTickets">TICKET</button>
+      </div>
+
       <div class="demo-toggle" id="demoToggle">🧪 DEMO</div>
       <div class="demo-panel" id="demoPanel">
-        <button data-demo="超ととのい賞">超ととのい</button>
-        <button data-demo="激ととのい賞">激ととのい</button>
-        <button data-demo="ぽかぽか賞">延長30分</button>
-        <button data-demo="爆睡ととのい賞">めぐりズム</button>
+        <button data-demo="超ととのい賞">サウナ90分無料</button>
+        <button data-demo="激ととのい賞">よもぎ蒸し60分無料</button>
+        <button data-demo="500円賞">500円割引</button>
+        <button data-demo="300円賞">300円割引</button>
+        <button data-demo="100円賞">100円割引</button>
+        <button data-demo="美肌ととのい賞">冷感フェイスパック</button>
+        <button data-demo="さっぱり賞">ミニ缶ジュース</button>
         <button data-demo="random">ランダム</button>
-        <button id="resetToday">本日の制限リセット</button>
+        <button id="resetToday">デモ用：全データリセット</button>
       </div>
 
       <div class="lamps"><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div><div class="lamp"></div></div>
@@ -240,50 +237,94 @@ canvas{display:block;width:100%;height:auto}
       <div class="logo">
         <div class="label">LASPA PREMIUM SLOT</div>
         <h1>夏の<br>ととのいくじ</h1>
-        <div class="sub">7月限定・本日1回チャレンジ</div>
+        <div class="sub">LINE限定・本日1回チャレンジ</div>
       </div>
 
-      <div class="screen">
-        <div class="status" id="status">PUSH TO START</div>
-        <div class="canvas-wrap">
-          <canvas id="slotCanvas" width="1180" height="520"></canvas>
-          <div class="center-glow"></div>
-        </div>
-        <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
-      </div>
-
-      <div class="controls">
-        <button class="push" id="spinBtn">🔴 PUSH</button>
-        <div class="note">同じスマホでは1日1回まで。<br>当選画面をスタッフへご提示ください。</div>
-        <div class="ticket" id="ticket">
-          <div class="ticket-top">
-            <div class="ticket-brand">LASPA DIGITAL TICKET</div>
-            <div class="ticket-chip">PREMIUM</div>
+      <div class="line-gate" id="lineGate">
+        <div class="panel">
+          <h2>LINE友達登録者限定</h2>
+          <p>正式運用時はLINE登録確認と連携予定です。社長確認用のため、下のボタンから進めます。</p>
+          <div class="main-actions">
+            <button id="lineBtn">LINE登録済みとして進む</button>
           </div>
-          <div class="ticket-icon" id="ticketIcon">👑</div>
-          <div class="rank" id="rank"></div>
-          <div class="prize" id="prize"></div>
-          <div class="ticket-divider"></div>
-          <div class="meta" id="meta"></div>
-          <div class="code" id="code"></div>
-          <div class="barcode" id="barcode"></div>
-          <div class="badge" id="badge"></div>
-        </div>
-        <div class="admin-link" id="adminToggle">スタッフ確認モード</div>
-        <div class="admin" id="admin">
-          <input id="pin" placeholder="スタッフPIN" inputmode="numeric">
-          <input id="checkCode" placeholder="交換コードを入力">
-          <button id="useBtn">このコードを使用済みにする</button>
-          <div class="admin-result" id="adminResult"></div>
+          <div class="warn">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
         </div>
       </div>
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver11</div>
+
+      <div class="view active" id="homeView">
+        <div class="panel">
+          <h2>Today’s Chance</h2>
+          <p>本日の抽選とマイチケットを確認できます。</p>
+          <div class="home-status" id="homeStatus">確認中...</div>
+          <div class="main-actions">
+            <button id="homeToSlot">今日の抽選へ</button>
+            <button class="secondary" id="homeToTickets">マイチケットを見る</button>
+          </div>
+          <div class="warn">未使用チケットがある場合は、使用後に次回抽選できます。</div>
+        </div>
+      </div>
+
+      <div class="view" id="slotView">
+        <div class="screen">
+          <div class="status" id="status">PUSH TO START</div>
+          <div class="canvas-wrap">
+            <canvas id="slotCanvas" width="1180" height="520"></canvas>
+            <div class="center-glow"></div>
+          </div>
+          <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
+        </div>
+
+        <div class="controls">
+          <button class="push" id="spinBtn">🔴 PUSH</button>
+          <div class="note">同じスマホでは1日1回まで。<br>当選チケットはマイチケットへ保存されます。</div>
+          <div class="ticket" id="ticket">
+            <div class="rank" id="rank"></div>
+            <div class="prize" id="prize"></div>
+            <div class="meta" id="meta"></div>
+            <div class="code" id="code"></div>
+            <div class="badge next" id="badge">マイチケット保存済み</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="view" id="ticketsView">
+        <div class="panel">
+          <h2>My Tickets</h2>
+          <p>スタッフ確認後、お客様自身で「使用する」を押してください。</p>
+          <div id="ticketsList"></div>
+          <div class="warn">スクリーンショットではご利用いただけません。必ず店頭QRから開いた画面をご提示ください。</div>
+        </div>
+      </div>
+
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver12.2 Synced</div>
     </div>
   </section>
 </main>
 
+<div class="modal" id="useModal">
+  <div class="modal-card">
+    <h2>このチケットを使用しますか？</h2>
+    <p id="modalText">使用後はUSED表示となり、元に戻せません。スタッフ確認後に押してください。</p>
+    <button class="ok" id="confirmUse">使用する</button>
+    <button class="cancel" id="cancelUse">キャンセル</button>
+  </div>
+</div>
+
 <script>
-const ADMIN_PIN="0716";
+/* ===============================
+   LASPA SLOT PROJECT Ver12.2 Synced
+   Ver10.1のワクワク感 + Ver12チケット運用
+================================= */
+const CONFIG={
+  pin:"0716",
+  storage:{
+    line:"laspaV12_lineRegistered",
+    draw:"laspaV12_drawDate",
+    last:"laspaV12_lastTicket",
+    tickets:"laspaV12_tickets"
+  }
+};
+
 const canvas=document.getElementById("slotCanvas");
 const ctx=canvas.getContext("2d");
 const W=canvas.width,H=canvas.height;
@@ -299,33 +340,54 @@ const prizeEl=document.getElementById("prize");
 const metaEl=document.getElementById("meta");
 const codeEl=document.getElementById("code");
 const badgeEl=document.getElementById("badge");
-const ticketIcon=document.getElementById("ticketIcon");
 const chance=document.getElementById("chance");
 const inner=document.getElementById("inner");
 
 const todayKey=()=>new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
 const nowText=()=>new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
-const addDays=(n)=>{const d=new Date();d.setDate(d.getDate()+n);return d.toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});};
+const makeDate=(iso)=>new Date(iso).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
+function addMonths(date,months){const d=new Date(date);const day=d.getDate();d.setMonth(d.getMonth()+months);if(d.getDate()!==day)d.setDate(0);return d}
+function makeCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="LASPA-";for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
 
+/* 景品：社長確認用 Ver12確定名 */
 const prizes=[
- {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"next",emoji:"👑",expire:30},
- {rank:"激ととのい賞",name:"よもぎ蒸し無料券",rate:2,type:"next",emoji:"🔥",expire:30},
- {rank:"ぽかぽか賞",name:"無料延長30分",rate:7,type:"today",emoji:"⏰",expire:0},
- {rank:"爆睡ととのい賞",name:"めぐりズム",rate:15,type:"today",emoji:"😴",expire:0},
- {rank:"美肌ととのい賞",name:"フェイスパック",rate:25,type:"today",emoji:"✨",expire:0},
- {rank:"さっぱり賞",name:"汗拭きシート",rate:25,type:"today",emoji:"💧",expire:0},
- {rank:"ほっこり賞",name:"入浴剤",rate:25,type:"today",emoji:"♨️",expire:0}
+ {rank:"超ととのい賞",name:"サウナ90分無料チケット",rate:1,type:"sauna",symbol:"sauna",theme:"#ffd36a"},
+ {rank:"激ととのい賞",name:"よもぎ蒸し60分無料チケット",rate:2,type:"yomogi",symbol:"yomogi",theme:"#6cffb8"},
+ {rank:"500円賞",name:"500円割引チケット",rate:5,type:"discount",symbol:"discount500",theme:"#fff1aa"},
+ {rank:"300円賞",name:"300円割引チケット",rate:12,type:"discount",symbol:"discount300",theme:"#ffd36a"},
+ {rank:"100円賞",name:"100円割引チケット",rate:25,type:"discount",symbol:"discount100",theme:"#ffcc66"},
+ {rank:"美肌ととのい賞",name:"冷感フェイスパック",rate:25,type:"pack",symbol:"pack",theme:"#74f7ff"},
+ {rank:"さっぱり賞",name:"ミニ缶ジュース",rate:30,type:"juice",symbol:"juice",theme:"#ff5a7d"}
 ];
+
 const symbols=[
- ["👑","超ととのい"],["🔥","激ととのい"],["⏰","延長30分"],["😴","めぐりズム"],["✨","美肌"],["💧","さっぱり"],["♨️","ほっこり"],["🌿","よもぎ"],["🧖","サウナ"]
+ {key:"sauna", label:"サウナ90分無料チケット", color:"#ffd36a"},
+ {key:"yomogi", label:"よもぎ蒸し60分無料チケット", color:"#6cffb8"},
+ {key:"discount500", label:"500円割引チケット", color:"#fff1aa"},
+ {key:"discount300", label:"300円割引チケット", color:"#ffd36a"},
+ {key:"discount100", label:"100円割引チケット", color:"#ffcc66"},
+ {key:"pack", label:"冷感フェイスパック", color:"#74f7ff"},
+ {key:"juice", label:"ミニ缶ジュース", color:"#ff5a7d"}
 ];
 
 function pickPrize(){const r=Math.random()*100;let a=0;for(const p of prizes){a+=p.rate;if(r<a)return p}return prizes[prizes.length-1]}
 function getPrizeByRank(rank){if(rank==="random")return pickPrize();return prizes.find(p=>p.rank===rank)||pickPrize()}
-function symbolIndex(p){const i=symbols.findIndex(s=>s[0]===p.emoji);return i<0?0:i}
-function makeCode(){const chars="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";let out="LASPA-";for(let i=0;i<6;i++)out+=chars[Math.floor(Math.random()*chars.length)];return out}
-function wait(ms){return new Promise(r=>setTimeout(r,ms))}
-function vibrate(p){if(navigator.vibrate)navigator.vibrate(p)}
+function symbolIndex(p){
+ const map={
+  sauna:0,
+  yomogi:1,
+  discount500:2,
+  discount300:3,
+  discount100:4,
+  pack:5,
+  juice:6
+ };
+ return map[p.symbol] ?? 0;
+}
+
+/* 音 */
 function beep(freq=520,dur=.08,type="sine",gain=.04){
  try{const ac=new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator();const g=ac.createGain();o.type=type;o.frequency.value=freq;g.gain.value=gain;o.connect(g);g.connect(ac.destination);o.start();setTimeout(()=>{o.stop();ac.close()},dur*1000)}catch(e){}
 }
@@ -334,6 +396,207 @@ function soundStop(i){beep(620+i*120,.055,"triangle",.04);setTimeout(()=>beep(98
 function soundPremium(){beep(880,.12,"square",.045);setTimeout(()=>beep(1320,.14,"square",.045),150);setTimeout(()=>beep(1760,.18,"square",.045),320)}
 function soundWin(){beep(740,.08,"triangle",.04);setTimeout(()=>beep(930,.08,"triangle",.04),110);setTimeout(()=>beep(1180,.12,"triangle",.04),220)}
 
+/* チケット保存 */
+function getTickets(){try{return JSON.parse(localStorage.getItem(CONFIG.storage.tickets)||"[]")}catch(e){return[]}}
+function saveTickets(arr){localStorage.setItem(CONFIG.storage.tickets,JSON.stringify(arr))}
+function isExpired(t){return t.status==="unused" && new Date(t.expiresAt).getTime()<Date.now()}
+function normalizedTickets(){
+  const arr=getTickets().map(t=>isExpired(t)?{...t,status:"expired"}:t);
+  saveTickets(arr);return arr
+}
+function hasUnusedTicket(){return normalizedTickets().some(t=>t.status==="unused")}
+function alreadyDrawn(){return localStorage.getItem(CONFIG.storage.draw)===todayKey()}
+function canSpin(){return !alreadyDrawn()&&!hasUnusedTicket()}
+function createTicketFromPrize(p,isDemo=false){
+ const issued=new Date();
+ const expires=addMonths(issued,2);
+ const rec={
+  id:"ticket_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
+  rank:p.rank,prize:p.name,type:p.type,code:makeCode(),
+  issuedAt:issued.toISOString(),expiresAt:expires.toISOString(),
+  drawnAt:nowText(),usedAt:null,status:"unused",demo:isDemo
+ };
+ if(!isDemo){
+   const all=getTickets();all.unshift(rec);saveTickets(all);
+   localStorage.setItem(CONFIG.storage.draw,todayKey());
+   localStorage.setItem(CONFIG.storage.last,JSON.stringify(rec));
+ }
+ return rec
+}
+let selectedTicketId=null;
+function useTicket(id){
+ const arr=normalizedTickets().map(t=>t.id===id&&t.status==="unused"?{...t,status:"used",usedAt:new Date().toISOString()}:t);
+ saveTickets(arr)
+}
+
+/* 画面 */
+function setView(name){
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+ document.getElementById(name+"View").classList.add("active");
+ document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
+ const nav=document.getElementById("nav"+name.charAt(0).toUpperCase()+name.slice(1));
+ if(nav)nav.classList.add("active");
+ if(name==="home")renderHome();
+ if(name==="tickets")renderTickets();
+ if(name==="slot")updateSpinState();
+}
+function renderHome(){
+ const hs=document.getElementById("homeStatus");
+ const btn=document.getElementById("homeToSlot");
+ if(hasUnusedTicket()){hs.textContent="未使用チケットがあります。使用後に次回抽選できます。";btn.disabled=true}
+ else if(alreadyDrawn()){hs.textContent="本日の抽選は利用済みです。次回は明日以降にご参加ください。";btn.disabled=true}
+ else{hs.textContent="本日の抽選に参加できます。PUSHで運試し！";btn.disabled=false}
+}
+function updateSpinState(){
+ if(hasUnusedTicket()){spinBtn.disabled=true;spinBtn.textContent="チケット使用後に抽選可能";statusEl.textContent="未使用チケットがあります"}
+ else if(alreadyDrawn()){spinBtn.disabled=true;spinBtn.textContent="本日は抽選済み";statusEl.textContent="本日の抽選は利用済み"}
+ else{spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="PUSH TO START"}
+}
+function showTicket(record){
+ ticket.classList.add("show");rankEl.textContent=record.rank;prizeEl.textContent=record.prize;codeEl.textContent=record.code;
+ metaEl.innerHTML=`抽選日時：${record.drawnAt}<br>有効期限：${makeDate(record.expiresAt)}まで<br>※マイチケット画面をスタッフへご提示ください。`;
+ badgeEl.className="badge next";badgeEl.textContent="マイチケット保存済み";
+}
+function renderTickets(){
+ const list=document.getElementById("ticketsList");
+ const arr=normalizedTickets();
+ if(!arr.length){list.innerHTML='<div class="empty">現在利用できるチケットはありません。<br>本日の抽選で当選したチケットがここに保存されます。</div>';return}
+ list.innerHTML=arr.map(t=>{
+  const st=t.status==="used"?"使用済み":t.status==="expired"?"期限切れ":"未使用";
+  const stamp=t.status==="used"?'<div class="used-stamp">USED</div>':(t.status==="expired"?'<div class="used-stamp">期限切れ</div>':"");
+  const cls=t.status==="used"?"used":(t.status==="expired"?"expired":"");
+  const btn=t.status==="unused"?`<button class="use" data-use="${t.id}">使用する</button>`:`<button class="use" disabled>${st}</button>`;
+  return `<div class="ticket-card ${cls}">
+   ${stamp}
+   <div class="tlabel">LASPA DIGITAL TICKET</div>
+   <div class="tname">${t.prize}</div>
+   <div class="tmeta">
+    状態：${st}<br>
+    発行日：${makeDate(t.issuedAt)}<br>
+    有効期限：${makeDate(t.expiresAt)}まで<br>
+    交換コード：${t.code}
+   </div>
+   ${btn}
+  </div>`
+ }).join("");
+ list.querySelectorAll("[data-use]").forEach(b=>b.addEventListener("click",()=>openUseModal(b.dataset.use)))
+}
+function openUseModal(id){
+ selectedTicketId=id;
+ const t=normalizedTickets().find(x=>x.id===id);
+ document.getElementById("modalText").innerHTML=`${t.prize}<br><br>使用後はUSED表示となり、元に戻せません。スタッフ確認後に押してください。`;
+ document.getElementById("useModal").classList.add("show")
+}
+function closeUseModal(){selectedTicketId=null;document.getElementById("useModal").classList.remove("show")}
+
+
+
+/* 景品連動Canvas図柄：画像は使わずコードで描画
+   Ver12.2：ダサい手描き絵を廃止し、スロット向け高級シンボルに統一
+*/
+function drawPrizeSymbol(ctx, symbol, boost=1){
+ const key=symbol.key;
+ const data={
+  sauna:{main:"👑",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"emoji"},
+  yomogi:{main:"🌿",sub:"",color:"#6cffb8",dark:"#0b5837",font:"emoji"},
+  discount500:{main:"¥500",sub:"",color:"#fff1aa",dark:"#5b1d00",font:"money"},
+  discount300:{main:"¥300",sub:"",color:"#ffd36a",dark:"#5b1d00",font:"money"},
+  discount100:{main:"¥100",sub:"",color:"#ffcc66",dark:"#5b1d00",font:"money"},
+  pack:{main:"ICE",sub:"PACK",color:"#74f7ff",dark:"#10587a",font:"text"},
+  juice:{main:"🥤",sub:"",color:"#ff5a7d",dark:"#5e0920",font:"emoji"}
+ }[key];
+
+ ctx.save();
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+
+ // outer premium medallion
+ const outer=ctx.createRadialGradient(0,-18,14,0,0,92);
+ outer.addColorStop(0,"rgba(255,255,255,.96)");
+ outer.addColorStop(.28,data.color);
+ outer.addColorStop(.72,"rgba(255,211,106,.58)");
+ outer.addColorStop(1,data.dark);
+ ctx.fillStyle=outer;
+ ctx.strokeStyle="rgba(255,255,255,.82)";
+ ctx.lineWidth=5;
+ ctx.beginPath();
+ ctx.roundRect(-88,-72,176,144,28);
+ ctx.fill();
+ ctx.stroke();
+
+ // inner dark glass
+ const inner=ctx.createLinearGradient(0,-62,0,62);
+ inner.addColorStop(0,"rgba(8,12,25,.96)");
+ inner.addColorStop(.5,"rgba(23,28,45,.86)");
+ inner.addColorStop(1,"rgba(3,4,10,.98)");
+ ctx.fillStyle=inner;
+ ctx.strokeStyle="rgba(255,255,255,.20)";
+ ctx.lineWidth=2;
+ ctx.beginPath();
+ ctx.roundRect(-76,-60,152,120,22);
+ ctx.fill();
+ ctx.stroke();
+
+ // glow ring
+ ctx.shadowColor=data.color;
+ ctx.shadowBlur=22;
+ ctx.strokeStyle=data.color;
+ ctx.globalAlpha=.42 + boost*.28;
+ ctx.lineWidth=4;
+ ctx.beginPath();
+ ctx.roundRect(-70,-54,140,108,18);
+ ctx.stroke();
+ ctx.globalAlpha=1;
+
+ // main symbol
+ ctx.shadowColor=data.color;
+ ctx.shadowBlur=24;
+ if(data.font==="money"){
+   const g=ctx.createLinearGradient(-60,-30,60,35);
+   g.addColorStop(0,"#ffffff");
+   g.addColorStop(.48,data.color);
+   g.addColorStop(1,"#ff9f1a");
+   ctx.fillStyle=g;
+   ctx.strokeStyle="rgba(0,0,0,.55)";
+   ctx.lineWidth=6;
+   ctx.font="1000 54px system-ui,sans-serif";
+   ctx.strokeText(data.main,0,2);
+   ctx.fillText(data.main,0,2);
+
+   // ticket cuts
+   ctx.shadowBlur=0;
+   ctx.fillStyle="rgba(255,255,255,.14)";
+   ctx.beginPath();ctx.arc(-78,0,12,0,Math.PI*2);ctx.arc(78,0,12,0,Math.PI*2);ctx.fill();
+ }else if(data.font==="text"){
+   ctx.fillStyle="#eaffff";
+   ctx.strokeStyle="rgba(0,0,0,.55)";
+   ctx.lineWidth=5;
+   ctx.font="1000 48px system-ui,sans-serif";
+   ctx.strokeText(data.main,0,-10);
+   ctx.fillText(data.main,0,-10);
+   ctx.font="1000 25px system-ui,sans-serif";
+   ctx.strokeText(data.sub,0,34);
+   ctx.fillText(data.sub,0,34);
+ }else{
+   ctx.font="900 88px system-ui, Apple Color Emoji, Segoe UI Emoji";
+   ctx.fillText(data.main,0,0);
+ }
+
+ // glossy highlight
+ ctx.shadowBlur=0;
+ const shine=ctx.createLinearGradient(-62,-56,62,-20);
+ shine.addColorStop(0,"rgba(255,255,255,.0)");
+ shine.addColorStop(.5,"rgba(255,255,255,.28)");
+ shine.addColorStop(1,"rgba(255,255,255,.0)");
+ ctx.fillStyle=shine;
+ ctx.beginPath();
+ ctx.roundRect(-64,-56,128,26,13);
+ ctx.fill();
+
+ ctx.restore();
+}
+
+/* Canvas Reel */
 class Reel{
  constructor(i){
   this.i=i;this.x=START_X+i*(REEL_W+GAP);this.offset=0;this.speed=0;this.state="idle";this.finalIdx=0;this.stopAt=0;this.flash=0;this.glow=0;this.lastTick=0;
@@ -349,11 +612,17 @@ class Reel{
     if(tick!==this.lastTick && tick%2===0){this.lastTick=tick; if(tick%4===0) beep(115+this.i*24,.009,"square",.008)}
     if(now-this.spinStart>=this.spinMs){
       this.state="stop";this.stopStart=now;this.from=this.offset;
-      const mod=((this.offset% (symbols.length*CELL))+symbols.length*CELL)%(symbols.length*CELL);
-      const desired=this.finalIdx*CELL;
-      let dist=(desired-mod+symbols.length*CELL)%(symbols.length*CELL);
-      dist+=(4+this.i*2)*symbols.length*CELL;
-      this.to=this.offset+dist;
+      const cycle = symbols.length * CELL;
+      const mod = ((this.offset % cycle) + cycle) % cycle;
+
+      // 中央ラインに finalIdx の図柄が来るように補正する。
+      // 描画上、中央に来るoffsetは「finalIdx*CELL - 中央補正値」。
+      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
+      const desired = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
+
+      let dist = (desired - mod + cycle) % cycle;
+      dist += (4 + this.i * 2) * cycle;
+      this.to = this.offset + dist;
     }
   }else if(this.state==="stop"){
     let t=Math.min((now-this.stopStart)/this.stopMs,1);
@@ -363,7 +632,9 @@ class Reel{
     const tick=Math.floor(this.offset/CELL);
     if(tick!==this.lastTick && tick%2===0 && t<.9){this.lastTick=tick;beep(130+this.i*25,.008,"square",.008)}
     if(t>=1){
-      this.offset=this.finalIdx*CELL;
+      const cycle = symbols.length * CELL;
+      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
+      this.offset = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
       this.state="stopped";this.flash=1;this.glow=1;soundStop(this.i);vibrate([40,30,80]);
       return "stopped";
     }
@@ -389,7 +660,7 @@ class Reel{
       const cy=y+CELL/2;
       const dist=Math.abs(cy-CENTER_Y);
       const centerBoost = Math.max(0, 1 - dist / 210);
-      const scale = .78 + centerBoost * .38;
+      const scale = .82 + centerBoost * .48;
       const alpha = .38 + centerBoost * .62;
 
       ctx.save();
@@ -397,31 +668,21 @@ class Reel{
       ctx.translate(this.x+REEL_W/2,cy);
       ctx.scale(scale,scale);
       ctx.textAlign="center";ctx.textBaseline="middle";
-
-      // Icon shadow / glossy depth
       ctx.shadowColor="rgba(0,0,0,.32)";
       ctx.shadowBlur=10;
       ctx.shadowOffsetY=6;
-
-      ctx.font="900 104px system-ui, Apple Color Emoji, Segoe UI Emoji";
-      ctx.fillText(symbols[j][0],0,0);
-
+      drawPrizeSymbol(ctx, symbols[j], centerBoost);
       ctx.shadowBlur=0;
       ctx.shadowOffsetY=0;
-
-      // Center highlight sparkle
       if(centerBoost > .72){
         ctx.globalAlpha=(centerBoost-.72)*1.8;
         ctx.fillStyle="rgba(255,255,255,.72)";
-        ctx.beginPath();
-        ctx.arc(62,-60,8,0,Math.PI*2);
-        ctx.fill();
+        ctx.beginPath();ctx.arc(62,-60,8,0,Math.PI*2);ctx.fill();
       }
       ctx.restore();
     }
   }
 
-  // side glass
   const side=ctx.createLinearGradient(this.x,0,this.x+REEL_W,0);
   side.addColorStop(0,"rgba(0,0,0,.18)");side.addColorStop(.18,"rgba(255,255,255,.06)");side.addColorStop(.82,"rgba(255,255,255,.06)");side.addColorStop(1,"rgba(0,0,0,.18)");
   ctx.fillStyle=side;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
@@ -430,24 +691,19 @@ class Reel{
     ctx.globalAlpha=this.flash;
     ctx.fillStyle="rgba(255,246,180,.82)";
     ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
-
     ctx.globalAlpha=this.flash*.9;
     const burst=ctx.createRadialGradient(this.x+REEL_W/2,CENTER_Y,12,this.x+REEL_W/2,CENTER_Y,190);
     burst.addColorStop(0,"rgba(255,255,255,.95)");
     burst.addColorStop(.38,"rgba(255,211,106,.42)");
     burst.addColorStop(1,"rgba(255,211,106,0)");
-    ctx.fillStyle=burst;
-    ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
+    ctx.fillStyle=burst;ctx.fillRect(this.x,VIEW_Y,REEL_W,VIEW_H);
   }
   if(this.glow>0){
     ctx.globalAlpha=this.glow;
-    ctx.strokeStyle="rgba(255,211,106,.98)";
-    ctx.lineWidth=10;
+    ctx.strokeStyle="rgba(255,211,106,.98)";ctx.lineWidth=10;
     roundRect(this.x+5,VIEW_Y+5,REEL_W-10,VIEW_H-10,24);ctx.stroke();
-
     ctx.globalAlpha=this.glow*.55;
-    ctx.strokeStyle="rgba(116,247,255,.75)";
-    ctx.lineWidth=4;
+    ctx.strokeStyle="rgba(116,247,255,.75)";ctx.lineWidth=4;
     roundRect(this.x+14,VIEW_Y+14,REEL_W-28,VIEW_H-28,19);ctx.stroke();
   }
   ctx.restore();
@@ -462,8 +718,6 @@ let last=performance.now(), spinning=false, stopCount=0, resultPrize=null, demoM
 function drawFrame(now){
  const dt=Math.min(now-last,34);last=now;
  ctx.clearRect(0,0,W,H);
-
- // separators
  ctx.fillStyle="rgba(0,0,0,.42)";
  ctx.fillRect(START_X+REEL_W+GAP/2-5,VIEW_Y,10,VIEW_H);
  ctx.fillRect(START_X+(REEL_W+GAP)*2-GAP/2-5,VIEW_Y,10,VIEW_H);
@@ -475,7 +729,7 @@ function drawFrame(now){
     if(stopCount===1)statusEl.textContent="1st STOP… 図柄点灯！";
     if(stopCount===2){
       statusEl.textContent="2nd STOP… ラストに注目";
-      if(resultPrize && (resultPrize.rank.includes("超")||resultPrize.rank.includes("激"))){
+      if(resultPrize && (resultPrize.rank.includes("超")||resultPrize.rank.includes("激")||resultPrize.rank.includes("500"))){
         chance.classList.add("show");inner.classList.add("flash");beep(1200,.18,"square",.045);vibrate([80,60,130]);
         setTimeout(()=>{chance.classList.remove("show");inner.classList.remove("flash")},980);
       }
@@ -485,7 +739,6 @@ function drawFrame(now){
   r.draw();
  }
 
- // top/bottom glass on canvas
  const gradTop=ctx.createLinearGradient(0,VIEW_Y,0,VIEW_Y+80);
  gradTop.addColorStop(0,"rgba(0,0,0,.34)");gradTop.addColorStop(1,"rgba(0,0,0,0)");
  ctx.fillStyle=gradTop;ctx.fillRect(START_X,VIEW_Y,REEL_W*3+GAP*2,80);
@@ -498,8 +751,9 @@ function drawFrame(now){
 requestAnimationFrame(drawFrame);
 
 async function startSpin(forcedRank=null,isDemo=false){
- if(alreadyDrawn()&&!isDemo)return;
- ticket.className="ticket";
+ if(spinning)return;
+ if(!isDemo && !canSpin()){updateSpinState();return}
+ ticket.classList.remove("show");
  spinBtn.disabled=true;spinning=true;stopCount=0;demoMode=isDemo;
  resultPrize=forcedRank?getPrizeByRank(forcedRank):pickPrize();
  const idx=symbolIndex(resultPrize);
@@ -512,57 +766,29 @@ async function startSpin(forcedRank=null,isDemo=false){
 }
 function finishSpin(){
  statusEl.textContent=resultPrize.rank+" 確定！";
+ document.documentElement.style.setProperty("--themeGlow", resultPrize.theme || "#ffd36a");
  reels.forEach(r=>{r.flash=1;r.glow=1.15});
- const record=saveRecord(resultPrize,makeCode(),nowText(),demoMode);
+ const record=createTicketFromPrize(resultPrize,demoMode);
  showTicket(record);
  if(resultPrize.rank.includes("超")){
-  premiumShow("CONGRATULATIONS","超ととのい賞 / サウナ90分無料チケット");
+  premiumShow("CONGRATULATIONS","サウナ90分無料チケット");
   confetti(170);soundPremium();vibrate([140,80,140,80,300]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1500);
  }else if(resultPrize.rank.includes("激")){
-  premiumShow("激ととのい!!","よもぎ蒸し無料券");
+  premiumShow("激ととのい!!","よもぎ蒸し60分無料チケット");
   confetti(125);soundPremium();vibrate([120,70,220]);inner.classList.add("flash");setTimeout(()=>inner.classList.remove("flash"),1300);
+ }else if(resultPrize.rank.includes("500")){
+  premiumShow("BIG BONUS","500円割引チケット");
+  confetti(100);soundPremium();vibrate([90,60,160]);
  }else{
   confetti(75);soundWin();vibrate(120);
  }
  spinning=false;
  if(demoMode){spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="DEMO結果：もう一度確認できます"}
  else{spinBtn.textContent="本日は抽選済み"}
+ renderHome();
 }
-function saveRecord(p,code,drawnAt,isDemo=false){
- const record={rank:p.rank,prize:p.name,type:p.type,code,drawnAt,expire:p.type==="next"?addDays(p.expire):todayKey(),used:false,demo:isDemo};
- if(!isDemo){
-  localStorage.setItem("laspaDrawDate",todayKey());
-  localStorage.setItem("laspaLastTicket",JSON.stringify(record));
-  const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");all[code]=record;localStorage.setItem("laspaTickets",JSON.stringify(all));
- }
- return record;
-}
-function showTicket(record){
- ticket.className="ticket show";
- const iconMap={"超ととのい賞":"👑","激ととのい賞":"🔥","ぽかぽか賞":"⏰","爆睡ととのい賞":"😴","美肌ととのい賞":"✨","さっぱり賞":"💧","ほっこり賞":"♨️"};
- ticketIcon.textContent=iconMap[record.rank]||"🎁";
 
- if(record.rank.includes("超")) ticket.classList.add("ticket-super");
- else if(record.rank.includes("激")) ticket.classList.add("ticket-fire");
- else if(record.rank.includes("ぽかぽか")||record.rank.includes("ほっこり")) ticket.classList.add("ticket-green");
- else if(record.rank.includes("さっぱり")) ticket.classList.add("ticket-blue");
- else if(record.rank.includes("美肌")) ticket.classList.add("ticket-silver");
-
- rankEl.textContent=record.rank;
- prizeEl.textContent=record.prize;
- codeEl.textContent=record.code;
- const line=record.type==="next"?`次回来店時利用：有効期限 ${record.expire}まで`:`当日交換：本日中にスタッフへ提示`;
- metaEl.innerHTML=`抽選日時：${record.drawnAt}<br>${line}<br>※スクショ保存OK。交換時にこの画面をご提示ください。`;
- badgeEl.className="badge "+(record.type==="next"?"next":"");
- badgeEl.textContent=record.type==="next"?"次回特典":"当日交換景品";
-}
-function alreadyDrawn(){return localStorage.getItem("laspaDrawDate")===todayKey()}
-function restore(){
- const rec=localStorage.getItem("laspaLastTicket");
- if(alreadyDrawn()&&rec){spinBtn.disabled=true;spinBtn.textContent="本日は抽選済み";statusEl.textContent="本日の抽選結果";showTicket(JSON.parse(rec))}
-}
-restore();
-
+/* Effect */
 function confetti(amount=90){
  const box=document.getElementById("confetti");const colors=["#ffd36a","#74f7ff","#ff2d55","#6cffb8","#ffffff","#b56cff"];
  for(let i=0;i<amount;i++){const e=document.createElement("i");e.style.left=Math.random()*100+"vw";e.style.background=colors[Math.floor(Math.random()*colors.length)];e.style.animationDelay=Math.random()*0.9+"s";e.style.transform=`rotate(${Math.random()*360}deg)`;box.appendChild(e);setTimeout(()=>e.remove(),4300)}
@@ -572,22 +798,46 @@ function premiumShow(title,sub){
  j.classList.remove("show");void j.offsetWidth;j.classList.add("show");setTimeout(()=>j.classList.remove("show"),3300)
 }
 
+/* Events */
+document.getElementById("navHome").addEventListener("click",()=>setView("home"));
+document.getElementById("navSlot").addEventListener("click",()=>setView("slot"));
+document.getElementById("navTickets").addEventListener("click",()=>setView("tickets"));
+document.getElementById("homeToSlot").addEventListener("click",()=>setView("slot"));
+document.getElementById("homeToTickets").addEventListener("click",()=>setView("tickets"));
 spinBtn.addEventListener("click",()=>startSpin());
-document.getElementById("demoToggle").addEventListener("click",()=>document.getElementById("demoPanel").classList.toggle("show"));
-document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>{document.getElementById("demoPanel").classList.remove("show");startSpin(btn.dataset.demo,true)}));
-document.getElementById("resetToday").addEventListener("click",()=>{localStorage.removeItem("laspaDrawDate");localStorage.removeItem("laspaLastTicket");spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";ticket.className="ticket";statusEl.textContent="制限リセット完了。PUSH TO START";document.getElementById("demoPanel").classList.remove("show")});
-document.getElementById("adminToggle").addEventListener("click",()=>{const a=document.getElementById("admin");a.style.display=a.style.display==="block"?"none":"block"});
-document.getElementById("useBtn").addEventListener("click",()=>{
- const pin=document.getElementById("pin").value.trim(),code=document.getElementById("checkCode").value.trim().toUpperCase(),out=document.getElementById("adminResult");
- if(pin!==ADMIN_PIN){out.textContent="PINが違います。";return}
- const all=JSON.parse(localStorage.getItem("laspaTickets")||"{}");
- if(!all[code]){out.textContent="この端末には該当コードの記録がありません。無料券は店頭メモ・スプレッドシート記録と照合してください。";return}
- if(all[code].used){out.innerHTML="使用済みです。<br>使用日時："+all[code].usedAt;return}
- all[code].used=true;all[code].usedAt=nowText();localStorage.setItem("laspaTickets",JSON.stringify(all));
- out.innerHTML=`使用済みにしました。<br>${all[code].rank} / ${all[code].prize}<br>抽選日時：${all[code].drawnAt}`;
+
+document.getElementById("confirmUse").addEventListener("click",()=>{
+ if(selectedTicketId){useTicket(selectedTicketId);closeUseModal();renderTickets();renderHome();updateSpinState();premiumShow("USED","チケットを使用済みにしました");}
 });
+document.getElementById("cancelUse").addEventListener("click",closeUseModal);
+document.getElementById("useModal").addEventListener("click",(e)=>{if(e.target.id==="useModal")closeUseModal()});
+
+document.getElementById("demoToggle").addEventListener("click",()=>document.getElementById("demoPanel").classList.toggle("show"));
+document.querySelectorAll("[data-demo]").forEach(btn=>btn.addEventListener("click",()=>{document.getElementById("demoPanel").classList.remove("show");setView("slot");startSpin(btn.dataset.demo,true)}));
+document.getElementById("resetToday").addEventListener("click",()=>{
+ if(!confirm("デモ確認用に全データをリセットしますか？"))return;
+ Object.values(CONFIG.storage).forEach(k=>localStorage.removeItem(k));
+ location.reload();
+});
+
+/* LINE gate */
+document.getElementById("lineBtn").addEventListener("click",()=>{
+ localStorage.setItem(CONFIG.storage.line,"true");
+ document.getElementById("lineGate").style.display="none";
+ setView("home");
+});
+
+/* init */
 const steamBox=document.getElementById("steam");
 for(let i=0;i<10;i++){const s=document.createElement("span");s.style.left=(Math.random()*95)+"vw";s.style.animationDelay=(Math.random()*6)+"s";s.style.animationDuration=(5.5+Math.random()*4.5)+"s";steamBox.appendChild(s)}
+
+if(localStorage.getItem(CONFIG.storage.line)!=="true"){
+ document.getElementById("lineGate").style.display="block";
+ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+}else{
+ setView("home");
+}
+updateSpinState();
 </script>
 </body>
 </html>
