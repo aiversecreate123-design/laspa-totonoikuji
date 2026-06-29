@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>LASPA PREMIUM SLOT Ver13 Official</title>
+<title>LASPA PREMIUM SLOT Ver14 Resort Casino</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;min-height:100%;background:#03040b;color:#fff;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;overflow-x:hidden}
@@ -152,6 +152,116 @@ canvas{display:block;width:100%;height:auto}
 .flash{animation:flash .55s ease-in-out 2}
 @keyframes flash{50%{filter:brightness(2.3) saturate(1.7)}}
 
+/* Ver14 Resort Casino UI */
+:root{
+  --event-primary:#03111f;
+  --event-gold:#ffd36a;
+  --event-accent:#00e5ff;
+  --event-pink:#ff2dcb;
+  --event-red:#ff2d24;
+  --event-green:#52ff72;
+}
+body.theme-summer_beach{
+  background:
+    radial-gradient(circle at 18% 16%,rgba(255,45,203,.22),transparent 18%),
+    radial-gradient(circle at 82% 15%,rgba(255,159,26,.24),transparent 19%),
+    radial-gradient(circle at 50% 10%,rgba(0,229,255,.18),transparent 24%),
+    linear-gradient(180deg,#030712 0%,#06162a 47%,#02040a 100%);
+}
+.resort-bg,.fireworks,.wave-layer{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.resort-bg{z-index:0;background:
+  radial-gradient(circle at 50% 78%,rgba(0,229,255,.18),transparent 31%),
+  linear-gradient(180deg,rgba(3,17,31,0) 0%,rgba(3,17,31,.9) 72%,#02040a 100%)}
+.resort-bg:before{content:"";position:absolute;left:-8%;right:-8%;bottom:0;height:34%;background:
+  radial-gradient(ellipse at 50% 100%,rgba(0,229,255,.26),transparent 58%),
+  repeating-radial-gradient(ellipse at 50% 120%,rgba(255,255,255,.18) 0 1px,transparent 2px 22px);opacity:.62;animation:waves 6s ease-in-out infinite}
+.resort-bg:after{content:"";position:absolute;left:5%;right:5%;bottom:19%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,211,106,.7),rgba(0,229,255,.7),transparent);box-shadow:0 0 22px rgba(0,229,255,.5)}
+@keyframes waves{50%{transform:translateY(8px) scaleX(1.03);opacity:.82}}
+.fireworks{z-index:1}
+.fireworks span{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffd36a;box-shadow:0 0 0 0 rgba(255,211,106,.9);animation:firework 3.8s ease-out infinite}
+.fireworks span:before,.fireworks span:after{content:"";position:absolute;inset:-24px;border-radius:50%;border:2px dotted currentColor;opacity:.75}
+.fireworks span:after{inset:-42px;opacity:.36;transform:rotate(20deg)}
+@keyframes firework{0%,56%{transform:scale(.08);opacity:0}64%{opacity:1}100%{transform:scale(1.35);opacity:0}}
+.machine{width:min(470px,100%);border-radius:42px;padding:15px;background:
+  linear-gradient(145deg,#080501,#4a2500 9%,#ffdf82 19%,#8b4b07 28%,#040309 49%,#1b1029 74%,#ffb923 100%);
+  box-shadow:0 0 0 1px rgba(255,211,106,.36),0 0 44px rgba(255,211,106,.32),0 0 85px rgba(255,45,203,.18),0 30px 90px rgba(0,0,0,.9),inset 0 0 22px rgba(255,255,255,.18)}
+.machine:before{inset:6px;border-radius:36px;border:1px solid rgba(255,225,132,.42);box-shadow:inset 0 0 18px rgba(255,211,106,.2)}
+.machine:after{content:"";position:absolute;inset:-5px;border-radius:47px;background:conic-gradient(from 0deg,#ffd36a,#ff2dcb,#00e5ff,#52ff72,#ffd36a);filter:blur(14px);opacity:.22;z-index:-1;animation:haloSpin 9s linear infinite}
+@keyframes haloSpin{to{transform:rotate(360deg)}}
+.inner{border-radius:32px;padding:13px 12px 15px;background:
+  radial-gradient(circle at 50% 0%,rgba(255,211,106,.28),transparent 27%),
+  linear-gradient(180deg,#0a0d18 0%,#05050b 45%,#130616 100%);border:1px solid rgba(255,211,106,.2)}
+.casino-top{position:relative;z-index:5;margin:0 4px 9px;height:78px;border-radius:68px 68px 18px 18px;background:radial-gradient(circle at 50% 0%,rgba(255,211,106,.28),transparent 48%),linear-gradient(180deg,#12131e,#030309);border:2px solid rgba(255,211,106,.72);box-shadow:inset 0 -20px 28px rgba(0,0,0,.66),0 0 24px rgba(255,211,106,.2)}
+.casino-top:before{content:"";position:absolute;left:20px;right:20px;top:-8px;height:16px;border-radius:999px;background:repeating-linear-gradient(90deg,#ff2d24 0 10px,#ffd36a 10px 20px,#52ff72 20px 30px,#00e5ff 30px 40px,#ff2dcb 40px 50px);filter:drop-shadow(0 0 10px rgba(255,211,106,.75));animation:ledFlow 1.7s linear infinite}
+.casino-top:after{content:"";position:absolute;left:10%;right:10%;bottom:8px;height:1px;background:linear-gradient(90deg,transparent,#ffd36a,#fff6c8,#ffd36a,transparent);box-shadow:0 0 12px #ffd36a}
+.brand-kicker{position:absolute;left:0;right:0;top:12px;text-align:center;font-family:Georgia,serif;font-size:13px;letter-spacing:.48em;color:#fff8cf;text-shadow:0 0 10px rgba(255,211,106,.8);font-weight:900}
+.brand-main{position:absolute;left:0;right:0;top:27px;text-align:center;font-family:Georgia,serif;font-size:29px;line-height:.78;letter-spacing:.05em;font-weight:1000;background:linear-gradient(180deg,#fffde3 0%,#ffd36a 36%,#ff9f1a 58%,#7a3100 62%,#fff1aa 100%);-webkit-background-clip:text;color:transparent;filter:drop-shadow(0 0 10px rgba(255,179,0,.75)) drop-shadow(0 3px 0 rgba(72,25,0,.95))}
+.brand-main:before{content:"";position:absolute;left:50%;top:24px;width:190px;height:26px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse,rgba(255,211,106,.22),transparent 68%);z-index:-1}
+.led-rail{position:absolute;z-index:6;top:158px;bottom:96px;width:15px;border-radius:999px;background:linear-gradient(180deg,#ff2dcb,#00e5ff,#ffd36a,#ff2d24);box-shadow:0 0 18px rgba(0,229,255,.7),0 0 28px rgba(255,45,203,.44);animation:ledBreathe 2.4s ease-in-out infinite}
+.led-rail.left{left:-3px}.led-rail.right{right:-3px;animation-delay:.35s}
+.led-rail:before{content:"";position:absolute;inset:7px 3px;background:repeating-linear-gradient(180deg,rgba(255,255,255,.95) 0 8px,transparent 8px 20px);border-radius:inherit;animation:ledFlow .8s linear infinite}
+.machine.spinning .led-rail:before,.machine.spinning .casino-top:before{animation-duration:.34s}
+.machine.win .led-rail,.machine.win .casino-top{filter:brightness(1.65) saturate(1.45)}
+@keyframes ledFlow{to{background-position:0 50px}}
+@keyframes ledBreathe{50%{filter:brightness(1.38);opacity:.92}}
+.logo h1{font-size:36px;text-shadow:0 0 18px rgba(255,211,106,.55),0 3px 0 rgba(91,29,0,.8)}
+.logo .sub{box-shadow:0 0 18px rgba(255,211,106,.5);position:relative}
+.event-period{margin-top:7px;font-size:11px;font-weight:900;color:#91f8ff;letter-spacing:.08em;text-shadow:0 0 10px rgba(0,229,255,.7)}
+.screen{border-radius:25px;padding:12px 10px 14px;background:linear-gradient(180deg,#030407,#0b0b10 44%,#130812);border:2px solid rgba(255,211,106,.86);box-shadow:inset 0 0 42px rgba(0,0,0,.95),0 0 0 5px rgba(255,211,106,.08),0 0 30px rgba(255,211,106,.24)}
+.status{min-height:42px;margin-bottom:8px;border-radius:13px;background:linear-gradient(90deg,rgba(0,229,255,.08),rgba(255,211,106,.1),rgba(255,45,203,.07));border:1px solid rgba(255,211,106,.24);color:#7df9ff;text-shadow:0 0 12px rgba(0,229,255,.8)}
+.canvas-wrap{border-radius:22px;border:3px solid #ffd36a;background:linear-gradient(180deg,#fff8dd,#ffffff,#d7f8ff);box-shadow:inset 0 18px 32px rgba(255,255,255,.68),inset 0 -28px 30px rgba(0,0,0,.22),0 0 0 8px rgba(0,0,0,.48),0 0 28px rgba(255,211,106,.35)}
+.canvas-wrap:before{height:100%;background:linear-gradient(110deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,.08) 18%,transparent 34%,transparent 68%,rgba(255,255,255,.14) 83%,transparent 100%);mix-blend-mode:screen}
+.canvas-wrap:after{height:100%;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.38) 100%)}
+.center-glow{left:0;right:0;height:3px;border-radius:0;background:linear-gradient(90deg,transparent,#ffd36a,#fff7be,#ffd36a,transparent);border:0;box-shadow:0 0 14px #ffd36a,0 0 25px rgba(255,211,106,.8)}
+.controls{display:grid;grid-template-columns:1fr 132px 1fr;gap:9px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.035));border-color:rgba(255,211,106,.24)}
+.control-panel{min-height:76px;border-radius:15px;padding:9px;background:linear-gradient(180deg,#090910,#030305);border:1px solid rgba(255,211,106,.32);box-shadow:inset 0 0 18px rgba(0,0,0,.8)}
+.control-panel .mini-title{font-size:10px;color:#ffd36a;font-weight:1000;letter-spacing:.12em}.control-panel .mini-text{margin-top:8px;color:#5ff7ff;font-weight:1000;font-size:12px;line-height:1.35;text-shadow:0 0 10px rgba(0,229,255,.65)}
+.chance-dots{display:flex;gap:8px;margin-top:14px;justify-content:center}.chance-dots i{width:11px;height:11px;border-radius:50%;background:#ffd36a;box-shadow:0 0 12px currentColor}.chance-dots i:nth-child(1){color:#ff2d24;background:#ff2d24}.chance-dots i:nth-child(2){color:#ffd36a;background:#ffd36a}.chance-dots i:nth-child(3){color:#52ff72;background:#52ff72}.chance-dots i:nth-child(4){color:#00e5ff;background:#00e5ff}.chance-dots i:nth-child(5){color:#8b5cff;background:#8b5cff}
+.push{height:132px;border-radius:50%;font-size:29px;color:#fff3a7;text-shadow:0 2px 0 #7a1800,0 0 13px #ffd36a;background:radial-gradient(circle at 50% 28%,#fff6b9 0 8%,#ff6a2a 19%,#e30613 49%,#5b0007 78%,#180003 100%);box-shadow:0 10px 0 #4d1500,0 0 0 8px #ffd36a,0 0 0 13px #4a2500,0 0 25px rgba(255,45,24,.85),inset 0 8px 18px rgba(255,255,255,.76),inset 0 -18px 26px rgba(0,0,0,.5);animation:pushPulse 1.8s ease-in-out infinite}
+.push:before{content:""}.push:active{transform:translateY(9px) scale(.98);box-shadow:0 2px 0 #4d1500,0 0 0 8px #ffd36a,0 0 0 13px #4a2500,0 0 24px rgba(255,45,24,.75),inset 0 5px 12px rgba(255,255,255,.6)}
+.push:disabled{border-radius:22px;height:84px;font-size:13px;box-shadow:0 4px 0 #222,0 0 0 4px rgba(255,211,106,.38);text-shadow:none}
+@keyframes pushPulse{50%{transform:scale(1.035);filter:brightness(1.25);box-shadow:0 10px 0 #4d1500,0 0 0 8px #ffd36a,0 0 0 13px #4a2500,0 0 42px rgba(255,45,24,.95),inset 0 8px 18px rgba(255,255,255,.84),inset 0 -18px 26px rgba(0,0,0,.48)}}
+.note{grid-column:1/-1;margin-top:0}.ticket{grid-column:1/-1}
+@media(max-width:390px){.controls{grid-template-columns:1fr 116px 1fr}.push{height:116px;font-size:25px}.control-panel{min-height:67px}.control-panel .mini-text{font-size:11px}.logo h1{font-size:32px}.brand-main{font-size:27px}}
+
+/* Ver14 Image Frame Integration */
+body.image-frame-mode{background:#02040a}
+body.image-frame-mode .bg,body.image-frame-mode .resort-bg,body.image-frame-mode .fireworks,body.image-frame-mode .steam{display:none}
+body.image-frame-mode .app{align-items:flex-start;justify-content:center;min-height:auto;padding:0 0 16px}
+body.image-frame-mode .machine{width:min(430px,100%);padding:0;border-radius:0;background:transparent;box-shadow:none}
+body.image-frame-mode .machine:before,body.image-frame-mode .machine:after{display:none}
+body.image-frame-mode .inner{overflow:visible;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+body.image-frame-mode .casino-top,body.image-frame-mode .lamps,body.image-frame-mode .logo,body.image-frame-mode .led-rail{display:none}
+body.image-frame-mode .nav{position:sticky;top:8px;z-index:70;margin:8px 10px 8px;padding:5px;border-radius:999px;background:rgba(0,0,0,.58);backdrop-filter:blur(10px);border:1px solid rgba(255,211,106,.35)}
+body.image-frame-mode[data-view="slot"] .nav{display:none}
+body.image-frame-mode .demo-toggle{right:12px;top:58px;background:rgba(0,0,0,.68);backdrop-filter:blur(8px)}
+body.image-frame-mode .demo-panel{top:92px}
+.slot-art-stage{display:none}
+body.image-frame-mode #slotView.active .slot-art-stage{display:block;position:relative;width:min(430px,100%);margin:0 auto;aspect-ratio:573/925;filter:drop-shadow(0 20px 38px rgba(0,0,0,.78))}
+.slot-frame-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.slot-reel-overlay{position:absolute;left:7.35%;top:30.15%;width:85.3%;height:29.9%;border-radius:3.6%;overflow:hidden;background:linear-gradient(180deg,#fff8e8,#fff,#def8ff);box-shadow:inset 0 18px 26px rgba(255,255,255,.52),inset 0 -20px 28px rgba(0,0,0,.22)}
+.slot-reel-overlay canvas{width:100%;height:100%;display:block}
+.slot-reel-overlay:before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(105deg,rgba(255,255,255,.24),transparent 28%,transparent 68%,rgba(255,255,255,.2));mix-blend-mode:screen}
+.slot-reel-overlay:after{content:"";position:absolute;left:-1%;right:-1%;top:49.7%;height:2px;z-index:4;background:linear-gradient(90deg,transparent,#ffd36a,#fff8bf,#ffd36a,transparent);box-shadow:0 0 10px #ffd36a,0 0 20px rgba(255,211,106,.8)}
+.slot-status-overlay{position:absolute;left:5.3%;top:66.65%;width:29.5%;height:6.7%;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 7px;border-radius:9px;color:#5ff7ff;font-size:clamp(10px,3vw,14px);line-height:1.25;font-weight:1000;text-shadow:0 0 10px rgba(0,229,255,.9);pointer-events:none}
+.slot-chance-overlay{position:absolute;right:5.3%;top:66.75%;width:29.5%;height:6.5%;display:flex;align-items:center;justify-content:center;gap:8px;pointer-events:none}
+.slot-chance-overlay i{width:9px;height:9px;border-radius:50%;box-shadow:0 0 10px currentColor}
+.slot-chance-overlay i:nth-child(1){background:#ff2d24;color:#ff2d24}.slot-chance-overlay i:nth-child(2){background:#ffd36a;color:#ffd36a}.slot-chance-overlay i:nth-child(3){background:#52ff72;color:#52ff72}.slot-chance-overlay i:nth-child(4){background:#e7ff38;color:#e7ff38}.slot-chance-overlay i:nth-child(5){background:#8b5cff;color:#8b5cff}
+.slot-push-overlay{position:absolute;left:37.2%;top:63.55%;width:25.8%;height:10.35%;border:0;border-radius:50%;background:radial-gradient(circle at 50% 42%,rgba(255,255,255,.28),rgba(255,211,106,.18) 32%,rgba(255,45,24,.18) 56%,rgba(0,0,0,0) 72%);color:transparent;cursor:pointer;box-shadow:0 0 0 rgba(255,211,106,0);animation:imagePushGlow 1.85s ease-in-out infinite}
+.slot-push-overlay:active{transform:translateY(5px) scale(.985);animation:none;box-shadow:0 0 25px rgba(255,211,106,.85),inset 0 8px 18px rgba(0,0,0,.35)}
+.slot-push-overlay:disabled{cursor:default;opacity:.45;animation:none}
+@keyframes imagePushGlow{50%{box-shadow:0 0 32px rgba(255,47,24,.75),0 0 58px rgba(255,211,106,.5);filter:brightness(1.15)}}
+.slot-draw-count{position:absolute;left:25.2%;top:25.95%;width:20%;height:2.7%;display:flex;align-items:center;justify-content:center;border-radius:4px;background:rgba(0,0,0,.92);font-size:clamp(12px,3.5vw,17px);font-weight:1000;color:#fff2b7;text-shadow:0 0 10px rgba(255,211,106,.65);pointer-events:none}
+.slot-reset-note{display:none}
+.slot-nav-hit{position:absolute;top:80.4%;height:7.8%;border:0;background:rgba(255,211,106,0);border-radius:10px;color:transparent;cursor:pointer}
+.slot-nav-hit:focus-visible{outline:2px solid rgba(255,211,106,.9);outline-offset:2px}
+.slot-nav-home{left:1.5%;width:17%}.slot-nav-tickets{left:19.4%;width:17.5%}.slot-nav-used{left:38.2%;width:17.2%}.slot-nav-prizes{left:56.7%;width:17.4%}.slot-nav-settings{left:77.1%;width:17.4%}
+body.image-frame-mode #slotView .screen,body.image-frame-mode #slotView .controls>.control-panel,body.image-frame-mode #slotView .controls>.note,body.image-frame-mode #slotView .controls>.push{display:none}
+body.image-frame-mode #slotView .controls{display:block;margin:10px auto 0;width:min(430px,100%);padding:0;background:transparent;border:0}
+body.image-frame-mode #slotView .ticket{margin:12px 10px 0}
+body.image-frame-mode #homeView,body.image-frame-mode #ticketsView,body.image-frame-mode .line-gate{padding:0 10px}
+@media(max-width:370px){.slot-status-overlay{font-size:10px}.slot-chance-overlay{gap:6px}.slot-chance-overlay i{width:7px;height:7px}}
+
 /* Ticket / Home panels */
 .panel{
   margin-top:14px;border-radius:22px;padding:14px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));
@@ -202,10 +312,302 @@ canvas{display:block;width:100%;height:auto}
   .push{height:68px;font-size:21px}
   .demo-toggle{top:58px}
 }
+/* Ver14 reference-image alignment: 6780ecd5 completed frame */
+body.image-frame-mode #slotView.active .slot-art-stage{width:min(430px,100%);aspect-ratio:573/925;margin:0 auto}
+.slot-reel-overlay{left:9.35%;top:35.15%;width:81.35%;height:31.45%;border-radius:4.1%;box-shadow:inset 0 18px 30px rgba(255,255,255,.42),inset 0 -28px 34px rgba(0,0,0,.28),0 0 20px rgba(255,177,45,.22)}
+.slot-reel-overlay:before{background:linear-gradient(102deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.1) 17%,transparent 35%,transparent 66%,rgba(255,255,255,.22) 82%,transparent 100%),radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.28),transparent 40%)}
+.slot-reel-overlay:after{top:49.9%;height:2px;background:linear-gradient(90deg,transparent,#ffb31f 10%,#fff8b8 50%,#ffb31f 90%,transparent);box-shadow:0 0 10px #ffb31f,0 0 22px rgba(255,179,31,.95)}
+.slot-push-overlay{left:35.75%;top:69.7%;width:28.5%;height:16.7%;background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.42),rgba(255,231,128,.25) 22%,rgba(255,42,18,.18) 47%,rgba(0,0,0,0) 70%);box-shadow:0 0 18px rgba(255,53,25,.5),0 0 34px rgba(255,196,64,.42);animation:imagePushGlow 1.75s ease-in-out infinite}
+.slot-push-overlay:active{transform:translateY(5px) scale(.982);box-shadow:0 0 30px rgba(255,53,25,.78),0 0 62px rgba(255,196,64,.62),inset 0 10px 18px rgba(0,0,0,.38)}
+.slot-status-overlay{left:2.55%;top:79.65%;width:28.1%;height:4.65%;font-size:clamp(9px,2.85vw,13px);align-items:center;color:#4ff9ff;background:linear-gradient(180deg,rgba(2,8,13,.82),rgba(0,0,0,.92));border-radius:6px;border:1px solid rgba(0,229,255,.18);box-shadow:inset 0 0 12px rgba(0,229,255,.08);text-shadow:0 0 10px rgba(0,229,255,.95),0 0 18px rgba(0,229,255,.55)}
+.slot-chance-overlay{right:2.8%;top:78.4%;width:28.4%;height:7.3%;gap:8px}
+.slot-chance-overlay i{width:8px;height:8px;box-shadow:0 0 9px currentColor,0 0 18px currentColor}
+.slot-draw-count{left:32.9%;top:29.05%;width:16.6%;height:2.95%;background:rgba(0,0,0,.9);border-radius:3px;font-size:clamp(12px,3.4vw,17px)}
+.slot-nav-home{left:2.5%;top:91.6%;width:16.5%;height:7.4%}.slot-nav-tickets{left:20.4%;top:91.6%;width:17.7%;height:7.4%}.slot-nav-used{left:39.8%;top:91.6%;width:16.9%;height:7.4%}.slot-nav-prizes{left:57.8%;top:91.6%;width:20.2%;height:7.4%}.slot-nav-settings{left:80.5%;top:91.6%;width:16.8%;height:7.4%}
+@keyframes imagePushGlow{50%{box-shadow:0 0 34px rgba(255,47,24,.82),0 0 58px rgba(255,211,106,.58),0 0 18px rgba(255,255,255,.24);filter:brightness(1.16) saturate(1.08)}}
+
+/* AIVERSE SLOT ENGINE asset prototype */
+:root{--asset-bg:none}
+body.image-frame-mode{
+  background:transparent !important;
+}
+body.image-frame-mode:before{
+  display:none !important;
+}
+body.image-frame-mode .app{
+  min-height:calc(100vh - 18px);
+  align-items:center;
+  justify-content:center;
+  padding:8px 0 10px;
+}
+body.image-frame-mode .footer{
+  display:none;
+}
+body.image-frame-mode .machine,
+body.image-frame-mode .inner{
+  width:100%;
+}
+body.image-frame-mode #slotView.active .slot-art-stage{
+  width:min(590px,96vw,calc((100vh - 34px) * 1024 / 1536));
+  aspect-ratio:1024/1536;
+  margin:0 auto;
+  filter:drop-shadow(0 24px 42px rgba(0,0,0,.82));
+}
+.slot-frame-img{
+  object-fit:contain;
+}
+.slot-reel-overlay{
+  left:10.8%;
+  top:36.55%;
+  width:78.4%;
+  height:28.65%;
+  border-radius:3.1%;
+  background:transparent;
+  box-shadow:none;
+}
+.slot-reel-overlay canvas{
+  width:100%;
+  height:100%;
+  transform:scale(1.34);
+  transform-origin:center center;
+}
+.slot-reel-overlay:before{
+  background:linear-gradient(105deg,rgba(255,255,255,.20),transparent 28%,transparent 68%,rgba(255,255,255,.13));
+}
+.slot-reel-overlay:after{
+  top:49.8%;
+  height:2px;
+}
+.slot-push-overlay{
+  left:29.0%;
+  top:68.55%;
+  width:42.0%;
+  height:18.9%;
+  background:transparent;
+  box-shadow:0 0 24px rgba(255,55,24,.32),0 0 44px rgba(255,211,106,.22);
+  z-index:12;
+}
+.asset-push-img{
+  left:29.0%;
+  top:68.55%;
+  width:42.0%;
+  height:18.9%;
+  object-fit:cover;
+  object-position:center 30%;
+  border-radius:50%;
+  clip-path:ellipse(49% 43% at 50% 50%);
+  z-index:11;
+  opacity:.02;
+  mix-blend-mode:screen;
+}
+.slot-status-overlay{
+  left:6.3%;
+  top:81.3%;
+  width:24.4%;
+  height:6.0%;
+}
+.slot-chance-overlay{
+  right:6.4%;
+  top:82.1%;
+  width:24.2%;
+  height:4.8%;
+}
+.slot-draw-count{
+  left:32.6%;
+  top:32.45%;
+  width:16.8%;
+  height:2.9%;
+}
+.asset-menu-bar{
+  width:min(590px,96vw,calc((100vh - 34px) * 1024 / 1536));
+  height:clamp(62px,7.4vw,78px);
+  margin:-58px auto 0;
+  border-radius:0;
+  box-shadow:0 0 18px rgba(255,211,106,.22);
+}
+.asset-menu-bar img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 50%;
+}
+@media(max-width:560px){
+  body.image-frame-mode .app{
+    min-height:100svh;
+    padding:4px 0 8px;
+  }
+  body.image-frame-mode #slotView.active .slot-art-stage{
+    width:min(100vw,calc((100svh - 24px) * 1024 / 1536));
+  }
+  .asset-menu-bar{
+    width:min(96vw,calc((100svh - 24px) * 1024 / 1536));
+    height:clamp(58px,13.8vw,72px);
+    margin:-52px auto 0;
+  }
+}
+
+/* Final asset preview viewport guard */
+html:has(body.image-frame-mode),
+body.image-frame-mode{
+  overflow-y:hidden !important;
+}
+
+
+/* Single UI frame mode: use completed frame image, overlay only dynamic parts */
+html:has(body.image-frame-mode),
+body.image-frame-mode{
+  overflow:hidden !important;
+}
+body.image-frame-mode{
+  background:transparent !important;
+}
+body.image-frame-mode:before{
+  display:none !important;
+}
+body.image-frame-mode .app{
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+body.image-frame-mode .machine,
+body.image-frame-mode .inner{
+  width:100%;
+}
+body.image-frame-mode .footer,
+.asset-push-img,
+.asset-menu-bar,
+.slot-reset-note{
+  display:none !important;
+}
+body.image-frame-mode #slotView.active .slot-art-stage{
+  width:min(520px,96vw,calc(100vh * 573 / 925));
+  aspect-ratio:573/925;
+  margin:0 auto;
+  filter:drop-shadow(0 22px 42px rgba(0,0,0,.78));
+}
+.slot-frame-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  pointer-events:none;
+}
+.slot-reel-overlay{
+  left:6.0%;
+  top:29.55%;
+  width:88.0%;
+  height:37.2%;
+  border-radius:3.2%;
+  background:linear-gradient(180deg,#fff7e8,#fff,#eaf8ff);
+  box-shadow:inset 0 16px 26px rgba(255,255,255,.38),inset 0 -22px 30px rgba(0,0,0,.22);
+  overflow:hidden;
+  z-index:4;
+}
+.slot-reel-overlay canvas{
+  width:100%;
+  height:100%;
+  transform:scale(1.02);
+  transform-origin:center center;
+}
+.slot-reel-overlay:before{
+  background:linear-gradient(105deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.12));
+}
+.slot-reel-overlay:after{
+  top:49.6%;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#ffb31f 10%,#fff8b8 50%,#ffb31f 90%,transparent);
+  box-shadow:0 0 10px #ffb31f,0 0 20px rgba(255,179,31,.9);
+}
+.slot-draw-count{
+  left:41.4%;
+  top:25.75%;
+  width:18.2%;
+  height:3.0%;
+  font-size:clamp(12px,3.0vw,16px);
+  background:transparent;
+}
+.slot-status-overlay{
+  left:3.8%;
+  top:76.75%;
+  width:28.4%;
+  height:7.3%;
+  padding:0 6px;
+  color:#43faff;
+  background:transparent;
+  border:0;
+  font-size:clamp(10px,2.6vw,13px);
+}
+.slot-chance-overlay{
+  right:3.8%;
+  top:78.25%;
+  width:28.4%;
+  height:4.2%;
+  gap:7px;
+}
+.slot-chance-overlay i{
+  width:7px;
+  height:7px;
+}
+.slot-push-overlay{
+  left:35.9%;
+  top:66.95%;
+  width:28.2%;
+  height:16.7%;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+  z-index:12;
+}
+.slot-push-overlay:active{
+  transform:translateY(4px) scale(.985);
+  box-shadow:0 0 26px rgba(255,211,106,.6);
+}
+.slot-nav-hit{
+  display:block;
+  top:90.8%;
+  height:8.7%;
+  border-radius:0;
+  background:transparent;
+  z-index:14;
+}
+.slot-nav-home{left:0;width:19.5%;}
+.slot-nav-tickets{left:19.5%;width:20.0%;}
+.slot-nav-used{left:39.5%;width:20.0%;}
+.slot-nav-prizes{left:59.5%;width:20.0%;}
+.slot-nav-settings{left:79.5%;width:20.5%;}
+body.image-frame-mode #slotView .controls{
+  display:block;
+  margin:0;
+  width:100%;
+  padding:0;
+  background:transparent;
+  border:0;
+}
+@media(max-width:560px){
+  body.image-frame-mode #slotView.active .slot-art-stage{
+    width:min(100vw,100svh * 573 / 925);
+  }
+}
+
+/* Transparent host background: no backgrounds-folder image */
+html:has(body.image-frame-mode),
+body.image-frame-mode{
+  background:transparent !important;
+  overflow-y:hidden !important;
+}
+body.image-frame-mode:before{
+  display:none !important;
+}
+
 </style>
 </head>
-<body>
+<body class="image-frame-mode">
 <div class="bg"></div>
+<div class="resort-bg" id="resortBg"></div>
+<div class="fireworks" id="fireworks"></div>
 <div class="steam" id="steam"></div>
 <div class="confetti" id="confetti"></div>
 <div class="jackpot" id="jackpot"><div class="box"><h2 id="jackpotTitle">CONGRATULATIONS</h2><p id="jackpotSub">PREMIUM BONUS</p></div></div>
@@ -213,6 +615,8 @@ canvas{display:block;width:100%;height:auto}
 <main class="app">
   <section class="machine" id="machine">
     <div class="inner" id="inner">
+      <div class="led-rail left"></div><div class="led-rail right"></div>
+      <div class="casino-top"><div class="brand-kicker">LASPA</div><div class="brand-main">PREMIUM<br>SLOT</div></div>
       <div class="nav">
         <button id="navHome" class="active">HOME</button>
         <button id="navSlot">SLOT</button>
@@ -221,8 +625,8 @@ canvas{display:block;width:100%;height:auto}
 
       <div class="demo-toggle" id="demoToggle">🧪 DEMO</div>
       <div class="demo-panel" id="demoPanel">
-        <button data-demo="超ととのい賞">サウナ90分半額</button>
-        <button data-demo="激ととのい賞">よもぎ蒸し60分半額</button>
+        <button data-demo="超ととのい賞">サウナ90分無料</button>
+        <button data-demo="激ととのい賞">よもぎ蒸し60分無料</button>
         <button data-demo="500円賞">500円割引</button>
         <button data-demo="300円賞">300円割引</button>
         <button data-demo="100円賞">100円割引</button>
@@ -236,8 +640,9 @@ canvas{display:block;width:100%;height:auto}
 
       <div class="logo">
         <div class="label">LASPA PREMIUM SLOT</div>
-        <h1>夏の<br>ととのいくじ</h1>
-        <div class="sub">LINE限定・本日1回チャレンジ</div>
+        <h1 id="eventTitle">夏の<br>ととのいくじ</h1>
+        <div class="sub" id="eventSubtitle">LINE限定・1日1回チャレンジ</div>
+        <div class="event-period" id="eventPeriod">2026.7.1 - 2026.8.31</div>
       </div>
 
       <div class="line-gate" id="lineGate">
@@ -265,26 +670,24 @@ canvas{display:block;width:100%;height:auto}
       </div>
 
       <div class="view" id="slotView">
-        <div class="screen">
-          <div class="status" id="status">PUSH TO START</div>
-          <div class="canvas-wrap">
+        <div class="slot-art-stage" aria-label="LASPA PREMIUM SLOT">
+          <img class="slot-frame-img" src="./assets/laspa-premium-slot-reference.png" alt="LASPA PREMIUM SLOT UIフレーム">
+          <div class="slot-draw-count" id="drawCountDisplay">1回 / 1回</div>
+          <div class="slot-reset-note">※毎日00:00にリセット</div>
+          <div class="slot-reel-overlay">
             <canvas id="slotCanvas" width="1180" height="520"></canvas>
-            <div class="center-glow"></div>
+            <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
           </div>
-          <div class="chance" id="chance"><strong>激アツ!!</strong><small>最後のリールに注目</small></div>
+          <div class="slot-status-overlay" id="status">PUSH TO START</div>
+          <div class="slot-chance-overlay" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <button class="slot-push-overlay push" id="spinBtn" aria-label="PUSH">PUSH</button>
+          <button class="slot-nav-hit slot-nav-home" id="slotNavHome" aria-label="HOME">HOME</button>
+          <button class="slot-nav-hit slot-nav-tickets" id="slotNavTickets" aria-label="TICKET">TICKET</button>
+          <button class="slot-nav-hit slot-nav-used" id="slotNavUsed" aria-label="USED">USED</button>
+          <button class="slot-nav-hit slot-nav-prizes" id="slotNavPrizes" aria-label="PRIZE">PRIZE</button>
+          <button class="slot-nav-hit slot-nav-settings" id="slotNavSettings" aria-label="SETTING">SETTING</button>
         </div>
-
-        <div class="controls">
-          <button class="push" id="spinBtn">🔴 PUSH</button>
-          <div class="note">同じスマホでは1日1回まで。<br>当選チケットはマイチケットへ保存されます。</div>
-          <div class="ticket" id="ticket">
-            <div class="rank" id="rank"></div>
-            <div class="prize" id="prize"></div>
-            <div class="meta" id="meta"></div>
-            <div class="code" id="code"></div>
-            <div class="badge next" id="badge">マイチケット保存済み</div>
-          </div>
-        </div>
+      </div>
       </div>
 
       <div class="view" id="ticketsView">
@@ -296,7 +699,7 @@ canvas{display:block;width:100%;height:auto}
         </div>
       </div>
 
-      <div class="footer">© LASPA / Summer Totonoi Kuji Ver13 Official</div>
+      <div class="footer">© LASPA / Summer Totonoi Kuji Ver14 Resort Casino</div>
     </div>
   </section>
 </main>
@@ -312,9 +715,22 @@ canvas{display:block;width:100%;height:auto}
 
 <script>
 /* ===============================
-   LASPA SLOT PROJECT Ver13 Official
-   Ver10.1のワクワク感 + Ver12チケット運用
+   LASPA SLOT PROJECT Ver14 Resort Casino
+   Ver12チケット運用 + Ver14筐体UI/テーマ設定
 ================================= */
+const EVENT_CONFIG={
+  title:"夏のととのいくじ",
+  subtitle:"LINE限定・1日1回チャレンジ",
+  theme:"summer_beach",
+  period:"2026.7.1 - 2026.8.31"
+};
+const THEME_CONFIG={
+  summer_beach:{
+    name:"Summer Beach",
+    backgroundType:"css",
+    colors:{primary:"#03111f",gold:"#ffd36a",accent:"#00e5ff",pink:"#ff2dcb"}
+  }
+};
 const CONFIG={
   pin:"0716",
   storage:{
@@ -342,6 +758,9 @@ const codeEl=document.getElementById("code");
 const badgeEl=document.getElementById("badge");
 const chance=document.getElementById("chance");
 const inner=document.getElementById("inner");
+const machineEl=document.getElementById("machine");
+const miniStatusEl=document.getElementById("miniStatus");
+const drawCountDisplay=document.getElementById("drawCountDisplay");
 
 const todayKey=()=>new Date().toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"});
 const nowText=()=>new Date().toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",hour12:false});
@@ -361,6 +780,18 @@ const prizes=[
  {rank:"美肌ととのい賞",name:"冷感フェイスパック",rate:25,type:"pack",symbol:"pack",theme:"#74f7ff"},
  {rank:"さっぱり賞",name:"ミニ缶ジュース",rate:30,type:"juice",symbol:"juice",theme:"#ff5a7d"}
 ];
+
+const ASSET_SYMBOL_PATHS={
+ sauna:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_10_26.png",
+ yomogi:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_10_52.png",
+ discount500:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_11_12.png",
+ discount300:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_11_23.png",
+ discount100:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_11_33.png",
+ pack:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_11_43.png",
+ juice:"./reels/ChatGPT Image 2026蟷ｴ6譛・9譌･ 22_15_06.png"
+};
+const assetSymbolImages={};
+for(const [key,src] of Object.entries(ASSET_SYMBOL_PATHS)){const img=new Image();img.src=src;assetSymbolImages[key]=img}
 
 const symbols=[
  {key:"sauna", label:"サウナ90分半額チケット", color:"#ffd36a"},
@@ -409,7 +840,7 @@ function alreadyDrawn(){return localStorage.getItem(CONFIG.storage.draw)===today
 function canSpin(){return !alreadyDrawn()&&!hasUnusedTicket()}
 function createTicketFromPrize(p,isDemo=false){
  const issued=new Date();
- const expires=addMonths(issued,1);
+ const expires=addMonths(issued,2);
  const rec={
   id:"ticket_"+Date.now()+"_"+Math.random().toString(36).slice(2,8),
   rank:p.rank,prize:p.name,type:p.type,code:makeCode(),
@@ -431,15 +862,17 @@ function useTicket(id){
 
 /* 画面 */
 function setView(name){
+ document.body.dataset.view=name;
  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
  document.getElementById(name+"View").classList.add("active");
  document.querySelectorAll(".nav button").forEach(b=>b.classList.remove("active"));
  const nav=document.getElementById("nav"+name.charAt(0).toUpperCase()+name.slice(1));
  if(nav)nav.classList.add("active");
- if(name==="home")renderHome();
+ if(name==="home"){renderHome();updateDrawCountDisplay()}
  if(name==="tickets")renderTickets();
- if(name==="slot")updateSpinState();
+ if(name==="slot"){updateSpinState();updateDrawCountDisplay()}
 }
+function updateDrawCountDisplay(){if(drawCountDisplay)drawCountDisplay.textContent=alreadyDrawn()?"0回 / 1回":"1回 / 1回"}
 function renderHome(){
  const hs=document.getElementById("homeStatus");
  const btn=document.getElementById("homeToSlot");
@@ -448,9 +881,9 @@ function renderHome(){
  else{hs.textContent="本日の抽選に参加できます。PUSHで運試し！";btn.disabled=false}
 }
 function updateSpinState(){
- if(hasUnusedTicket()){spinBtn.disabled=true;spinBtn.textContent="チケット使用後に抽選可能";statusEl.textContent="未使用チケットがあります"}
- else if(alreadyDrawn()){spinBtn.disabled=true;spinBtn.textContent="本日は抽選済み";statusEl.textContent="本日の抽選は利用済み"}
- else{spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="PUSH TO START"}
+ if(hasUnusedTicket()){spinBtn.disabled=true;spinBtn.textContent="TICKET";statusEl.textContent="未使用チケットがあります";if(miniStatusEl)miniStatusEl.textContent="先にチケットをご利用ください"}
+ else if(alreadyDrawn()){spinBtn.disabled=true;spinBtn.textContent="DONE";statusEl.textContent="本日の抽選は利用済み";if(miniStatusEl)miniStatusEl.textContent="また明日チャレンジ"}
+ else{spinBtn.disabled=false;spinBtn.textContent="PUSH";statusEl.textContent="PUSH TO START";if(miniStatusEl)miniStatusEl.textContent="スロットを回してね！"}
 }
 function showTicket(record){
  ticket.classList.add("show");rankEl.textContent=record.rank;prizeEl.textContent=record.prize;codeEl.textContent=record.code;
@@ -490,242 +923,146 @@ function openUseModal(id){
 function closeUseModal(){selectedTicketId=null;document.getElementById("useModal").classList.remove("show")}
 
 
-
-
-/* 景品連動Canvas図柄：画像・絵文字に依存しない固定シンボル
-   Ver13 Official：PC / iPhone / Androidで見た目が変わらないCanvas描画
-*/
-function drawPrizeSymbol(ctx, symbol, boost=1){
- const key=symbol.key;
- const data={
-  sauna:{main:"SAUNA",sub:"50%",color:"#ffd36a",dark:"#5b1d00",kind:"crown"},
-  yomogi:{main:"YOMOGI",sub:"50%",color:"#6cffb8",dark:"#0b5837",kind:"leaf"},
-  discount500:{main:"¥500",sub:"",color:"#fff1aa",dark:"#5b1d00",kind:"ticket"},
-  discount300:{main:"¥300",sub:"",color:"#ffd36a",dark:"#5b1d00",kind:"ticket"},
-  discount100:{main:"¥100",sub:"",color:"#ffcc66",dark:"#5b1d00",kind:"ticket"},
-  pack:{main:"COOL",sub:"PACK",color:"#74f7ff",dark:"#10587a",kind:"pack"},
-  juice:{main:"DRINK",sub:"",color:"#ff5a7d",dark:"#5e0920",kind:"can"}
- }[key];
-
+/* 景品連動Canvas図柄：アセットがあれば画像、未読込時は既存Canvas描画 */
+function drawAssetSymbolImage(ctx, symbol, boost=1){
+ const img=assetSymbolImages[symbol.key];
+ if(!img||!img.complete||!img.naturalWidth)return false;
+ const side=172;
  ctx.save();
- ctx.textAlign="center";
- ctx.textBaseline="middle";
+ ctx.beginPath();ctx.rect(-side/2,-side/2,side,side);ctx.clip();
+ ctx.drawImage(img,0,0,img.naturalWidth,img.naturalHeight,-side/2,-side/2,side,side);
+ ctx.restore();
+ return true;
+}
+function drawPrizeSymbol(ctx, symbol, boost=1){
+ if(drawAssetSymbolImage(ctx,symbol,boost))return;
+ const key=symbol.key;
+ ctx.save();
  ctx.lineCap="round";
  ctx.lineJoin="round";
 
- drawSymbolBase(ctx,data);
+ if(key==="sauna"){
+   drawCrown(ctx);
+ }else if(key==="yomogi"){
+   drawYomogi(ctx);
+ }else if(key==="discount500"){
+   drawTicket(ctx,"500");
+ }else if(key==="discount300"){
+   drawTicket(ctx,"300");
+ }else if(key==="discount100"){
+   drawTicket(ctx,"100");
+ }else if(key==="pack"){
+   drawFacePack(ctx);
+ }else if(key==="juice"){
+   drawCanJuice(ctx);
+ }
 
- if(data.kind==="crown") drawFixedCrown(ctx,data);
- if(data.kind==="leaf") drawFixedLeaf(ctx,data);
- if(data.kind==="ticket") drawFixedTicket(ctx,data);
- if(data.kind==="pack") drawFixedPack(ctx,data);
- if(data.kind==="can") drawFixedCan(ctx,data);
-
- drawSymbolShine(ctx);
  ctx.restore();
 }
 
-function drawSymbolBase(ctx,data){
- const outer=ctx.createRadialGradient(0,-18,14,0,0,92);
- outer.addColorStop(0,"rgba(255,255,255,.96)");
- outer.addColorStop(.28,data.color);
- outer.addColorStop(.72,"rgba(255,211,106,.58)");
- outer.addColorStop(1,data.dark);
- ctx.fillStyle=outer;
- ctx.strokeStyle="rgba(255,255,255,.82)";
- ctx.lineWidth=5;
- roundRectCanvas(ctx,-88,-72,176,144,28);
- ctx.fill();
- ctx.stroke();
-
- const inner=ctx.createLinearGradient(0,-62,0,62);
- inner.addColorStop(0,"rgba(8,12,25,.96)");
- inner.addColorStop(.5,"rgba(23,28,45,.86)");
- inner.addColorStop(1,"rgba(3,4,10,.98)");
- ctx.fillStyle=inner;
- ctx.strokeStyle="rgba(255,255,255,.20)";
- ctx.lineWidth=2;
- roundRectCanvas(ctx,-76,-60,152,120,22);
- ctx.fill();
- ctx.stroke();
-
- ctx.shadowColor=data.color;
- ctx.shadowBlur=22;
- ctx.strokeStyle=data.color;
- ctx.globalAlpha=.48;
- ctx.lineWidth=4;
- roundRectCanvas(ctx,-70,-54,140,108,18);
- ctx.stroke();
- ctx.globalAlpha=1;
- ctx.shadowBlur=0;
-}
-
-function drawFixedCrown(ctx,data){
- const g=ctx.createLinearGradient(-60,-46,60,54);
- g.addColorStop(0,"#fff6bd");
- g.addColorStop(.42,"#ffd36a");
- g.addColorStop(1,"#ff8b00");
+function drawCrown(ctx){
+ const g=ctx.createLinearGradient(-70,-70,70,60);
+ g.addColorStop(0,"#fff6bd");g.addColorStop(.42,"#ffd36a");g.addColorStop(1,"#ff8b00");
  ctx.fillStyle=g;
- ctx.strokeStyle="#3b1600";
- ctx.lineWidth=6;
- ctx.beginPath();
- ctx.moveTo(-58,22);
- ctx.lineTo(-48,-34);
- ctx.lineTo(-18,0);
- ctx.lineTo(0,-46);
- ctx.lineTo(18,0);
- ctx.lineTo(48,-34);
- ctx.lineTo(58,22);
- ctx.closePath();
- ctx.fill();ctx.stroke();
-
- ctx.fillStyle="#fff3a7";
- ctx.strokeStyle="#3b1600";
- ctx.lineWidth=4;
- [-48,0,48].forEach((x,i)=>{
-   ctx.beginPath();
-   ctx.arc(x,i===1?-46:-34,i===1?8:7,0,Math.PI*2);
-   ctx.fill();ctx.stroke();
- });
-
- ctx.fillStyle="#9b3b00";
- ctx.strokeStyle="#3b1600";
- ctx.lineWidth=4;
- roundRectCanvas(ctx,-60,22,120,24,8);
- ctx.fill();ctx.stroke();
-
- ctx.fillStyle="#fff7c5";
- roundRectCanvas(ctx,-42,28,84,6,3);
- ctx.fill();
-
- ctx.fillStyle="#fff6bd";
- ctx.font="1000 24px system-ui,sans-serif";
- ctx.fillText("SAUNA",0,56);
-}
-
-function drawFixedLeaf(ctx,data){
- ctx.strokeStyle="#0b5837";
+ ctx.strokeStyle="#7a3100";
  ctx.lineWidth=7;
  ctx.beginPath();
- ctx.moveTo(0,52);
- ctx.bezierCurveTo(-8,20,4,-18,0,-50);
- ctx.stroke();
-
- const leaves=[
-  [-18,-28,-64,-48],
-  [-12,-2,-62,-2],
-  [-8,24,-52,34],
-  [18,-28,64,-48],
-  [12,-2,62,-2],
-  [8,24,52,34]
- ];
- leaves.forEach(([x,y,ex,ey])=>{
-   const grad=ctx.createLinearGradient(x,y,ex,ey);
-   grad.addColorStop(0,"#d5ffe1");
-   grad.addColorStop(.45,"#6cffb8");
-   grad.addColorStop(1,"#13915d");
-   ctx.fillStyle=grad;
-   ctx.strokeStyle="#0b5837";
-   ctx.lineWidth=4;
-   ctx.beginPath();
-   ctx.moveTo(x,y);
-   ctx.quadraticCurveTo((x+ex)/2, y-24, ex, ey);
-   ctx.quadraticCurveTo((x+ex)/2, y+22, x,y);
-   ctx.closePath();
-   ctx.fill();ctx.stroke();
- });
-
- ctx.fillStyle="#eaffef";
- ctx.font="1000 28px system-ui,sans-serif";
- ctx.fillText("50%",0,56);
-}
-
-function drawFixedTicket(ctx,data){
- const g=ctx.createLinearGradient(-62,-34,62,36);
- g.addColorStop(0,"#ffffff");
- g.addColorStop(.5,data.color);
- g.addColorStop(1,"#ff9f1a");
- ctx.fillStyle=g;
- ctx.strokeStyle="#3b1600";
- ctx.lineWidth=5;
- ctx.beginPath();
- ctx.moveTo(-66,-42);
- ctx.lineTo(66,-42);
- ctx.quadraticCurveTo(56,-18,66,0);
- ctx.quadraticCurveTo(56,18,66,42);
- ctx.lineTo(-66,42);
- ctx.quadraticCurveTo(-56,18,-66,0);
- ctx.quadraticCurveTo(-56,-18,-66,-42);
+ ctx.moveTo(-78,30);
+ ctx.lineTo(-62,-48);
+ ctx.lineTo(-22,2);
+ ctx.lineTo(0,-66);
+ ctx.lineTo(24,2);
+ ctx.lineTo(64,-48);
+ ctx.lineTo(78,30);
  ctx.closePath();
  ctx.fill();ctx.stroke();
-
- ctx.strokeStyle="rgba(59,22,0,.4)";
- ctx.lineWidth=3;
- ctx.setLineDash([7,7]);
- ctx.beginPath();ctx.moveTo(-42,-32);ctx.lineTo(-42,32);ctx.stroke();
- ctx.setLineDash([]);
-
- ctx.fillStyle="#2a0800";
- ctx.font="1000 48px system-ui,sans-serif";
- ctx.fillText(data.main,10,4);
-}
-
-function drawFixedPack(ctx,data){
- const g=ctx.createLinearGradient(-52,-56,52,60);
- g.addColorStop(0,"#ffffff");
- g.addColorStop(.42,"#bdfbff");
- g.addColorStop(1,"#5bc7ff");
- ctx.fillStyle=g;
- ctx.strokeStyle="#10587a";
- ctx.lineWidth=5;
- roundRectCanvas(ctx,-52,-58,104,116,18);
- ctx.fill();ctx.stroke();
-
- ctx.fillStyle="rgba(255,255,255,.62)";
- roundRectCanvas(ctx,-34,-42,68,18,9);
- ctx.fill();
-
- ctx.fillStyle="#10587a";
- ctx.font="1000 31px system-ui,sans-serif";
- ctx.fillText("COOL",0,-4);
- ctx.font="1000 22px system-ui,sans-serif";
- ctx.fillText("PACK",0,30);
-}
-
-function drawFixedCan(ctx,data){
- const g=ctx.createLinearGradient(-42,-60,50,62);
- g.addColorStop(0,"#fff0f4");
- g.addColorStop(.25,"#ff5a7d");
- g.addColorStop(1,"#9a1734");
- ctx.fillStyle=g;
- ctx.strokeStyle="#5e0920";
- ctx.lineWidth=5;
- roundRectCanvas(ctx,-42,-58,84,116,22);
- ctx.fill();ctx.stroke();
-
- ctx.fillStyle="rgba(255,255,255,.34)";
- roundRectCanvas(ctx,-26,-46,18,92,9);
- ctx.fill();
-
+ ctx.fillStyle="#fff3a7";
+ ctx.beginPath();ctx.arc(-62,-48,10,0,Math.PI*2);ctx.arc(0,-66,12,0,Math.PI*2);ctx.arc(64,-48,10,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle="#9b3b00";
+ roundRectCanvas(ctx,-70,30,140,28,10);ctx.fill();
  ctx.fillStyle="#fff7c5";
- ctx.strokeStyle="#5e0920";
- ctx.lineWidth=4;
- ctx.beginPath();ctx.ellipse(0,-58,36,11,0,0,Math.PI*2);ctx.fill();ctx.stroke();
- ctx.beginPath();ctx.ellipse(0,58,36,11,0,0,Math.PI*2);ctx.fill();ctx.stroke();
-
- ctx.fillStyle="#fff";
- ctx.font="1000 26px system-ui,sans-serif";
- ctx.fillText("DRINK",0,2);
+ roundRectCanvas(ctx,-50,36,100,8,4);ctx.fill();
 }
 
-function drawSymbolShine(ctx){
- const shine=ctx.createLinearGradient(-62,-56,62,-20);
- shine.addColorStop(0,"rgba(255,255,255,0)");
- shine.addColorStop(.5,"rgba(255,255,255,.25)");
- shine.addColorStop(1,"rgba(255,255,255,0)");
- ctx.fillStyle=shine;
- roundRectCanvas(ctx,-64,-56,128,24,12);
- ctx.fill();
+function drawYomogi(ctx){
+ ctx.strokeStyle="#1f7a4c";
+ ctx.lineWidth=8;
+ ctx.beginPath();ctx.moveTo(0,58);ctx.bezierCurveTo(-8,10,4,-34,0,-66);ctx.stroke();
+ const leaves=[[-34,-28,-68,-62],[-20,2,-66,-12],[-12,30,-54,30],[32,-30,70,-66],[22,4,68,-12],[14,32,58,30]];
+ for(const l of leaves){
+   const [x,y,ex,ey]=l;
+   const grad=ctx.createLinearGradient(x,y,ex,ey);
+   grad.addColorStop(0,"#c6ffd6");grad.addColorStop(.45,"#6cffb8");grad.addColorStop(1,"#13915d");
+   ctx.fillStyle=grad;ctx.strokeStyle="#0b5837";ctx.lineWidth=4;
+   ctx.beginPath();
+   ctx.moveTo(x,y);
+   ctx.quadraticCurveTo((x+ex)/2, y-28, ex, ey);
+   ctx.quadraticCurveTo((x+ex)/2, y+22, x,y);
+   ctx.closePath();ctx.fill();ctx.stroke();
+ }
+ ctx.fillStyle="rgba(255,255,255,.65)";
+ ctx.beginPath();ctx.arc(24,-58,6,0,Math.PI*2);ctx.fill();
+}
+
+function drawTicket(ctx,amount){
+ const g=ctx.createLinearGradient(-86,-56,86,60);
+ g.addColorStop(0,"#fff8d6");g.addColorStop(.35,"#ffd36a");g.addColorStop(1,"#ff9f1a");
+ ctx.fillStyle=g;
+ ctx.strokeStyle="#7a3100";
+ ctx.lineWidth=6;
+ ctx.beginPath();
+ ctx.moveTo(-82,-50);ctx.lineTo(82,-50);
+ ctx.quadraticCurveTo(70,-20,82,0);
+ ctx.quadraticCurveTo(70,20,82,50);
+ ctx.lineTo(-82,50);
+ ctx.quadraticCurveTo(-70,20,-82,0);
+ ctx.quadraticCurveTo(-70,-20,-82,-50);
+ ctx.closePath();
+ ctx.fill();ctx.stroke();
+ ctx.strokeStyle="rgba(122,49,0,.42)";
+ ctx.lineWidth=4;
+ ctx.setLineDash([8,8]);
+ ctx.beginPath();ctx.moveTo(-50,-38);ctx.lineTo(-50,38);ctx.stroke();
+ ctx.setLineDash([]);
+ ctx.fillStyle="#2a0800";
+ ctx.font="1000 52px system-ui,sans-serif";
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.fillText(amount,20,2);
+ ctx.font="900 18px system-ui,sans-serif";
+ ctx.fillText("円",70,14);
+}
+
+function drawFacePack(ctx){
+ const g=ctx.createLinearGradient(-55,-75,65,75);
+ g.addColorStop(0,"#ffffff");g.addColorStop(.36,"#bdfbff");g.addColorStop(1,"#5bc7ff");
+ ctx.fillStyle=g;ctx.strokeStyle="#10587a";ctx.lineWidth=6;
+ roundRectCanvas(ctx,-62,-72,124,144,24);ctx.fill();ctx.stroke();
+ ctx.fillStyle="rgba(255,255,255,.58)";
+ roundRectCanvas(ctx,-43,-52,86,24,12);ctx.fill();
+ ctx.fillStyle="#10587a";
+ ctx.beginPath();ctx.arc(-22,-4,9,0,Math.PI*2);ctx.arc(22,-4,9,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle="#10587a";ctx.lineWidth=5;
+ ctx.beginPath();ctx.arc(0,18,20,.12*Math.PI,.88*Math.PI);ctx.stroke();
+ ctx.fillStyle="#eaffff";
+ ctx.font="900 22px system-ui,sans-serif";
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.fillText("COOL",0,50);
+}
+
+function drawCanJuice(ctx){
+ const g=ctx.createLinearGradient(-48,-78,62,76);
+ g.addColorStop(0,"#fff0f4");g.addColorStop(.24,"#ff5a7d");g.addColorStop(1,"#9a1734");
+ ctx.fillStyle=g;ctx.strokeStyle="#5e0920";ctx.lineWidth=6;
+ roundRectCanvas(ctx,-48,-72,96,144,28);ctx.fill();ctx.stroke();
+ ctx.fillStyle="rgba(255,255,255,.32)";
+ roundRectCanvas(ctx,-30,-60,22,120,12);ctx.fill();
+ ctx.fillStyle="#fff7c5";
+ ctx.beginPath();ctx.ellipse(0,-72,42,14,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.beginPath();ctx.ellipse(0,72,42,14,0,0,Math.PI*2);ctx.fill();ctx.stroke();
+ ctx.fillStyle="#fff";
+ ctx.font="1000 28px system-ui,sans-serif";
+ ctx.textAlign="center";ctx.textBaseline="middle";
+ ctx.fillText("DRINK",0,0);
 }
 
 function roundRectCanvas(ctx,x,y,w,h,r){
@@ -754,17 +1091,11 @@ class Reel{
     if(tick!==this.lastTick && tick%2===0){this.lastTick=tick; if(tick%4===0) beep(115+this.i*24,.009,"square",.008)}
     if(now-this.spinStart>=this.spinMs){
       this.state="stop";this.stopStart=now;this.from=this.offset;
-      const cycle = symbols.length * CELL;
-      const mod = ((this.offset % cycle) + cycle) % cycle;
-
-      // 中央ラインに finalIdx の図柄が来るように補正する。
-      // 描画上、中央に来るoffsetは「finalIdx*CELL - 中央補正値」。
-      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
-      const desired = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
-
-      let dist = (desired - mod + cycle) % cycle;
-      dist += (4 + this.i * 2) * cycle;
-      this.to = this.offset + dist;
+      const mod=((this.offset% (symbols.length*CELL))+symbols.length*CELL)%(symbols.length*CELL);
+      const desired=this.finalIdx*CELL;
+      let dist=(desired-mod+symbols.length*CELL)%(symbols.length*CELL);
+      dist+=(4+this.i*2)*symbols.length*CELL;
+      this.to=this.offset+dist;
     }
   }else if(this.state==="stop"){
     let t=Math.min((now-this.stopStart)/this.stopMs,1);
@@ -774,9 +1105,7 @@ class Reel{
     const tick=Math.floor(this.offset/CELL);
     if(tick!==this.lastTick && tick%2===0 && t<.9){this.lastTick=tick;beep(130+this.i*25,.008,"square",.008)}
     if(t>=1){
-      const cycle = symbols.length * CELL;
-      const centerAdjust = (CENTER_Y - VIEW_Y - CELL / 2);
-      this.offset = ((this.finalIdx * CELL - centerAdjust) % cycle + cycle) % cycle;
+      this.offset=this.finalIdx*CELL;
       this.state="stopped";this.flash=1;this.glow=1;soundStop(this.i);vibrate([40,30,80]);
       return "stopped";
     }
@@ -894,9 +1223,11 @@ requestAnimationFrame(drawFrame);
 
 async function startSpin(forcedRank=null,isDemo=false){
  if(spinning)return;
- if(!isDemo && !canSpin()){updateSpinState();return}
+ if(!isDemo && !canSpin()){updateSpinState();updateDrawCountDisplay();return}
  ticket.classList.remove("show");
  spinBtn.disabled=true;spinning=true;stopCount=0;demoMode=isDemo;
+ machineEl.classList.add("spinning");machineEl.classList.remove("win");
+ if(miniStatusEl)miniStatusEl.textContent="リール加速中...";
  resultPrize=forcedRank?getPrizeByRank(forcedRank):pickPrize();
  const idx=symbolIndex(resultPrize);
  statusEl.textContent="全リール始動！ ととのいを掴め！";
@@ -907,6 +1238,8 @@ async function startSpin(forcedRank=null,isDemo=false){
  reels[2].start(idx,0,2250,1650);
 }
 function finishSpin(){
+ machineEl.classList.remove("spinning");machineEl.classList.add("win");setTimeout(()=>machineEl.classList.remove("win"),1800);
+ if(miniStatusEl)miniStatusEl.textContent=resultPrize.rank+" 確定！";
  statusEl.textContent=resultPrize.rank+" 確定！";
  document.documentElement.style.setProperty("--themeGlow", resultPrize.theme || "#ffd36a");
  reels.forEach(r=>{r.flash=1;r.glow=1.15});
@@ -926,8 +1259,8 @@ function finishSpin(){
  }
  spinning=false;
  if(demoMode){spinBtn.disabled=false;spinBtn.textContent="🔴 PUSH";statusEl.textContent="DEMO結果：もう一度確認できます"}
- else{spinBtn.textContent="本日は抽選済み"}
- renderHome();
+ else{spinBtn.textContent="DONE"}
+ renderHome();updateDrawCountDisplay();
 }
 
 /* Effect */
@@ -946,10 +1279,20 @@ document.getElementById("navSlot").addEventListener("click",()=>setView("slot"))
 document.getElementById("navTickets").addEventListener("click",()=>setView("tickets"));
 document.getElementById("homeToSlot").addEventListener("click",()=>setView("slot"));
 document.getElementById("homeToTickets").addEventListener("click",()=>setView("tickets"));
+document.getElementById("slotNavHome")?.addEventListener("click",()=>setView("home"));
+document.getElementById("slotNavTickets")?.addEventListener("click",()=>setView("tickets"));
+document.getElementById("slotNavUsed")?.addEventListener("click",()=>setView("tickets"));
+document.getElementById("slotNavPrizes")?.addEventListener("click",()=>setView("tickets"));
+document.getElementById("slotNavSettings")?.addEventListener("click",()=>setView("home"));
+document.getElementById("assetMenuHome")?.addEventListener("click",()=>setView("home"));
+document.getElementById("assetMenuTicket")?.addEventListener("click",()=>setView("tickets"));
+document.getElementById("assetMenuPrize")?.addEventListener("click",()=>setView("tickets"));
+document.getElementById("assetMenuRule")?.addEventListener("click",()=>setView("home"));
+document.getElementById("assetMenuSetting")?.addEventListener("click",()=>setView("home"));
 spinBtn.addEventListener("click",()=>startSpin());
 
 document.getElementById("confirmUse").addEventListener("click",()=>{
- if(selectedTicketId){useTicket(selectedTicketId);closeUseModal();renderTickets();renderHome();updateSpinState();premiumShow("USED","チケットを使用済みにしました");}
+ if(selectedTicketId){useTicket(selectedTicketId);closeUseModal();renderTickets();renderHome();updateDrawCountDisplay();updateSpinState();updateDrawCountDisplay();premiumShow("USED","チケットを使用済みにしました");}
 });
 document.getElementById("cancelUse").addEventListener("click",closeUseModal);
 document.getElementById("useModal").addEventListener("click",(e)=>{if(e.target.id==="useModal")closeUseModal()});
@@ -969,7 +1312,23 @@ document.getElementById("lineBtn").addEventListener("click",()=>{
  setView("home");
 });
 
+function applyEventTheme(){
+ const theme=THEME_CONFIG[EVENT_CONFIG.theme]||THEME_CONFIG.summer_beach;
+ document.body.classList.add("theme-"+EVENT_CONFIG.theme);
+ document.documentElement.style.setProperty("--event-primary",theme.colors.primary);
+ document.documentElement.style.setProperty("--event-gold",theme.colors.gold);
+ document.documentElement.style.setProperty("--event-accent",theme.colors.accent);
+ document.documentElement.style.setProperty("--event-pink",theme.colors.pink||"#ff2dcb");
+ const title=document.getElementById("eventTitle");
+ if(title)title.innerHTML=EVENT_CONFIG.title.replace(/(.{2})/,"$1<br>");
+ document.getElementById("eventSubtitle").textContent=EVENT_CONFIG.subtitle;
+ document.getElementById("eventPeriod").textContent=EVENT_CONFIG.period;
+}
+
 /* init */
+applyEventTheme();
+const fireworksBox=document.getElementById("fireworks");
+for(let i=0;i<7;i++){const f=document.createElement("span");f.style.left=(8+Math.random()*84)+"vw";f.style.top=(5+Math.random()*28)+"vh";f.style.color=["#ffd36a","#ff2dcb","#00e5ff","#ffffff"][i%4];f.style.animationDelay=(Math.random()*3.8)+"s";fireworksBox.appendChild(f)}
 const steamBox=document.getElementById("steam");
 for(let i=0;i<10;i++){const s=document.createElement("span");s.style.left=(Math.random()*95)+"vw";s.style.animationDelay=(Math.random()*6)+"s";s.style.animationDuration=(5.5+Math.random()*4.5)+"s";steamBox.appendChild(s)}
 
@@ -979,7 +1338,7 @@ if(localStorage.getItem(CONFIG.storage.line)!=="true"){
 }else{
  setView("home");
 }
-updateSpinState();
+updateSpinState();updateDrawCountDisplay();
 </script>
 </body>
 </html>
