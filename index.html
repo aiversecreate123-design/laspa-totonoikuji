@@ -202,6 +202,370 @@ canvas{display:block;width:100%;height:auto}
   .push{height:68px;font-size:21px}
   .demo-toggle{top:58px}
 }
+
+/* LASPA PREMIUM SLOT visual skin - CSS only, game logic untouched */
+body{background:linear-gradient(180deg,#05060f,#020203);min-height:100svh;}
+.app{min-height:100svh;align-items:flex-start;padding:0;}
+.machine{width:min(430px,100vw);min-height:100svh;border-radius:0;padding:0 9px 82px;background:linear-gradient(180deg,#050507 0%,#111018 18%,#050506 100%);box-shadow:none;overflow:hidden;}
+.machine:before{inset:0;border-radius:0;border:0;background:linear-gradient(90deg,rgba(0,229,255,.75),transparent 4%,transparent 96%,rgba(255,45,203,.75)),linear-gradient(180deg,rgba(255,211,106,.38),transparent 34%,rgba(255,211,106,.20));opacity:.45;pointer-events:none;}
+.inner{min-height:calc(100svh - 82px);overflow:visible;border-radius:0 0 26px 26px;padding:56px 8px 18px;background:radial-gradient(circle at 50% 8%,rgba(255,211,106,.20),transparent 24%),linear-gradient(180deg,#090914 0%,#08070c 56%,#020203 100%);border:1px solid rgba(255,211,106,.18);border-top:0;box-shadow:inset 0 0 42px rgba(0,0,0,.85),0 0 28px rgba(255,211,106,.12);}
+.inner:before,.inner:after{position:absolute;top:14px;z-index:35;height:34px;padding:0 13px;border:1px solid rgba(255,211,106,.8);border-radius:10px;display:flex;align-items:center;color:#fff4b5;background:rgba(0,0,0,.72);box-shadow:0 0 14px rgba(255,211,106,.22),inset 0 0 12px rgba(255,211,106,.08);font-size:12px;font-weight:1000;letter-spacing:.06em;}.inner:before{content:"マイチケット  ▱";left:11px;}.inner:after{content:"メニュー  ☰";right:11px;}
+.nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);z-index:60;width:min(430px,100vw);height:73px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0;padding:8px 8px 10px;background:linear-gradient(180deg,rgba(8,8,10,.92),rgba(0,0,0,.98));border-top:1px solid rgba(255,211,106,.72);box-shadow:0 -10px 24px rgba(0,0,0,.55),0 0 20px rgba(255,211,106,.18);}.nav button{min-width:0;border:1px solid rgba(255,211,106,.32);border-radius:8px;padding:25px 2px 5px;color:#ffe6a0;background:linear-gradient(180deg,rgba(255,211,106,.10),rgba(0,0,0,.35));font-size:10px;line-height:1;position:relative;}.nav button:before{position:absolute;top:5px;left:0;right:0;font-size:19px;line-height:1;}#navHome:before{content:"⌂";}#navSlot:before{content:"🎁";font-size:17px;}#navTickets:before{content:"▱";}.nav button.active{color:#1b0b00;background:linear-gradient(180deg,#fff4b8,#ffd36a 58%,#a76a00);border-color:#fff1a8;box-shadow:0 0 18px rgba(255,211,106,.55);}
+.demo-toggle{top:60px;right:18px;z-index:70;transform:scale(.86);}.demo-panel{top:96px;right:16px;z-index:80;}.lamps{position:absolute;top:62px;left:54px;right:54px;margin:0;z-index:5;}.lamp{width:12px;height:12px;}
+.logo{margin:0 -2px 8px;height:148px;border-radius:140px 140px 20px 20px;border:2px solid rgba(255,211,106,.88);background:radial-gradient(circle at 50% 5%,rgba(255,211,106,.22),transparent 38%),linear-gradient(180deg,#161016 0%,#050506 67%,#12060d 100%);box-shadow:inset 0 -20px 28px rgba(0,0,0,.72),0 0 24px rgba(255,211,106,.24),0 0 34px rgba(255,45,203,.14);display:flex;flex-direction:column;justify-content:center;overflow:hidden;}.logo:before{content:"";position:absolute;left:8%;right:8%;top:6px;height:12px;border-radius:999px;background:repeating-linear-gradient(90deg,#ff2d24 0 12px,#ffd36a 12px 24px,#52ff72 24px 36px,#00e5ff 36px 48px,#ff2dcb 48px 60px);filter:drop-shadow(0 0 10px rgba(255,211,106,.75));}.logo .label{font-family:Georgia,serif;font-size:13px;letter-spacing:.48em;color:#fff8d4;margin-top:8px;}.logo h1{margin:7px 0 0;font-family:Georgia,serif;font-size:48px;line-height:.78;letter-spacing:.02em;text-shadow:0 0 16px rgba(255,211,106,.65),0 4px 0 rgba(80,25,0,.85);}.logo .sub{margin:13px auto 0;padding:5px 32px;border-radius:0;clip-path:polygon(9% 0,91% 0,100% 50%,91% 100%,9% 100%,0 50%);font-size:13px;}
+.screen{margin:0;padding:48px 10px 12px;border-radius:18px;border:3px solid rgba(255,211,106,.92);background:linear-gradient(180deg,#090906,#17100a 16%,#030303 100%);box-shadow:inset 0 0 24px rgba(0,0,0,.92),0 0 0 5px rgba(255,211,106,.09),0 0 24px rgba(255,211,106,.22);}.screen:before{content:"🎟  本日の抽選回数   1回 / 1回      ※毎日00:00にリセット";position:absolute;left:12px;right:12px;top:10px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:#fff4c3;background:#050504;border:1px solid rgba(255,211,106,.44);font-size:12px;font-weight:1000;white-space:nowrap;box-shadow:inset 0 0 12px rgba(255,211,106,.06);}
+.status{position:absolute;left:16px;bottom:-176px;width:30%;min-height:52px;border-radius:10px;border:1px solid rgba(0,229,255,.28);background:rgba(0,0,0,.66);color:#4ff9ff;font-size:11px;padding:14px 6px 4px;text-shadow:0 0 10px rgba(0,229,255,.95);}.status:before{content:"STATUS";position:absolute;top:3px;left:0;right:0;color:#ffe271;font-size:9px;letter-spacing:.12em;}
+.canvas-wrap{border-radius:14px;border:2px solid #ffdf83;background:linear-gradient(180deg,#fff9e8,#fff,#e9f7ff);box-shadow:inset 0 18px 30px rgba(255,255,255,.58),inset 0 -24px 30px rgba(0,0,0,.22),0 0 18px rgba(255,211,106,.28);}.canvas-wrap:before{height:100%;background:linear-gradient(105deg,rgba(255,255,255,.28),transparent 30%,transparent 68%,rgba(255,255,255,.18));}.canvas-wrap:after{height:100%;background:radial-gradient(ellipse at center,transparent 48%,rgba(0,0,0,.30));}.center-glow{left:-8px;right:-8px;height:2px;border:0;border-radius:0;background:linear-gradient(90deg,transparent,#ffb31f,#fff7b4,#ffb31f,transparent);box-shadow:0 0 12px #ffb31f,0 0 22px rgba(255,211,106,.9);}
+.controls{margin-top:8px;min-height:166px;padding:0;border:0;background:transparent;}.controls:after{content:"CHANCE";position:absolute;right:16px;top:18px;width:30%;height:52px;border-radius:10px;border:1px solid rgba(255,211,106,.34);background:radial-gradient(circle at 18% 68%,#ff2d24 0 5px,transparent 6px),radial-gradient(circle at 36% 68%,#ffd36a 0 5px,transparent 6px),radial-gradient(circle at 54% 68%,#52ff72 0 5px,transparent 6px),radial-gradient(circle at 72% 68%,#00e5ff 0 5px,transparent 6px),radial-gradient(circle at 88% 68%,#8b5cff 0 5px,transparent 6px),rgba(0,0,0,.66);color:#ffe271;font-size:10px;font-weight:1000;letter-spacing:.1em;display:flex;align-items:flex-start;justify-content:center;padding-top:7px;box-shadow:inset 0 0 14px rgba(0,0,0,.7);}
+.push{position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:138px;height:138px;border-radius:50%;font-size:28px;color:#fff4b6;background:radial-gradient(circle at 50% 30%,#fff6b9 0 8%,#ff6a2a 19%,#e30613 50%,#570006 78%,#160002 100%);box-shadow:0 9px 0 #4d1500,0 0 0 8px #ffd36a,0 0 0 14px #3c1b00,0 0 28px rgba(255,45,24,.86),inset 0 8px 18px rgba(255,255,255,.76),inset 0 -18px 26px rgba(0,0,0,.5);text-shadow:0 2px 0 #7a1800,0 0 12px #ffd36a;z-index:8;}.push:active{transform:translateX(-50%) translateY(8px) scale(.985);}.push:disabled{width:138px;height:138px;border-radius:50%;font-size:12px;}
+.note{position:absolute;left:16px;right:16px;bottom:4px;margin:0;font-size:10px;opacity:.68;}.ticket{margin-top:148px;}.footer{display:none;}.panel{margin-top:0;}.line-gate{position:relative;z-index:20;}
+@media(max-width:370px){.machine{padding-left:6px;padding-right:6px;}.inner{padding-top:54px;}.logo{height:138px;}.logo h1{font-size:42px;}.screen:before{font-size:10px;}.push{width:126px;height:126px;font-size:25px;}.status,.controls:after{width:31%;font-size:10px;}}
+
+
+/* LASPA skin visual refinement after screenshot check */
+.logo{height:132px;justify-content:flex-start;padding-top:26px;}
+.logo .label{font-size:12px;margin-top:0;}
+.logo h1{font-size:30px;line-height:.9;margin:6px 0 0;letter-spacing:.04em;}
+.logo .sub{margin-top:9px;font-size:12px;padding:5px 26px;}
+.screen{padding-top:44px;}
+.canvas-wrap{border-radius:12px;}
+.controls{min-height:186px;margin-top:10px;}
+.push{top:2px;width:126px;height:126px;font-size:24px;}
+.push:disabled{width:126px;height:126px;}
+.status{bottom:-142px;left:14px;width:31%;min-height:48px;font-size:10px;}
+.controls:after{top:34px;right:14px;width:31%;height:48px;font-size:9px;}
+.note{bottom:24px;font-size:9px;}
+@media(max-width:370px){.logo h1{font-size:27px}.push{width:116px;height:116px}.push:disabled{width:116px;height:116px}.status{bottom:-132px}.controls:after{top:30px}}
+
+
+/* Title hierarchy fix: keep HTML, make LASPA PREMIUM SLOT the main title */
+.logo{padding-top:24px;}
+.logo .label{
+  font-family:Georgia,serif;
+  font-size:30px;
+  line-height:.88;
+  letter-spacing:.08em;
+  color:#ffd36a;
+  text-shadow:0 0 16px rgba(255,211,106,.82),0 3px 0 rgba(78,24,0,.9);
+  max-width:270px;
+  margin:0 auto;
+}
+.logo h1{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;
+  line-height:1;
+  margin:13px auto 0;
+  padding:5px 28px;
+  color:#1b0b00;
+  background:linear-gradient(90deg,#74f7ff,#fff1aa,#ff9f1a);
+  -webkit-background-clip:border-box;
+  clip-path:polygon(9% 0,91% 0,100% 50%,91% 100%,9% 100%,0 50%);
+  filter:none;
+  text-shadow:none;
+}
+.logo .sub{display:none;}
+
+
+/* Reference-frame playable skin: visual frame image + existing game logic overlays */
+body.reference-frame-skin,
+body{
+  background:#050507;
+}
+.app{
+  min-height:100svh;
+  align-items:center;
+  justify-content:center;
+  padding:0;
+}
+.machine{
+  width:min(573px,100vw);
+  min-height:100svh;
+  padding:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  overflow:hidden;
+}
+.machine:before,.machine:after,.inner:before,.inner:after{display:none!important;}
+.inner{
+  min-height:100svh;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  overflow:visible;
+}
+.lamps,.logo,.footer{display:none!important;}
+.demo-toggle{
+  opacity:0;
+  pointer-events:none;
+}
+.demo-panel{z-index:100;}
+#slotView.active{
+  display:block;
+  position:relative;
+  width:min(573px,100vw,calc(100svh * 573 / 925));
+  aspect-ratio:573/925;
+  margin:0 auto;
+  overflow:hidden;
+  filter:drop-shadow(0 20px 34px rgba(0,0,0,.70));
+}
+.laspa-reference-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  z-index:1;
+  pointer-events:none;
+  user-select:none;
+  -webkit-user-drag:none;
+}
+#slotView .screen{
+  position:absolute;
+  left:7.0%;
+  top:31.0%;
+  width:86.0%;
+  height:35.3%;
+  z-index:5;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:3.8%;
+  background:transparent;
+  box-shadow:none;
+  overflow:visible;
+}
+#slotView .screen:before{display:none!important;}
+#slotView .canvas-wrap{
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:3.8%;
+  background:linear-gradient(180deg,#fff8ea,#fff,#edf8ff);
+  box-shadow:inset 0 20px 30px rgba(255,255,255,.50),inset 0 -24px 32px rgba(0,0,0,.22);
+  overflow:hidden;
+}
+#slotView .canvas-wrap canvas{
+  width:100%;
+  height:100%;
+  transform:scale(1.03);
+  transform-origin:center center;
+}
+#slotView .canvas-wrap:before{
+  height:100%;
+  background:linear-gradient(105deg,rgba(255,255,255,.20),transparent 28%,transparent 70%,rgba(255,255,255,.14));
+}
+#slotView .canvas-wrap:after{
+  height:100%;
+  background:radial-gradient(ellipse at center,transparent 56%,rgba(0,0,0,.24));
+}
+#slotView .center-glow{
+  left:-2%;
+  right:-2%;
+  height:2px;
+  border:0;
+  border-radius:0;
+  background:linear-gradient(90deg,transparent,#ffb31f,#fff8b8,#ffb31f,transparent);
+  box-shadow:0 0 10px #ffb31f,0 0 20px rgba(255,179,31,.9);
+}
+#slotView .status{
+  position:absolute;
+  left:4.0%;
+  top:76.7%;
+  width:28.5%;
+  height:6.5%;
+  min-height:0;
+  z-index:8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px 6px 4px;
+  border:0;
+  background:transparent;
+  color:#36fbff;
+  font-size:clamp(10px,2.7vw,14px);
+  line-height:1.18;
+  text-shadow:0 0 10px rgba(0,229,255,.95),0 0 18px rgba(0,229,255,.55);
+}
+#slotView .status:before{display:none!important;}
+#slotView .controls{
+  position:absolute;
+  inset:0;
+  z-index:10;
+  margin:0;
+  padding:0;
+  border:0;
+  background:transparent;
+  pointer-events:none;
+}
+#slotView .controls:after{display:none!important;}
+#slotView .push{
+  position:absolute;
+  left:35.9%;
+  top:66.6%;
+  width:28.4%;
+  height:17.1%;
+  transform:none;
+  z-index:14;
+  border-radius:50%;
+  opacity:.01;
+  color:transparent;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+  pointer-events:auto;
+}
+#slotView .push:active{
+  transform:translateY(4px) scale(.985);
+  box-shadow:0 0 28px rgba(255,211,106,.7);
+}
+#slotView .note{
+  display:none;
+}
+#slotView .ticket{
+  position:absolute;
+  left:5%;
+  right:5%;
+  bottom:13%;
+  z-index:30;
+  margin:0;
+}
+#slotView .chance{
+  border-radius:3.8%;
+}
+.nav{
+  position:absolute;
+  left:0;
+  bottom:0;
+  transform:none;
+  width:100%;
+  height:9.1%;
+  z-index:20;
+  display:grid;
+  grid-template-columns:20% 20% 20% 20% 20%;
+  gap:0;
+  margin:0;
+  padding:0;
+  background:transparent;
+  border:0;
+  box-shadow:none;
+}
+.nav button{
+  border:0;
+  border-radius:0;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  padding:0;
+  font-size:0;
+}
+.nav button:before{display:none!important;}
+#navHome{grid-column:1;}
+#navSlot{grid-column:3;}
+#navTickets{grid-column:2;}
+#homeView.active,#ticketsView.active,.line-gate{
+  position:relative;
+  z-index:40;
+  padding:16px;
+}
+#homeView.active .panel,#ticketsView.active .panel,.line-gate .panel{
+  background:rgba(5,7,16,.94);
+  border:1px solid rgba(255,211,106,.55);
+}
+@media(max-width:420px){
+  #slotView.active{width:min(100vw,100svh * 573 / 925);}
+  #slotView .status{font-size:10px;}
+}
+
+
+/* Reference frame screenshot refinement */
+.machine,.inner{width:100vw;max-width:none;overflow:hidden;}
+#slotView.active{
+  width:calc(100svh * 573 / 925);
+  height:100svh;
+  max-width:none;
+  margin:0;
+  left:50%;
+  transform:translateX(-50%);
+}
+.laspa-reference-frame{object-fit:fill;}
+.nav{
+  position:fixed;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:100vw;
+  max-width:573px;
+  height:9.2svh;
+  opacity:1;
+  outline:0!important;
+}
+.nav button,.nav button.active,.nav button:focus,.nav button:focus-visible{
+  border:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  color:transparent!important;
+}
+@media(max-width:430px){
+  #slotView .status{font-size:10px;}
+}
+
+
+/* Fix reference frame centering over existing view animation */
+#slotView.active{
+  position:fixed !important;
+  top:0 !important;
+  left:50vw !important;
+  transform:translateX(-50%) !important;
+  animation:none !important;
+}
+
+
+/* Preserve full reference image: no crop */
+#slotView.active{
+  position:relative !important;
+  top:auto !important;
+  left:auto !important;
+  transform:none !important;
+  animation:none !important;
+  width:min(573px,100vw) !important;
+  height:auto !important;
+  aspect-ratio:573/925 !important;
+  margin:0 auto !important;
+}
+.laspa-reference-frame{object-fit:contain!important;}
+.nav{
+  position:fixed!important;
+  left:50%!important;
+  top:calc(100vw * 925 / 573 * .908)!important;
+  bottom:auto!important;
+  transform:translateX(-50%)!important;
+  width:100vw!important;
+  max-width:573px!important;
+  height:calc(100vw * 925 / 573 * .092)!important;
+  max-height:84px!important;
+}
+@media(min-width:573px){
+  .nav{top:839px!important;height:86px!important;}
+}
+
+
+/* Move live status text to reference STATUS panel */
+#slotView .status{
+  position:fixed!important;
+  left:calc(50vw - min(573px,100vw) / 2 + min(573px,100vw) * .04)!important;
+  top:calc(min(573px,100vw) * 925 / 573 * .767)!important;
+  width:calc(min(573px,100vw) * .285)!important;
+  height:calc(min(573px,100vw) * 925 / 573 * .065)!important;
+  z-index:30!important;
+}
+
 </style>
 </head>
 <body>
@@ -265,6 +629,7 @@ canvas{display:block;width:100%;height:auto}
       </div>
 
       <div class="view" id="slotView">
+        <img class="laspa-reference-frame" src="./LASPA-PREMIUM-SLOT/assets/laspa-premium-slot-reference.png" alt="LASPA PREMIUM SLOT 完成UIフレーム">
         <div class="screen">
           <div class="status" id="status">PUSH TO START</div>
           <div class="canvas-wrap">
